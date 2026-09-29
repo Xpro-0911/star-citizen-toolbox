@@ -1,0 +1,1714 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>沐瞳十二年</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Noto+Serif+SC:wght@400;900&display=swap">
+<style>
+/* Layout: one full-bleed stage; captions float over it and change scale and position per chapter */
+:root{
+  --night:#04030A;
+  --ink:#EEE8DA;
+  --ink-dim:rgba(238,232,218,.64);
+  --moon:#F2D9A0;
+  --line:rgba(238,232,218,.24);
+  --f-display:"Big Shoulders Display","Oswald","Impact","Haettenschweiler","Arial Narrow Bold",sans-serif;
+  --f-serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun","WenQuanYi Zen Hei",serif;
+  --f-sans:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Noto Sans SC","WenQuanYi Zen Hei",sans-serif;
+  --lb:0px;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--night);color:var(--ink);overflow:hidden}
+body{font-family:var(--f-sans);-webkit-font-smoothing:antialiased}
+#stage{position:fixed;inset:0;background:var(--night);overflow:hidden;user-select:none;-webkit-user-select:none}
+#gl,#ov{position:absolute;inset:0;width:100%;height:100%;display:block}
+#ov{display:none}
+.cap .hl{color:#F2BE64}
+.cap.ink,.cap.ink .c{color:#2B2118 !important;text-shadow:none !important}
+.cap.ink .hl{color:#B8412B !important}
+#caps{position:absolute;left:0;right:0;top:var(--lb);bottom:var(--lb);pointer-events:none;overflow:hidden}
+.cap{position:absolute;white-space:pre;display:none;will-change:opacity,transform,filter;line-height:1}
+.cap .c{display:inline-block;white-space:pre;will-change:opacity,transform,filter}
+.k-mega{font:900 clamp(44px,10vw,220px)/.86 var(--f-display);color:#fff;mix-blend-mode:difference;text-align:center;letter-spacing:-.005em}
+.k-outline{font:900 clamp(110px,30vmin,380px)/.8 var(--f-display);color:transparent;-webkit-text-stroke:2px rgba(238,232,218,.95);letter-spacing:.02em}
+.k-year{font:900 clamp(84px,21vmin,270px)/.8 var(--f-display);color:transparent;-webkit-text-stroke:1.6px rgba(238,232,218,.92);letter-spacing:.01em}
+.k-title{font:700 clamp(26px,5.6vmin,78px)/1 var(--f-display);color:#F7F0E2;letter-spacing:.03em;text-shadow:0 0 30px rgba(0,0,0,.6)}
+.k-titlecn{font:900 clamp(24px,4.6vmin,60px)/1.2 var(--f-serif);color:#F7F0E2;letter-spacing:.08em;text-shadow:0 0 30px rgba(0,0,0,.6)}
+.k-wide{font:400 clamp(20px,4.2vmin,54px)/1 var(--f-serif);color:#EDE3FF;letter-spacing:.42em;text-shadow:0 0 24px rgba(90,60,255,.55)}
+.k-line{font:400 clamp(16px,3vmin,32px)/1.55 var(--f-serif);color:#F3ECDD;letter-spacing:.2em;text-shadow:0 1px 18px rgba(0,0,0,.8)}
+.k-tag{font:600 clamp(11px,1.7vmin,16px)/1.4 var(--f-sans);color:var(--ink-dim);letter-spacing:.34em;text-transform:uppercase}
+.k-count{font:900 clamp(46px,11vmin,150px)/.9 var(--f-display);color:#FFF6E4;letter-spacing:.02em;font-variant-numeric:tabular-nums;text-shadow:0 0 40px rgba(255,200,120,.35)}
+.k-count .c{min-width:.52em;text-align:center}
+.k-count .sep{min-width:.2em}
+.k-vert{writing-mode:vertical-rl;font:400 clamp(17px,3.2vmin,34px)/1.9 var(--f-serif);color:#FFF1F4;letter-spacing:.34em;text-shadow:0 0 18px rgba(60,20,80,.8)}
+.k-vbig{writing-mode:vertical-rl;font:900 clamp(40px,9.5vmin,118px)/1 var(--f-serif);color:transparent;-webkit-text-stroke:1.2px rgba(255,236,240,.9);letter-spacing:.12em}
+.k-fcount{font:900 clamp(40px,9vmin,120px)/1 var(--f-display);color:#FFD58A;font-variant-numeric:tabular-nums;text-shadow:0 0 30px rgba(255,190,90,.5)}
+.k-fcount small{display:block;font:600 clamp(11px,1.6vmin,15px)/1.6 var(--f-sans);letter-spacing:.3em;color:var(--ink-dim);text-align:right}
+.k-bounce{font:900 clamp(34px,7.8vmin,104px)/1 var(--f-display);color:#FFF4FA;letter-spacing:.04em;text-shadow:0 4px 0 #FF7EB6,0 8px 0 rgba(90,40,120,.5)}
+.k-ring{font:700 clamp(10px,1.6vmin,15px)/1 var(--f-sans);color:#F3ECDD;letter-spacing:.26em;text-transform:uppercase;white-space:nowrap}
+.k-ring::before{content:"";display:inline-block;width:.5em;height:.5em;border-radius:50%;background:currentColor;margin-right:.7em;vertical-align:.08em;box-shadow:0 0 10px currentColor}
+.k-fine{font:400 clamp(10px,1.4vmin,13px)/1.5 var(--f-sans);color:rgba(238,232,218,.5);letter-spacing:.22em}
+
+/* start card */
+#start{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(ellipse at 50% 55%,rgba(4,3,10,.15),rgba(4,3,10,.78) 70%);transition:opacity .9s ease;padding:0 16px}
+#start.hide{opacity:0;pointer-events:none}
+.st-inner{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;max-width:36rem;transform:translateY(22vh)}
+.st-kicker{margin:0;font:600 12px/1 var(--f-sans);letter-spacing:.42em;color:var(--ink-dim)}
+.st-title{margin:0;font:900 clamp(40px,9vmin,92px)/1 var(--f-serif);letter-spacing:.18em;padding-left:.18em;color:#F6EEDC;text-shadow:0 0 50px rgba(140,130,255,.35);text-wrap:balance}
+.st-sub{margin:0;font:400 14px/1.6 var(--f-serif);letter-spacing:.24em;color:var(--ink-dim)}
+#playBtn{margin-top:10px;font:700 15px/1 var(--f-sans);letter-spacing:.4em;padding:16px 34px 16px 40px;color:#0B0918;background:var(--moon);border:0;border-radius:999px;cursor:pointer;box-shadow:0 0 0 1px rgba(255,255,255,.2),0 10px 40px rgba(242,217,160,.25);transition:transform .2s ease,box-shadow .2s ease}
+#playBtn:hover:not(:disabled){transform:translateY(-1px) scale(1.03);box-shadow:0 0 0 1px rgba(255,255,255,.35),0 14px 50px rgba(242,217,160,.4)}
+#playBtn:disabled{opacity:.55;cursor:progress}
+#playBtn:focus-visible,#bar button:focus-visible{outline:2px solid var(--moon);outline-offset:3px}
+.st-hint{margin:0;font:400 12px/1.7 var(--f-sans);letter-spacing:.14em;color:rgba(238,232,218,.5);text-wrap:balance}
+
+/* control bar */
+#bar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:14px;padding:26px 16px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(to top,rgba(4,3,10,.85),rgba(4,3,10,0));opacity:0;transition:opacity .4s ease;pointer-events:none}
+#bar.show{opacity:1;pointer-events:auto}
+#bar button{flex:none;width:38px;height:38px;display:grid;place-items:center;background:rgba(238,232,218,.08);border:1px solid var(--line);border-radius:50%;color:var(--ink);cursor:pointer;padding:0}
+#bar button:hover{background:rgba(238,232,218,.18)}
+#bar svg{width:16px;height:16px;fill:currentColor}
+#tl{position:relative;flex:1;min-width:0;height:30px;cursor:pointer}
+#tl .rail{position:absolute;left:0;right:0;top:14px;height:2px;background:var(--line);border-radius:2px}
+#tlFill{position:absolute;left:0;top:14px;height:2px;background:var(--moon);border-radius:2px;width:0}
+#tl .tick{position:absolute;top:0;transform:translateX(-50%);font:600 10px/1 var(--f-sans);letter-spacing:.08em;color:var(--ink-dim);white-space:nowrap;padding-top:0}
+#tl .tick::after{content:"";position:absolute;left:50%;top:12px;width:1px;height:6px;background:var(--ink-dim)}
+#time{flex:none;font:600 12px/1 var(--f-sans);letter-spacing:.08em;color:var(--ink-dim);font-variant-numeric:tabular-nums}
+#msg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:30rem;padding:0 16px;text-align:center;font:400 15px/1.8 var(--f-sans);color:var(--ink);display:none}
+@media (max-width:560px){#tl .tick{display:none}#tl .tick.major{display:block}}
+@media (prefers-reduced-motion:reduce){#start,#bar{transition:none}}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="gl"></canvas>
+  <canvas id="ov"></canvas>
+  <div id="caps"></div>
+  <div id="msg"></div>
+  <div id="start">
+    <div class="st-inner">
+      <p class="st-kicker">MOONTON · 2014 — 2026</p>
+      <h1 class="st-title">沐瞳十二年</h1>
+      <p class="st-sub">一部实时生成的 MV · 3 分 32 秒</p>
+      <button id="playBtn" type="button" disabled>准备中</button>
+      <p class="st-hint">画面和音乐都由代码在浏览器里实时生成<br>请打开声音，建议全屏观看（F 键）</p>
+    </div>
+  </div>
+  <div id="bar">
+    <button id="pp" type="button" aria-label="暂停"><svg viewBox="0 0 16 16"><path id="ppIcon" d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg></button>
+    <div id="tl" role="slider" aria-label="播放进度" tabindex="0"><div class="rail"></div><div id="tlFill"></div></div>
+    <span id="time">0:00 / 3:24</span>
+    <button id="fs" type="button" aria-label="全屏"><svg viewBox="0 0 16 16"><path d="M1 1h5v2H3v3H1zM10 1h5v5h-2V3h-3zM1 10h2v3h3v2H1zM13 10h2v5h-5v-2h3z"/></svg></button>
+  </div>
+</div>
+<script>
+'use strict';
+/* ============================================================
+   沐瞳十二年 — real-time generated MV
+   Part 1: timing, score, audio engine
+   ============================================================ */
+const Q = new URLSearchParams(location.search);
+const TAU = Math.PI * 2;
+const BPM = 120, BEAT = 60 / BPM, STEP = BEAT / 4, BAR = BEAT * 4;
+
+const SECS = [
+  { id: 'prologue', bar: 0,  len: 6, name: '序章' },
+  { id: 'y2014',    bar: 6,  len: 8, name: '2014' },
+  { id: 'rush',     bar: 14, len: 7, name: '2015' },
+  { id: 'mlbb',     bar: 21, len: 9, name: '2016' },
+  { id: 'esports',  bar: 30, len: 10, name: '电竞' },
+  { id: 'billion',  bar: 40, len: 8, name: '2020' },
+  { id: 'mla',      bar: 48, len: 7, name: '2021' },
+  { id: 'wor',      bar: 55, len: 7, name: '2023' },
+  { id: 'home',     bar: 62, len: 4, name: '2025' },
+  { id: 'chess',    bar: 66, len: 4, name: '' },
+  { id: 'silver',   bar: 70, len: 4, name: '' },
+  { id: 'acecraft', bar: 74, len: 4, name: '' },
+  { id: 'm7',       bar: 78, len: 6, name: '2026' },
+  { id: 'savvy',    bar: 84, len: 4, name: '' },
+  { id: 'asian',    bar: 88, len: 5, name: '' },
+  { id: 'zone',     bar: 93, len: 4, name: '' },
+  { id: 'outro',    bar: 97, len: 9, name: '尾声' },
+];
+const TOTAL_BARS = 106, DUR = TOTAL_BARS * BAR, TOTAL_STEPS = TOTAL_BARS * 16;
+SECS.forEach((s, i) => { s.i = i; s.t0 = s.bar * BAR; s.t1 = (s.bar + s.len) * BAR; });
+const SEC = {}; SECS.forEach(s => SEC[s.id] = s);
+function secByBar(b) { for (let i = SECS.length - 1; i >= 0; i--) if (b >= SECS[i].bar) return SECS[i]; return SECS[0]; }
+
+/* ---------- math helpers ---------- */
+const clamp = (x, a = 0, b = 1) => x < a ? a : x > b ? b : x;
+const lerp = (a, b, t) => a + (b - a) * t;
+const sstep = (a, b, x) => { const t = clamp((x - a) / (b - a)); return t * t * (3 - 2 * t); };
+const ease3 = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const easeOut3 = t => 1 - Math.pow(1 - t, 3);
+const easeIn3 = t => t * t * t;
+const easeOutExpo = t => t >= 1 ? 1 : 1 - Math.pow(2, -10 * t);
+const easeOutBack = t => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); };
+const hash1 = n => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+const hex = h => [parseInt(h.slice(1, 3), 16) / 255, parseInt(h.slice(3, 5), 16) / 255, parseInt(h.slice(5, 7), 16) / 255];
+const fmtTime = s => { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+
+/* ---------- harmony ---------- */
+const CH = {
+  Dm: { r: 38, v: [50, 57, 62, 65, 69] }, Bb: { r: 34, v: [46, 58, 62, 65, 70] },
+  F:  { r: 41, v: [53, 57, 60, 65, 69] }, C:  { r: 36, v: [48, 55, 60, 64, 67] },
+  Eb: { r: 39, v: [51, 58, 63, 67, 70] }, A:  { r: 33, v: [45, 57, 61, 64, 69] },
+  D:  { r: 38, v: [50, 57, 62, 66, 69] }, Gm: { r: 43, v: [55, 58, 62, 67, 70] },
+};
+const CPROG = { main: ['Dm', 'Bb', 'F', 'C'], mla: ['Dm', 'C', 'Bb', 'C'], wor: ['Dm', 'Eb', 'Dm', 'C'], chess: ['F', 'C', 'Dm', 'Bb'] };
+const SCALE = [2, 4, 5, 7, 9, 10, 0]; // D natural minor pitch classes
+const SC_NOTES = []; for (let m = 0; m < 128; m++) if (SCALE.includes(m % 12)) SC_NOTES.push(m);
+function dia(n, k) { const i = SC_NOTES.indexOf(n); return i < 0 ? n - 3 : SC_NOTES[clamp(i + k, 0, SC_NOTES.length - 1)]; }
+
+/* melodies: [step in phrase, midi, length in 16ths] */
+const THEME = [[0,69,4],[4,74,4],[8,76,2],[10,77,4],[14,76,2],[16,74,6],[22,72,2],[24,74,4],[28,77,4],[32,72,4],[36,77,4],[40,79,2],[42,81,4],[46,79,2],[48,76,8],[56,74,2],[58,72,2],[60,76,4]];
+const FOUNDERS = [[0,69],[6,74],[8,77],[12,76],[16,74],[22,77],[24,82],[28,81],[32,81],[36,84],[38,81],[44,77],[48,79],[52,76],[54,72],[60,76],[64,77],[68,76],[70,74],[76,69]];
+const KOTO = [[0,69],[2,72],[4,74],[8,72],[10,69],[12,67],[16,65],[18,67],[20,69],[26,67],[28,65],[30,62],[32,65],[34,69],[36,72],[40,74],[42,77],[44,74],[48,72],[52,69],[56,67],[60,69]];
+const TOY = [[0,72,2],[2,77,2],[4,81,2],[6,77,2],[8,79,4],[12,76,4],[16,76,2],[18,79,2],[20,84,2],[22,79,2],[24,81,4],[28,79,4],[32,77,2],[34,81,2],[36,86,2],[38,81,2],[40,84,4],[44,81,4],[48,82,4],[52,81,2],[54,79,2],[56,77,4],[60,79,4]];
+const MOTIF2 = [[0,81,6],[6,79,2],[8,77,4],[12,76,4],[16,74,6],[22,76,2],[24,77,8]];
+const FLUTE = { 64: [81, 12], 80: [79, 8], 88: [77, 8], 96: [86, 16], 112: [84, 8], 120: [81, 8] };
+const mapOf = a => { const m = new Map(); a.forEach(n => m.set(n[0], n)); return m; };
+const M_THEME = mapOf(THEME), M_FOUND = mapOf(FOUNDERS), M_KOTO = mapOf(KOTO), M_TOY = mapOf(TOY), M_MOT = mapOf(MOTIF2);
+const OUTRO_PIANO = { 0: 69, 6: 74, 8: 77, 12: 76, 32: 74, 38: 77, 40: 82, 44: 81, 64: 62, 66: 66, 68: 69, 70: 74, 72: 78 };
+
+function chordAt(bar) {
+  const S = secByBar(bar), lb = bar - S.bar;
+  switch (S.id) {
+    case 'prologue': return lb < 3 ? 'Dm' : lb < 5 ? 'Bb' : 'C';
+    case 'rush': return lb === 6 ? 'A' : CPROG.main[lb % 4];
+    case 'mla': return CPROG.mla[lb % 4];
+    case 'wor': return CPROG.wor[lb % 4];
+    case 'home': case 'chess': case 'acecraft': return CPROG.chess[lb % 4];
+    case 'silver': return ['Dm', 'Gm', 'A', 'Dm'][lb % 4];
+    case 'zone': return ['Dm', 'Eb', 'Dm', 'Eb'][lb % 4];
+    case 'outro': return ['Dm', 'Bb', 'F', 'C', 'Dm', 'Bb', 'D', 'D', 'D'][lb];
+    default: return CPROG.main[lb % 4];
+  }
+}
+const HOME_M = [[0,72,4],[4,77,4],[8,81,6],[14,79,2],[16,76,6],[22,77,2],[24,79,8],[32,77,4],[36,81,4],[40,84,6],[46,82,2],[48,81,8],[56,79,4],[60,77,4]];
+const M_HOME = mapOf(HOME_M);
+
+/* ---------- the score: one deterministic function per 16th step ---------- */
+function gen(st) {
+  const bar = st >> 4, s = st & 15, S = secByBar(bar), lb = bar - S.bar, ch = CH[chordAt(bar)], E = [];
+  const A = (i, o) => { o = o || {}; o.i = i; E.push(o); return o; };
+  const ph = (lb % 4) * 16 + s;
+  const tones = [ch.v[1], ch.v[2], ch.v[3], ch.v[4], ch.v[2] + 12, ch.v[4], ch.v[3], ch.v[2]];
+  /* a gentle groove: soft kick on the beat, light snare on 2 and 4, sparse hats */
+  const groove = (lead, leadUp, arpV) => {
+    if ((s & 3) === 0) A('kick', { v: .72 });
+    if (s === 4 || s === 12) A('snare', { v: .5 });
+    if ((s & 3) === 2) A('hat', { v: .1 });
+    if ((s & 3) === 2) A('bass', { n: ch.r + 12, d: 2, v: .5 });
+    if (s === 0) { A('sub', { n: ch.r, d: 14, v: .42 }); A('pad', { n: ch.v, d: 16, v: .28 }); }
+    if (arpV) A('arp', { n: tones[s & 7] + 12, v: arpV, cut: .45 });
+    if (lead) { const th = M_THEME.get(ph); if (th) { A('lead', { n: th[1] + leadUp, d: th[2], v: .45 }); if (lead === 2) A('lead', { n: dia(th[1] + leadUp, -2), d: th[2], v: .22, harm: 1 }); } }
+  };
+  const fill = (from, v0) => { if (s >= from) A('snare', { v: v0 + .04 * (s - from) }); };
+  switch (S.id) {
+    case 'prologue':
+      if (s === 0 && lb === 0) A('drone', { n: 26, d: 16 * 6, v: .26 });
+      if (lb >= 1) { if (s === 0 || s === 8) A('heart', { v: .6 }); if (s === 3 || s === 11) A('heart', { v: .35 }); }
+      if (s === 0 && (lb === 1 || lb === 3)) A('pad', { n: ch.v, d: 32, v: .17 });
+      if (s === 0 && lb === 5) A('pad', { n: ch.v, d: 16, v: .16 });
+      if (lb >= 2 && (s === 6 || s === 14)) A('bell', { n: [81, 86, 88, 93, 89, 84][(lb * 2 + (s > 6 ? 1 : 0)) % 6], v: .16 });
+      if (lb === 4 && s === 0) A('swell', { d: 32, v: .18 });
+      break;
+    case 'y2014': {
+      const fp = lb * 16 + s;
+      if (fp < 80) { const f = M_FOUND.get(fp); if (f) A('piano', { n: f[1], v: .55, tag: 'founder' }); }
+      if (s === 0) { A('pad', { n: ch.v, d: 16, v: .17 }); A('piano', { n: ch.r + 12, v: .24 }); }
+      if (lb >= 4 && (s === 0 || s === 8)) { A('kick', { v: .38 }); A('sub', { n: ch.r, d: 7, v: .34 }); }
+      if (lb >= 5 && (s & 3) === 2) A('hat', { v: .06 });
+      if (lb >= 5) { const f = M_FOUND.get((lb - 4) * 16 + s); if (f && (s === 0 || s === 6 || s === 8 || s === 12)) A('piano', { n: f[1], v: .3 }); }
+      if (lb === 7 && s === 8) A('swell', { d: 8, v: .25 });
+      break;
+    }
+    case 'rush':
+      if (lb < 6) {
+        A('arp', { n: tones[s & 7] + 12, v: .22, cut: .2 + lb * .06 });
+        if (lb >= 2 && (s === 0 || s === 8)) A('kick', { v: .6 });
+        if (lb >= 3 && (s & 3) === 2) A('hat', { v: .08 });
+        if (lb >= 4 && (s === 4 || s === 12)) A('snare', { v: .35 });
+        if (lb >= 2 && (s & 1) === 0) A('bass', { n: ch.r + 12 + ((s & 7) === 6 ? 12 : 0), d: 2, v: .38 });
+        if (s === 0) A('pad', { n: ch.v, d: 16, v: .24 });
+      } else {
+        if (s === 0) { A('pad', { n: ch.v, d: 14, v: .28 }); A('swell', { d: 14, v: .26 }); }
+        if (s < 14) { if ((s & 1) === 0 || s >= 8) A('snare', { v: .18 + s * .025 }); if ((s & 3) === 0) A('kick', { v: .6 }); }
+      }
+      break;
+    case 'mlbb':
+      if (lb === 0 && s === 0) { A('impact', { v: .75 }); A('crash', { v: .6 }); }
+      if (lb < 8) { groove(lb >= 4 ? 2 : 1, lb >= 4 ? 12 : 0, .12); if (lb === 4 && s === 0) A('crash', { v: .4 }); }
+      else { if (s === 0) { A('pad', { n: ch.v, d: 16, v: .3 }); A('kick', { v: .6 }); } fill(8, .2); }
+      break;
+    case 'esports':
+      if (lb < 5) {
+        if (s === 0 || s === 2 || s === 8 || s === 10) { A('kick', { v: .68, tag: 'stomp' }); A('bass', { n: ch.r + 12, d: 2, v: .42 }); }
+        if (s === 4 || s === 12) A('clap', { v: .6, big: 1 });
+        if (s === 0) { A('brass', { n: ch.v, d: 3, v: .38 }); A('pad', { n: ch.v, d: 16, v: .22 }); }
+        if (lb === 0 && s === 0) { A('crowd', { d: 16 * 10, v: .16 }); A('crash', { v: .35 }); }
+      } else {
+        groove(1, 12, .1);
+        if (lb === 5 && s === 0) A('crash', { v: .4 });
+        if (lb === 9) fill(10, .2);
+      }
+      break;
+    case 'billion':
+      if (lb === 0 && s === 0) A('crash', { v: .4 });
+      if (lb < 6) {
+        if ((s & 3) === 0) A('kick', { v: .66 });
+        if (s === 4 || s === 12) A('clap', { v: .3 });
+        if ((s & 3) === 2) A('hat', { v: .08 });
+        A('bass', { n: ch.r + 12 + [0, 0, 12, 0][s & 3], d: 1, v: .3 });
+        A('arp', { n: tones[(s * 3) & 7] + 12, v: .15, cut: .55 });
+        if (s === 0) A('pad', { n: ch.v, d: 16, v: .24 });
+        if (lb >= 2) { const m = M_MOT.get(((lb - 2) % 2) * 16 + s); if (m) A('lead', { n: m[1], d: m[2], v: .38 }); }
+        if (lb === 5) fill(10, .2);
+      } else if (lb === 6) {
+        if (s === 0) { A('impact', { v: .6 }); A('bell', { n: 86, v: .4 }); A('pad', { n: ch.v, d: 32, v: .3 }); A('sub', { n: ch.r, d: 16, v: .36 }); }
+      } else if (s >= 8 && (s & 1) === 0) A('koto', { n: [62, 65, 67, 69][(s - 8) >> 1], v: .4 });
+      break;
+    case 'mla': {
+      const kp = lb < 4 ? ph : ((lb - 4) % 4) * 16 + s;
+      if (lb < 6) { const k = M_KOTO.get(kp); if (k) A('koto', { n: k[1], v: .48 }); }
+      if (s === 0) { A('pad', { n: ch.v, d: 16, v: .3 }); A('sub', { n: ch.r, d: 16, v: .3 }); }
+      if (lb >= 1 && s === 0) A('kick', { v: .48 });
+      if (lb >= 1 && s === 8) A('snare', { v: .28, soft: 1 });
+      if (lb >= 2 && lb < 6 && (s & 1) === 0) A('shaker', { v: .04 + ((s & 3) === 2 ? .03 : 0) });
+      const fl = FLUTE[(lb + 1) * 16 + s]; if (fl && lb >= 3) A('flute', { n: fl[0], d: fl[1], v: .48 });
+      if (lb === 6 && (s === 8 || s === 12 || s === 14)) A('taiko', { v: s === 8 ? .5 : .35 });
+      break;
+    }
+    case 'wor':
+      if (lb === 0 && s === 0) { A('drone', { n: 26, d: 16 * 7, v: .3 }); A('impact', { v: .4 }); }
+      if (s === 0 || s === 8) A('taiko', { v: .7, big: 1 });
+      if (s === 6 || s === 11) A('taiko', { v: .3 });
+      if (s === 0) A('brassL', { n: ch.v.slice(0, 3), d: 16, v: .38 });
+      if (lb >= 3 && s === 0) { A('choir', { n: ch.v, d: 16, v: .28 }); A('kick', { v: .5 }); }
+      if (lb === 6 && s >= 12) A('taiko', { v: .3 + .08 * (s - 12) });
+      break;
+    case 'home': case 'chess': case 'acecraft': {
+      const sw = S.id === 'acecraft' ? STEP * .33 : 0;
+      if (lb === 0 && s === 0) { A('crash', { v: .35 }); if (S.id === 'home') A('impact', { v: .35 }); }
+      if (s === 0) A('pad', { n: ch.v, d: 16, v: .22 });
+      if (S.id === 'home') {
+        if ((s & 3) === 0) A('kick', { v: .6 });
+        if (s === 4 || s === 12) A('clap', { v: .3 });
+        if ((s & 3) === 2) A('bass', { n: ch.r + 12, d: 2, v: .4 });
+        const m = M_HOME.get(ph); if (m) { A('flute', { n: m[1], d: m[2], v: .5 }); A('bell', { n: m[1] + 12, v: .08 }); }
+        if ((s & 1) === 0) A('piano', { n: tones[(s >> 1) & 7] + 12, v: .14 });
+      } else if (S.id === 'chess') {
+        if ((s & 1) === 0) A('mallet', { n: tones[(s >> 1) & 7] + 12, v: .26, tag: (s & 3) === 0 ? 'flip' : undefined });
+        if (s === 0 || s === 8) A('kick', { v: .55, tag: 'hop' });
+        if (s === 4 || s === 12) A('clap', { v: .24 });
+        if (s === 0 || s === 6 || s === 8 || s === 12) A('pbass', { n: ch.r + 12 + (s === 6 || s === 12 ? 7 : 0), d: 2, v: .4 });
+        const ty = M_TOY.get(ph); if (ty) A('toy', { n: ty[1], d: ty[2], v: .24 });
+      } else {
+        if (s === 0 || s === 8) A('pbass', { n: ch.r + 12, d: 2, v: .45 }); if (s === 4 || s === 12) A('pbass', { n: ch.r + 19, d: 2, v: .38 });
+        if (s === 4 || s === 12) A('snare', { v: .22, soft: 1 });
+        if (s === 0 || s === 8) A('kick', { v: .45 });
+        const ty = M_TOY.get(ph); if (ty) A('toy', { n: ty[1] + 5, d: ty[2], v: .24, off: (s & 3) === 2 ? sw : 0 });
+        if ((s & 3) === 2) A('mallet', { n: tones[s & 7] + 24, v: .12, off: sw });
+      }
+      break;
+    }
+    case 'silver':
+      if (lb === 0 && s === 0) { A('impact', { v: .3 }); A('drone', { n: 26, d: 16 * 4, v: .22 }); }
+      A('harp', { n: tones[[0, 1, 2, 3, 2, 1, 0, 1][s & 7]] + (s >= 8 ? 12 : 0), v: .22 });
+      if (s === 0) { A('brassL', { n: ch.v.slice(0, 3), d: 16, v: .32 }); A('choir', { n: ch.v, d: 16, v: .24 }); }
+      if (s === 0 || s === 10) A('kick', { v: .42 });
+      break;
+    case 'm7':
+      if (lb === 0 && s === 0) { A('impact', { v: .8 }); A('crash', { v: .6 }); }
+      if (lb < 5 || s < 8) { groove(1, 12, .12); if (s === 0) A('choir', { n: ch.v, d: 16, v: .24 }); if (s === 0 || s === 8) A('taiko', { v: .3 }); }
+      else { A('snare', { v: .18 + (s - 8) * .03 }); }
+      break;
+    case 'savvy':
+      if (s === 0) { A('pad', { n: ch.v, d: 16, v: .3 }); A('sub', { n: ch.r, d: 16, v: .3 }); }
+      { const f = M_FOUND.get((lb % 4) * 16 + s); if (f) A('piano', { n: f[1] - 12, v: .4 }); }
+      if (lb >= 2 && (s === 0 || s === 8)) A('kick', { v: .38 });
+      if (lb === 3 && s === 8) A('swell', { d: 8, v: .26 });
+      break;
+    case 'asian':
+      if (lb === 0 && s === 0) { A('impact', { v: .55 }); A('crash', { v: .45 }); }
+      if (lb < 4) { groove(2, 12, .1); if (s === 0) A('choir', { n: ch.v, d: 16, v: .28 }); if (s === 0 || s === 8) A('taiko', { v: .32 }); const th = M_THEME.get(ph); if (th) A('bell', { n: th[1] + 12, v: .1 }); }
+      else { if (s === 0) { A('choir', { n: ch.v, d: 16, v: .3 }); A('pad', { n: ch.v, d: 16, v: .3 }); } }
+      break;
+    case 'zone':
+      if (lb === 0 && s === 0) A('drone', { n: 26, d: 16 * 4, v: .26 });
+      if ((s & 1) === 0) A('bass', { n: ch.r + 12, d: 1, v: .26 });
+      A('hat', { v: (s & 3) === 0 ? .05 : .025 });
+      if (s === 0 || s === 8) A('kick', { v: .5 });
+      if (s === 0) A('bell', { n: 86, v: .12 });
+      if (lb === 2 && s === 0) A('riser', { d: 32, v: .14 });
+      break;
+    case 'outro': {
+      if (lb < 4) { if (s === 0 || s === 8) A('heart', { v: .45 }); if (s === 3 || s === 11) A('heart', { v: .25 }); }
+      if (s === 0 && lb < 6) A('pad', { n: ch.v, d: 16, v: .2 });
+      if (s === 0 && lb === 6) { A('pad', { n: ch.v, d: 48, v: .32 }); A('choir', { n: ch.v, d: 48, v: .26 }); A('boom', { v: .4 }); A('bell', { n: 86, v: .2 }); }
+      if (lb >= 2 && lb < 6 && s === 0) A('choir', { n: ch.v, d: 16, v: .2 });
+      if (lb < 4) { const f = M_FOUND.get(lb * 16 + s); if (f) A('piano', { n: f[1], v: .42 }); }
+      if (lb === 4 || lb === 5) { const f = M_FOUND.get((lb - 4) * 16 + s); if (f && (s === 0 || s === 8)) A('piano', { n: f[1], v: .35 }); }
+      const pn = { 96: 62, 98: 66, 100: 69, 102: 74, 104: 78 }[lb * 16 + s]; if (pn) A('piano', { n: pn, v: .4 });
+      break;
+    }
+  }
+  return E;
+}
+
+/* ---------- event timeline for the visuals (same score, no audio) ---------- */
+const EV = {};
+function evPush(name, t, e) { (EV[name] || (EV[name] = { t: [], e: [] })); EV[name].t.push(t); EV[name].e.push(e); }
+for (let st = 0; st < TOTAL_STEPS; st++) for (const e of gen(st)) { const t = st * STEP + (e.off || 0); evPush(e.i, t, e); if (e.tag) evPush(e.tag, t, e); }
+function lastIdx(name, t) { const L = EV[name]; if (!L) return -1; const a = L.t; let lo = 0, hi = a.length - 1, r = -1; while (lo <= hi) { const m = (lo + hi) >> 1; if (a[m] <= t) { r = m; lo = m + 1; } else hi = m - 1; } return r; }
+function since(name, t) { const i = lastIdx(name, t); return i < 0 ? 1e9 : t - EV[name].t[i]; }
+function env(name, t, dec) { const s = since(name, t); return s > dec * 8 ? 0 : Math.exp(-s / dec); }
+function evTimesIn(name, t0, t1) { const L = EV[name]; if (!L) return []; return L.t.filter(x => x >= t0 - 1e-6 && x < t1 - 1e-6); }
+
+/* ============================================================
+   Audio engine (Web Audio, scheduled ahead of time)
+   ============================================================ */
+let AC = null, MX = null;
+const mtof = n => 440 * Math.pow(2, (n - 69) / 12);
+function makeIR(sec) {
+  const len = Math.floor(AC.sampleRate * sec), b = AC.createBuffer(2, len, AC.sampleRate);
+  for (let c = 0; c < 2; c++) { const d = b.getChannelData(c); let lp = 0; for (let i = 0; i < len; i++) { const x = Math.random() * 2 - 1; lp = lp * .55 + x * .45; d[i] = lp * Math.pow(1 - i / len, 2.6) * (i < 90 ? i / 90 : 1); } }
+  return b;
+}
+function initAudio(ctx) {
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  AC = ctx || new Ctx({ latencyHint: 'playback' });
+  const g = v => { const x = AC.createGain(); x.gain.value = v; return x; };
+  MX = {};
+  const comp = AC.createDynamicsCompressor(); comp.threshold.value = -13; comp.knee.value = 10; comp.ratio.value = 2.4; comp.attack.value = .012; comp.release.value = .25;
+  const lim = AC.createDynamicsCompressor(); lim.threshold.value = -5; lim.knee.value = 0; lim.ratio.value = 20; lim.attack.value = .002; lim.release.value = .12;
+  MX.out = g(.7); MX.bus = g(1); MX.bus.connect(comp); comp.connect(lim); lim.connect(MX.out); MX.out.connect(AC.destination);
+  MX.duck = g(1); MX.duck.connect(MX.bus);
+  MX.music = g(.85); MX.music.connect(MX.duck);
+  MX.drums = g(.62); const shelf = AC.createBiquadFilter(); shelf.type = 'highshelf'; shelf.frequency.value = 4500; shelf.gain.value = -7; MX.drums.connect(shelf); shelf.connect(MX.bus);
+  MX.rev = AC.createConvolver(); MX.rev.buffer = makeIR(3.4); const ro = g(.5); MX.rev.connect(ro); ro.connect(MX.bus);
+  MX.revIn = g(1); MX.revIn.connect(MX.rev);
+  MX.dly = AC.createDelay(2); MX.dly.delayTime.value = BEAT * .75;
+  const fb = g(.36), lp = AC.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2600;
+  MX.dlyIn = g(1); MX.dlyIn.connect(MX.dly); MX.dly.connect(lp); lp.connect(fb); fb.connect(MX.dly);
+  const dOut = g(.45); lp.connect(dOut); dOut.connect(MX.duck); const dRev = g(.25); lp.connect(dRev); dRev.connect(MX.revIn);
+  const nb = AC.createBuffer(1, AC.sampleRate * 2, AC.sampleRate), nd = nb.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1; MX.noise = nb;
+}
+function newSession() {
+  const S = {}; const mk = (dst) => { const x = AC.createGain(); x.gain.value = 1; x.connect(dst); return x; };
+  S.music = mk(MX.music); S.drums = mk(MX.drums); S.rev = mk(MX.revIn); S.dly = mk(MX.dlyIn);
+  return S;
+}
+function killSession(S) {
+  if (!S) return; const t = AC.currentTime;
+  for (const k of ['music', 'drums', 'rev', 'dly']) { const p = S[k].gain; p.cancelScheduledValues(t); p.setValueAtTime(p.value, t); p.linearRampToValueAtTime(0, t + .06); }
+  setTimeout(() => { for (const k of ['music', 'drums', 'rev', 'dly']) try { S[k].disconnect(); } catch (e) { } }, 250);
+  const d = MX.duck.gain; d.cancelScheduledValues(t); d.setValueAtTime(1, t);
+}
+function route(node, S, bus, rv, dl) {
+  node.connect(S[bus]);
+  if (rv) { const s = AC.createGain(); s.gain.value = rv; node.connect(s); s.connect(S.rev); }
+  if (dl) { const s = AC.createGain(); s.gain.value = dl; node.connect(s); s.connect(S.dly); }
+}
+function osc(type, f, t, end) { const o = AC.createOscillator(); o.type = type; o.frequency.setValueAtTime(f, t); o.start(t); o.stop(end); return o; }
+function gainN(v) { const g = AC.createGain(); g.gain.value = v; return g; }
+function filt(type, f, q) { const b = AC.createBiquadFilter(); b.type = type; b.frequency.value = f; b.Q.value = q == null ? .7 : q; return b; }
+function noiseSrc(t, dur) { const s = AC.createBufferSource(); s.buffer = MX.noise; s.loop = true; s.start(t, Math.random() * 1.5); s.stop(t + dur); return s; }
+function tick(S, t, v, f, dur, bus) { const n = noiseSrc(t, dur + .03), h = filt('highpass', f), g = AC.createGain(); g.gain.setValueAtTime(v, t); g.gain.exponentialRampToValueAtTime(.0008, t + dur); n.connect(h); h.connect(g); route(g, S, bus); }
+function duck(t, depth) { const p = MX.duck.gain; p.cancelScheduledValues(t); p.setValueAtTime(depth, t); p.linearRampToValueAtTime(1, t + .24); }
+function envAD(g, t, peak, a, d) { g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.exponentialRampToValueAtTime(.0008, t + a + d); }
+function envSus(g, t, peak, a, len, r) { g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + a); g.gain.setValueAtTime(peak, t + Math.max(a, len)); g.gain.linearRampToValueAtTime(0, t + Math.max(a, len) + r); }
+
+const INS = {
+  kick(S, t, e) {
+    const o = osc('sine', 155, t, t + .46), g = AC.createGain();
+    o.frequency.exponentialRampToValueAtTime(46, t + .11);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(e.v * 1.05, t + .004); g.gain.exponentialRampToValueAtTime(.0008, t + .42);
+    o.connect(g); route(g, S, 'drums'); tick(S, t, e.v * .05, 3000, .01, 'drums'); duck(t, .6 + (1 - e.v) * .3);
+  },
+  snare(S, t, e) {
+    const o = osc('triangle', 190, t, t + .17), og = AC.createGain(); o.frequency.exponentialRampToValueAtTime(140, t + .1);
+    og.gain.setValueAtTime(e.v * .5, t); og.gain.exponentialRampToValueAtTime(.0008, t + .14); o.connect(og); route(og, S, 'drums', .15);
+    const n = noiseSrc(t, .4), hp = filt('highpass', 700), bp = filt('lowpass', 3800, .5), g = AC.createGain();
+    g.gain.setValueAtTime(e.v * .42, t); g.gain.exponentialRampToValueAtTime(.0008, t + (e.soft ? .34 : .17)); n.connect(hp); hp.connect(bp); bp.connect(g); route(g, S, 'drums', e.soft ? .6 : .25);
+  },
+  clap(S, t, e) {
+    const v = e.v * (e.big ? .55 : .45), n = noiseSrc(t, .5), bp = filt('bandpass', 1100, 1.1), g = AC.createGain();
+    g.gain.setValueAtTime(0, t);
+    for (let k = 0; k < 3; k++) { const tk = t + k * .011; g.gain.setValueAtTime(v, tk); g.gain.exponentialRampToValueAtTime(v * .15, tk + .009); }
+    g.gain.setValueAtTime(v * .8, t + .033); g.gain.exponentialRampToValueAtTime(.0008, t + .033 + (e.big ? .34 : .2));
+    n.connect(bp); bp.connect(g); route(g, S, 'drums', e.big ? .5 : .3);
+  },
+  hat(S, t, e) { tick(S, t, e.v * .5, 8000, .03, 'drums'); },
+  shaker(S, t, e) { tick(S, t, e.v * .6, 5200, .05, 'drums'); },
+  ohat(S, t, e) { const n = noiseSrc(t, .35), hp = filt('highpass', 6500), g = AC.createGain(); g.gain.setValueAtTime(e.v * .45, t); g.gain.exponentialRampToValueAtTime(.0008, t + .28); n.connect(hp); hp.connect(g); route(g, S, 'drums', .1); },
+  crash(S, t, e) { const n = noiseSrc(t, 2.4), hp = filt('highpass', 2500), lp = filt('lowpass', 7500), g = AC.createGain(); g.gain.setValueAtTime(.0005, t); g.gain.linearRampToValueAtTime(e.v * .2, t + .03); g.gain.exponentialRampToValueAtTime(.0008, t + 2.2); n.connect(hp); hp.connect(lp); lp.connect(g); route(g, S, 'drums', .4); },
+  taiko(S, t, e) {
+    const big = !!e.big, o = osc('sine', big ? 95 : 120, t, t + 1.2), g = AC.createGain();
+    o.frequency.exponentialRampToValueAtTime(big ? 48 : 70, t + .25);
+    g.gain.setValueAtTime(e.v, t); g.gain.exponentialRampToValueAtTime(.0008, t + (big ? 1.1 : .5)); o.connect(g); route(g, S, 'drums', .45);
+    const n = noiseSrc(t, .2), lp = filt('lowpass', big ? 500 : 900), ng = AC.createGain(); ng.gain.setValueAtTime(e.v * .6, t); ng.gain.exponentialRampToValueAtTime(.0008, t + .12); n.connect(lp); lp.connect(ng); route(ng, S, 'drums', .4);
+    if (big) duck(t, .5);
+  },
+  impact(S, t, e) {
+    const o = osc('sine', 70, t, t + 2.3), g = AC.createGain(); o.frequency.exponentialRampToValueAtTime(28, t + 1.4);
+    g.gain.setValueAtTime(e.v * .8, t); g.gain.exponentialRampToValueAtTime(.0008, t + 2.2); o.connect(g); route(g, S, 'drums', .4);
+    const n = noiseSrc(t, 1.8), lp = filt('lowpass', 2500), ng = AC.createGain(); lp.frequency.setValueAtTime(2500, t); lp.frequency.exponentialRampToValueAtTime(120, t + 1.5);
+    ng.gain.setValueAtTime(e.v * .35, t); ng.gain.exponentialRampToValueAtTime(.0008, t + 1.6); n.connect(lp); lp.connect(ng); route(ng, S, 'drums', .6); duck(t, .35);
+  },
+  boom(S, t, e) { INS.impact(S, t, e); },
+  heart(S, t, e) {
+    const o = osc('sine', 75, t, t + .26), g = AC.createGain(), lp = filt('lowpass', 180); o.frequency.exponentialRampToValueAtTime(38, t + .12);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(e.v * .95, t + .01); g.gain.exponentialRampToValueAtTime(.0008, t + .22); o.connect(lp); lp.connect(g); route(g, S, 'drums', .2);
+  },
+  riser(S, t, e) {
+    const d = e.d * STEP, n = noiseSrc(t, d), bp = filt('bandpass', 250, 1.5), g = AC.createGain();
+    bp.frequency.setValueAtTime(250, t); bp.frequency.exponentialRampToValueAtTime(7000, t + d);
+    g.gain.setValueAtTime(.0005, t); g.gain.exponentialRampToValueAtTime(e.v, t + d * .97); g.gain.linearRampToValueAtTime(0, t + d); n.connect(bp); bp.connect(g); route(g, S, 'music', .3);
+    const o = osc('sawtooth', 110, t, t + d + .02), og = AC.createGain(), lp = filt('lowpass', 1200); o.frequency.exponentialRampToValueAtTime(880, t + d);
+    og.gain.setValueAtTime(.0005, t); og.gain.exponentialRampToValueAtTime(e.v * .22, t + d * .97); og.gain.linearRampToValueAtTime(0, t + d); o.connect(lp); lp.connect(og); route(og, S, 'music', .2);
+  },
+  swell(S, t, e) {
+    const d = e.d * STEP, n = noiseSrc(t, d), bp = filt('bandpass', 400, 1.2), g = AC.createGain();
+    bp.frequency.setValueAtTime(400, t); bp.frequency.exponentialRampToValueAtTime(2600, t + d);
+    g.gain.setValueAtTime(.0005, t); g.gain.exponentialRampToValueAtTime(e.v, t + d * .95); g.gain.linearRampToValueAtTime(0, t + d); n.connect(bp); bp.connect(g); route(g, S, 'music', .5);
+  },
+  whoosh(S, t, e) {
+    const d = e.d * STEP, n = noiseSrc(t, d), bp = filt('bandpass', 300, .8), g = AC.createGain();
+    bp.frequency.setValueAtTime(300, t); bp.frequency.exponentialRampToValueAtTime(6000, t + d * .6); bp.frequency.exponentialRampToValueAtTime(200, t + d);
+    g.gain.setValueAtTime(.0005, t); g.gain.exponentialRampToValueAtTime(e.v, t + d * .6); g.gain.exponentialRampToValueAtTime(.0008, t + d); n.connect(bp); bp.connect(g); route(g, S, 'music', .4);
+  },
+  crowd(S, t, e) {
+    const d = e.d * STEP, n = noiseSrc(t, d), b1 = filt('bandpass', 850, .5), g = AC.createGain();
+    g.gain.setValueAtTime(.0005, t); g.gain.exponentialRampToValueAtTime(e.v, t + 1.5); g.gain.setValueAtTime(e.v, t + Math.max(1.6, d - 2)); g.gain.linearRampToValueAtTime(0, t + Math.max(2, d));
+    n.connect(b1); b1.connect(g); route(g, S, 'music', .5);
+  },
+  pad(S, t, e) {
+    const d = e.d * STEP, lp = filt('lowpass', 1400, .5), g = AC.createGain();
+    envSus(g, t, e.v * .14, .35, d - .1, .8);
+    for (const n of e.n) for (const dt of [-8, 8]) { const o = osc('sawtooth', mtof(n), t, t + d + .85); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); route(g, S, 'music', .45);
+  },
+  drone(S, t, e) {
+    const d = e.d * STEP, lp = filt('lowpass', 260, .8), g = AC.createGain();
+    envSus(g, t, e.v * .28, 2.5, d - 1.5, 1.5);
+    for (const [m, dt, tp] of [[e.n, -5, 'sawtooth'], [e.n, 5, 'sawtooth'], [e.n + 12, 0, 'sine'], [e.n + 19, 3, 'sine']]) { const o = osc(tp, mtof(m), t, t + d + .1); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); route(g, S, 'music', .4);
+  },
+  brass(S, t, e) {
+    const d = e.d * STEP, lp = filt('lowpass', 500, 1.2), g = AC.createGain();
+    lp.frequency.setValueAtTime(400, t); lp.frequency.linearRampToValueAtTime(2800, t + .05); lp.frequency.exponentialRampToValueAtTime(900, t + .3);
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(e.v * .16, t + .02); g.gain.setValueAtTime(e.v * .16, t + d); g.gain.exponentialRampToValueAtTime(.0008, t + d + .25);
+    for (const n of e.n) for (const dt of [-10, 10]) { const o = osc('sawtooth', mtof(n), t, t + d + .3); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); route(g, S, 'music', .35);
+  },
+  brassL(S, t, e) {
+    const d = e.d * STEP, lp = filt('lowpass', 650, .9), g = AC.createGain();
+    envSus(g, t, e.v * .2, .7, d - .2, .6);
+    for (const n of e.n) for (const dt of [-9, 0, 9]) { const o = osc('sawtooth', mtof(n - 12), t, t + d + .7); o.detune.value = dt; o.connect(lp); }
+    lp.connect(g); route(g, S, 'music', .4);
+  },
+  choir(S, t, e) {
+    const d = e.d * STEP, g = AC.createGain(), src = gainN(.22);
+    const f1 = filt('bandpass', 700, 4), f2 = filt('bandpass', 1150, 5), f3 = filt('bandpass', 2600, 6), f3g = gainN(.4);
+    src.connect(f1); src.connect(f2); src.connect(f3); f1.connect(g); f2.connect(g); f3.connect(f3g); f3g.connect(g);
+    envSus(g, t, e.v * 1.1, .6, d - .2, .9);
+    const lfo = osc('sine', 5.2, t, t + d + 1), lg = gainN(9); lfo.connect(lg);
+    for (const n of e.n) for (const dt of [-12, 0, 12]) { const o = osc('sawtooth', mtof(n), t, t + d + 1); o.detune.value = dt; lg.connect(o.detune); o.connect(src); }
+    route(g, S, 'music', .7);
+  },
+  bass(S, t, e) {
+    const d = e.d * STEP, o = osc('sawtooth', mtof(e.n), t, t + d + .1), o2 = osc('square', mtof(e.n - 12), t, t + d + .1), o2g = gainN(.5), lp = filt('lowpass', 300, 4), g = AC.createGain();
+    lp.frequency.setValueAtTime(1400, t); lp.frequency.exponentialRampToValueAtTime(220, t + .18);
+    g.gain.setValueAtTime(e.v * .32, t); g.gain.setValueAtTime(e.v * .32, t + d * .8); g.gain.exponentialRampToValueAtTime(.0008, t + d + .08);
+    o.connect(lp); o2.connect(o2g); o2g.connect(lp); lp.connect(g); route(g, S, 'music');
+  },
+  pbass(S, t, e) { const o = osc('triangle', mtof(e.n), t, t + .4), g = AC.createGain(); envAD(g, t, e.v * .55, .005, .3); o.connect(g); route(g, S, 'music'); },
+  sub(S, t, e) { const d = e.d * STEP, o = osc('sine', mtof(e.n), t, t + d + .15), g = AC.createGain(); envSus(g, t, e.v * .5, .01, d, .1); o.connect(g); route(g, S, 'music'); },
+  arp(S, t, e) {
+    const o = osc('sawtooth', mtof(e.n), t, t + .19), lp = filt('lowpass', 800, 6), g = AC.createGain(), c = e.cut || .4;
+    lp.frequency.setValueAtTime(400 + c * 7000, t); lp.frequency.exponentialRampToValueAtTime(300 + c * 900, t + .12);
+    g.gain.setValueAtTime(e.v * .26, t); g.gain.exponentialRampToValueAtTime(.0008, t + .16); o.connect(lp); lp.connect(g); route(g, S, 'music', .15, .26);
+  },
+  lead(S, t, e) {
+    const d = e.d * STEP, lp = filt('lowpass', 2400, .8), g = AC.createGain(), end = t + d + .22;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(e.v * .13, t + .012); g.gain.setValueAtTime(e.v * .11, t + Math.max(.03, d - .05)); g.gain.exponentialRampToValueAtTime(.0008, t + d + .18);
+    const vib = osc('sine', 5.5, t, end), vg = AC.createGain(); vg.gain.setValueAtTime(0, t); vg.gain.linearRampToValueAtTime(d > .4 ? 14 : 0, t + Math.min(d, .5)); vib.connect(vg);
+    for (const dt of [-16, -7, 0, 7, 16]) { const o = osc('sawtooth', mtof(e.n), t, end); o.detune.value = dt; vg.connect(o.detune); o.connect(lp); }
+    const sq = osc('square', mtof(e.n - 12), t, end), sg = gainN(.3); sq.connect(sg); sg.connect(lp);
+    lp.connect(g); route(g, S, 'music', .3, .22);
+  },
+  piano(S, t, e) {
+    const f = mtof(e.n), dec = Math.max(1.2, 2.8 - (e.n - 60) * .03), g = AC.createGain();
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(e.v * .3, t + .004); g.gain.exponentialRampToValueAtTime(e.v * .11, t + .25); g.gain.exponentialRampToValueAtTime(.0008, t + dec);
+    for (const [m, a] of [[1, 1], [2, .35], [3, .12], [4.02, .06]]) { const o = osc('sine', f * m, t, t + dec + .05), og = AC.createGain(); og.gain.setValueAtTime(a, t); og.gain.exponentialRampToValueAtTime(a * .04 + .0005, t + dec / m); o.connect(og); og.connect(g); }
+    tick(S, t, e.v * .035, 2000, .015, 'music'); route(g, S, 'music', .55, .18);
+  },
+  koto(S, t, e) {
+    const f = mtof(e.n), o = osc('triangle', f * .985, t, t + 1.45), o2 = osc('sawtooth', f * .985, t, t + 1.45), o2g = gainN(.22), lp = filt('lowpass', 4200, 2), g = AC.createGain();
+    o.frequency.exponentialRampToValueAtTime(f, t + .04); o2.frequency.exponentialRampToValueAtTime(f, t + .04);
+    lp.frequency.setValueAtTime(4200, t); lp.frequency.exponentialRampToValueAtTime(700, t + .6);
+    g.gain.setValueAtTime(e.v * .3, t); g.gain.exponentialRampToValueAtTime(.0008, t + 1.4);
+    o.connect(lp); o2.connect(o2g); o2g.connect(lp); lp.connect(g); route(g, S, 'music', .45, .3);
+  },
+  flute(S, t, e) {
+    const d = e.d * STEP, f = mtof(e.n), end = t + d + .35, o = osc('sine', f, t, end), o2 = osc('triangle', f * 2, t, end), o2g = gainN(.08), g = AC.createGain();
+    const vib = osc('sine', 5, t, end), vg = AC.createGain(); vg.gain.setValueAtTime(0, t); vg.gain.linearRampToValueAtTime(12, t + .6); vib.connect(vg); vg.connect(o.detune); vg.connect(o2.detune);
+    envSus(g, t, e.v * .2, .15, d - .1, .3);
+    const n = noiseSrc(t, d + .3), bp = filt('bandpass', f, 8), ng = gainN(e.v * .1); n.connect(bp); bp.connect(ng); ng.connect(g);
+    o.connect(g); o2.connect(o2g); o2g.connect(g); route(g, S, 'music', .55, .25);
+  },
+  bell(S, t, e) {
+    const f = mtof(e.n), c = osc('sine', f, t, t + 2.7), m = osc('sine', f * 3.5, t, t + 2.7), mg = AC.createGain(), g = AC.createGain();
+    mg.gain.setValueAtTime(f * 2.2, t); mg.gain.exponentialRampToValueAtTime(f * .02, t + 1.6); m.connect(mg); mg.connect(c.frequency);
+    envAD(g, t, e.v * .24, .003, 2.5); c.connect(g); route(g, S, 'music', .55, .3);
+  },
+  mallet(S, t, e) {
+    const f = mtof(e.n), o = osc('sine', f, t, t + .5), o2 = osc('sine', f * 4, t, t + .5), g = AC.createGain(), g2 = AC.createGain();
+    envAD(g, t, e.v * .3, .002, .42); envAD(g2, t, e.v * .12, .001, .07); o.connect(g); o2.connect(g2); g2.connect(g); route(g, S, 'music', .25, .2);
+  },
+  harp(S, t, e) {
+    const f = mtof(e.n), o = osc('sawtooth', f, t, t + .7), o2 = osc('square', f * 2, t, t + .7), o2g = gainN(.25), lp = filt('lowpass', 5000, 1.5), g = AC.createGain();
+    lp.frequency.setValueAtTime(5000, t); lp.frequency.exponentialRampToValueAtTime(900, t + .4);
+    envAD(g, t, e.v * .16, .002, .55); o.connect(lp); o2.connect(o2g); o2g.connect(lp); lp.connect(g); route(g, S, 'music', .4, .2);
+  },
+  toy(S, t, e) {
+    const d = e.d * STEP, o = osc('square', mtof(e.n), t, t + d + .08), lp = filt('lowpass', 2400, 2), g = AC.createGain();
+    g.gain.setValueAtTime(e.v * .15, t); g.gain.setValueAtTime(e.v * .11, t + d * .6); g.gain.exponentialRampToValueAtTime(.0008, t + d + .06);
+    o.connect(lp); lp.connect(g); route(g, S, 'music', .2, .3);
+  },
+};
+const SUSTAIN = new Set(['pad', 'drone', 'choir', 'brassL', 'crowd']);
+
+/* ---------- transport ---------- */
+const P = { playing: false, started: false, pos0: 0, t0: 0, step: 0, S: null, ended: false };
+function playEvent(S, e, t) { const f = INS[e.i]; if (f) try { f(S, t, e); } catch (err) { /* keep going */ } }
+function transportStart(pos) {
+  if (!AC) initAudio();
+  if (AC.state !== 'running') AC.resume();
+  if (P.S) killSession(P.S);
+  const S = P.S = newSession();
+  P.pos0 = pos; P.t0 = AC.currentTime + .08; P.playing = true; P.ended = false;
+  P.step = Math.ceil(pos / STEP - 1e-6);
+  for (let st = Math.max(0, P.step - 128); st < P.step; st++) for (const e of gen(st)) {
+    if (!SUSTAIN.has(e.i)) continue; const st0 = st * STEP, d = (e.d || 0) * STEP;
+    if (st0 + d > pos + .4) playEvent(S, Object.assign({}, e, { d: (st0 + d - pos) / STEP }), P.t0);
+  }
+  schedule();
+}
+function transportStop() { if (!P.playing) return; P.pos0 = curTime(); P.playing = false; killSession(P.S); P.S = null; }
+function schedule() {
+  if (!P.playing) return;
+  const horizon = AC.currentTime + (document.hidden ? 1.6 : .4);
+  while (P.step < TOTAL_STEPS) {
+    const tt = P.t0 + P.step * STEP - P.pos0;
+    if (tt > horizon) break;
+    if (tt >= AC.currentTime - .03) for (const e of gen(P.step)) playEvent(P.S, e, tt + (e.off || 0));
+    P.step++;
+  }
+}
+function curTime() {
+  if (!P.playing || !AC) return P.pos0;
+  return Math.max(0, AC.currentTime - P.t0 + P.pos0 - (AC.outputLatency || AC.baseLatency || 0));
+}
+setInterval(schedule, 60);
+/* ============================================================
+   Part 2: scenes. Each scene = particle layout + designed vector overlay + camera + captions.
+   Rule: every caption gets a picture that shows the same thing.
+   ============================================================ */
+const MOBILE = Math.min(innerWidth, innerHeight) < 700 || (navigator.hardwareConcurrency || 8) <= 4;
+const N = Math.max(8000, Math.min(90000, +(Q.get('n') || (MOBILE ? 22000 : 44000))));
+const NDUST = MOBILE ? 1800 : 3600;
+const rnd = mulberry32(20140101);
+const R = [], G = [];
+for (let k = 0; k < 8; k++) { const a = new Float32Array(N); for (let i = 0; i < N; i++) a[i] = rnd(); R.push(a); }
+for (let k = 0; k < 4; k++) { const a = new Float32Array(N); for (let i = 0; i < N; i++) { const u = Math.max(1e-7, rnd()), v = rnd(); a[i] = Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v); } G.push(a); }
+const PAL = { gold: hex('#F0B64E'), blue: hex('#4A8DFF'), red: hex('#FF4D5E'), violet: hex('#9A6BFF'), cyan: hex('#5FD4FF'), lav: hex('#C9A6FF'), crimson: hex('#E0355A'), candy: hex('#FF8FC8'), mint: hex('#7FF0C8') };
+const CHAPTER_COLS = [PAL.gold, PAL.blue, PAL.violet, PAL.cyan, PAL.lav, PAL.crimson, PAL.candy];
+const FONT_SERIF = '"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","SimSun","WenQuanYi Zen Hei",serif';
+const FONT_SANS = '"PingFang SC","Microsoft YaHei","Noto Sans SC","WenQuanYi Zen Hei",sans-serif';
+const FONT_DISP = '"Big Shoulders Display","Oswald","Impact","Arial Narrow Bold",sans-serif';
+const INK = a => `rgba(238,232,218,${a})`, GOLD = a => `rgba(242,190,100,${a})`, TEAL = a => `rgba(120,220,235,${a})`;
+
+function put(o, i, x, y, z, s, r, g, b, a) { const j = i * 8; o[j] = x; o[j + 1] = y; o[j + 2] = z; o[j + 3] = s; o[j + 4] = r; o[j + 5] = g; o[j + 6] = b; o[j + 7] = a; }
+/* particles a scene does not need: a faint haze spread through space */
+function haze(o, i, a) { put(o, i, (R[0][i] - .5) * 1700, (R[1][i] - .5) * 1000, -250 - R[2][i] * 700, 1.3, .6, .65, 1, a == null ? .035 : a); }
+function textPoints(str, font, count, width, seed) {
+  const cv = document.createElement('canvas'), H = 260, cx = cv.getContext('2d');
+  cx.font = font; const w = Math.ceil(cx.measureText(str).width) + 40; cv.width = w; cv.height = H;
+  cx.font = font; cx.fillStyle = '#fff'; cx.textBaseline = 'middle'; cx.textAlign = 'center'; cx.fillText(str, w / 2, H / 2 + 8);
+  const img = cx.getImageData(0, 0, w, H).data, pts = [];
+  for (let y = 0; y < H; y++) for (let x = 0; x < w; x++) if (img[(y * w + x) * 4 + 3] > 120) pts.push(x, y);
+  const out = new Float32Array(count * 2), r = mulberry32(seed || 7);
+  if (!pts.length) { for (let k = 0; k < count; k++) { out[k * 2] = (r() - .5) * width; out[k * 2 + 1] = (r() - .5) * width * .3; } return out; }
+  let minx = 1e9, maxx = -1e9, miny = 1e9, maxy = -1e9;
+  for (let k = 0; k < pts.length; k += 2) { minx = Math.min(minx, pts[k]); maxx = Math.max(maxx, pts[k]); miny = Math.min(miny, pts[k + 1]); maxy = Math.max(maxy, pts[k + 1]); }
+  const mx = (minx + maxx) / 2, my = (miny + maxy) / 2, s2 = width / Math.max(1, maxx - minx);
+  for (let k = 0; k < count; k++) { const j = Math.floor(r() * pts.length / 2) * 2; out[k * 2] = (pts[j] + r() - .5 - mx) * s2; out[k * 2 + 1] = -(pts[j + 1] + r() - .5 - my) * s2; }
+  return out;
+}
+
+/* ---------- geography ---------- */
+const LAND = [
+  [[-168,66],[-162,70],[-140,70],[-120,72],[-95,72],[-80,74],[-62,66],[-56,52],[-66,45],[-70,42],[-76,35],[-81,31],[-80,25],[-84,30],[-90,29],[-97,26],[-97,21],[-92,18],[-87,21],[-88,16],[-83,10],[-79,8],[-80,8],[-86,12],[-92,15],[-105,20],[-110,24],[-112,30],[-117,32],[-124,40],[-124,48],[-130,55],[-140,60],[-150,60],[-158,57],[-165,60]],
+  [[-55,60],[-45,60],[-20,70],[-20,80],[-40,83],[-65,80],[-72,77],[-55,70]],
+  [[-78,8],[-72,12],[-62,11],[-52,5],[-50,0],[-35,-5],[-35,-9],[-39,-15],[-41,-22],[-48,-26],[-53,-34],[-58,-38],[-65,-41],[-68,-50],[-70,-55],[-74,-50],[-73,-40],[-71,-30],[-70,-18],[-76,-14],[-81,-5],[-80,0]],
+  [[-9,37],[-9,43],[-2,44],[-5,48],[2,51],[8,54],[8,57],[5,60],[5,62],[12,66],[18,70],[28,71],[40,68],[45,68],[60,69],[70,73],[80,73],[100,77],[115,74],[130,72],[140,72],[160,70],[180,68],[180,65],[170,60],[163,57],[157,51],[155,59],[143,59],[137,54],[141,48],[135,43],[130,42],[129,35],[126,35],[126,38],[124,40],[121,39],[122,37],[119,35],[121,31],[122,29],[120,26],[117,23],[110,21],[108,21],[106,17],[109,12],[106,9],[104,10],[101,13],[100,8],[103,1],[101,3],[98,8],[98,16],[94,17],[92,22],[88,22],[80,15],[78,8],[76,10],[73,18],[70,22],[67,24],[62,25],[57,26],[59,22],[52,16],[45,13],[43,15],[39,21],[35,28],[34,31],[35,36],[30,37],[27,37],[26,40],[23,40],[22,37],[20,40],[19,42],[14,45],[12,44],[16,40],[18,40],[15,38],[12,42],[9,44],[3,43],[0,39],[-2,37],[-6,36]],
+  [[-17,21],[-17,15],[-15,11],[-8,5],[-2,5],[8,4],[9,1],[12,-5],[13,-12],[12,-17],[15,-27],[18,-33],[20,-35],[26,-34],[33,-28],[35,-24],[40,-15],[40,-10],[39,-5],[42,0],[51,11],[44,11],[43,13],[38,18],[33,28],[32,31],[25,32],[20,31],[10,34],[10,37],[0,36],[-6,36],[-10,30],[-13,27]],
+  [[114,-22],[114,-34],[117,-35],[123,-34],[131,-31],[135,-35],[138,-35],[140,-38],[146,-39],[150,-37],[153,-32],[153,-25],[146,-19],[142,-11],[141,-17],[136,-12],[131,-12],[126,-14],[122,-18]],
+  [[95,5],[98,4],[104,-2],[106,-6],[101,-3]], [[105,-6],[114,-7],[114,-8.5],[106,-7.5]], [[109,1],[110,-3],[116,-4],[119,1],[117,7],[113,3]],
+  [[120,18],[122,18],[126,7],[122,7],[120,13]], [[131,-1],[141,-3],[150,-10],[141,-9],[137,-5]],
+  [[130,31],[135,34],[140,35],[142,40],[141,45],[145,44],[140,41],[136,36],[132,34]], [[-5,50],[1,51],[0,53],[-2,56],[-5,58],[-6,56],[-4,53]],
+  [[44,-25],[47,-25],[50,-15],[49,-12],[44,-16]], [[172,-34],[178,-38],[174,-41],[167,-46],[170,-46],[174,-41]], [[119,-5],[125,1],[121,1],[120,-3]],
+];
+
+LAND.push([[120.1, 22.6], [120.7, 24.6], [121.6, 25.3], [121.9, 24.6], [121.2, 22.3], [120.7, 21.9]]); // Taiwan
+LAND.push([[108.6, 19.2], [109.6, 18.2], [110.9, 18.6], [111, 19.8], [110.1, 20.2]]); // Hainan
+LAND.push([[79.8, 9.8], [81.3, 8.6], [81.8, 7.2], [80.6, 5.9], [79.9, 6.9]]); // Sri Lanka
+const CHINA = [[73.5,39.5],[75,37],[78,35.5],[79,32.5],[81,30],[86,28],[89,28],[92,27.8],[96,29],[98,27.5],[98.5,24.5],[101,21.5],[104,22.8],[106.5,22],[108,21.5],[110,20.2],[111,21.5],[113.5,22.2],[117,23.5],[119.5,25.5],[121.5,28],[122,30.5],[121,32.5],[120,34.5],[119.2,35],[122.5,37],[121,37.8],[118,38.5],[117.8,39.5],[121,40],[122,40.5],[124.5,40],[126.5,41.5],[129,42.5],[130.5,42.5],[131,45],[133.5,48],[135,48.5],[131,48],[127.5,50],[125.5,53],[121,53.3],[120,51],[117.5,49.5],[119.5,47],[116,45.5],[112,45],[111,43.5],[106,42.5],[101,42.5],[97,42.8],[96,44],[91,45.5],[90,47.5],[88,49],[85.5,47],[82.5,45.5],[80.5,43],[80,41],[76.5,40.5]];
+const TAIWAN = LAND[LAND.length - 3], HAINAN = LAND[LAND.length - 2];
+function inPoly(lon, lat, poly) { let c = false; for (let a = 0, b = poly.length - 1; a < poly.length; b = a++) { const [x1, y1] = poly[a], [x2, y2] = poly[b]; if (((y1 > lat) !== (y2 > lat)) && (lon < (x2 - x1) * (lat - y1) / (y2 - y1) + x1)) c = !c; } return c; }
+const isLand = (lon, lat) => LAND.some(p => inPoly(lon, lat, p));
+const isChina = (lon, lat) => inPoly(lon, lat, CHINA) || inPoly(lon, lat, TAIWAN) || inPoly(lon, lat, HAINAN);
+const inKorea = (lon, lat) => lon > 125.4 && lon < 130 && lat > 33.8 && lat < 38.7 && isLand(lon, lat);
+const inJapan = (lon, lat) => lon > 129 && lat > 30 && lat < 46 && inPoly(lon, lat, LAND[11]);
+function gridLand(lon0, lon1, lat0, lat1, step, test) { const out = [], r = mulberry32(Math.round(step * 1000)); for (let lat = lat0; lat <= lat1; lat += step) for (let lon = lon0; lon <= lon1; lon += step) { const a = lon + (r() - .5) * step * .3, b = lat + (r() - .5) * step * .3; if ((test || isLand)(a, b)) out.push([a, b]); } return out; }
+/* flat world map (whole film) and a close East/Southeast Asia map (2014, MPL) */
+const WXY = (lon, lat) => [lon * 3.4, (lat - 12) * 3.4];
+const AXY = (lon, lat) => [(lon - 116) * 14, (lat - 16) * 14];
+const WMAP = gridLand(-178, 180, -55, 76, 1.25);
+const AMAP = gridLand(88, 146, -11, 46, .55);
+const CHN = gridLand(73, 135, 18, 54, .55, isChina);
+const LL = { SH: [121.47, 31.23], JKT: [106.85, -6.2], MNL: [120.98, 14.6], KUL: [101.69, 3.14], SIN: [103.82, 1.35], RUH: [46.68, 24.71], IST: [28.98, 41.01], TYO: [139.69, 35.68], SEL: [126.98, 37.57] };
+const WOR_COUNTRIES = [[38.9,-77],[45.4,-75.7],[19.4,-99.1],[-15.8,-47.9],[-34.6,-58.4],[-33.4,-70.6],[4.7,-74.1],[-12,-77],[51.5,-.1],[48.9,2.35],[52.5,13.4],[40.4,-3.7],[38.7,-9.1],[41.9,12.5],[52.4,4.9],[50.8,4.4],[46.9,7.4],[48.2,16.4],[52.2,21],[59.3,18.1],[59.9,10.8],[55.7,12.6],[60.2,24.9],[53.3,-6.3],[50.1,14.4],[38,23.7],[39.9,32.9],[24.7,46.7],[24.5,54.4],[30,31.2],[34,-6.8],[-25.7,28.2],[9.1,7.5],[-1.3,36.8],[33.7,73],[51.2,71.4],[55.75,37.6],[50.45,30.5],[35.7,139.7],[37.6,127],[1.35,103.8],[3.1,101.7],[-6.2,106.8],[14.6,121],[13.75,100.5],[21,105.8],[-35.3,149.1],[-41.3,174.8],[44.4,26.1],[47.5,19],[25.3,51.5],[29.4,48],[-.2,-78.5],[-34.9,-56.2],[64.1,-21.9],[22.3,114.2],[-33.9,18.4]].map(([la, lo]) => [lo, la]);
+
+/* ---------- a shared globe (2020 downloads, 2021 Japan/Korea) ---------- */
+const GLOBE_R = 250, GLOBE_C = [170, 0, 0];
+const GLOBE_PTS = (() => { const F = 26000, land = [], ga = Math.PI * (3 - Math.sqrt(5)); for (let k = 0; k < F; k++) { const y = 1 - (k + .5) / F * 2, rr = Math.sqrt(1 - y * y), th = ga * k, x = Math.cos(th) * rr, z = Math.sin(th) * rr, lat = Math.asin(y) * 180 / Math.PI, lon = Math.atan2(x, z) * 180 / Math.PI; if (isLand(lon, lat)) land.push([x, y, z, lon, lat]); } return land; })();
+const N_GLOBE = Math.min(10000, GLOBE_PTS.length, Math.round(N * .25));
+function globeXYZ(k, psi, tilt, rad) {
+  const p = GLOBE_PTS[Math.floor(k * GLOBE_PTS.length / N_GLOBE)], cp = Math.cos(psi), sp = Math.sin(psi), ct = Math.cos(tilt), st = Math.sin(tilt);
+  const x1 = p[0] * cp + p[2] * sp, z1 = -p[0] * sp + p[2] * cp, y2 = p[1] * ct - z1 * st, z2 = p[1] * st + z1 * ct;
+  return [GLOBE_C[0] + x1 * rad, GLOBE_C[1] + y2 * rad, GLOBE_C[2] + z2 * rad, z2, p[3], p[4]];
+}
+function globeProj(lon, lat, psi, tilt, rad) {
+  const a = lat * Math.PI / 180, b = lon * Math.PI / 180, x = Math.cos(a) * Math.sin(b), y = Math.sin(a), z = Math.cos(a) * Math.cos(b);
+  const cp = Math.cos(psi), sp = Math.sin(psi), ct = Math.cos(tilt), st = Math.sin(tilt), x1 = x * cp + z * sp, z1 = -x * sp + z * cp, y2 = y * ct - z1 * st, z2 = y * st + z1 * ct;
+  return [GLOBE_C[0] + x1 * rad, GLOBE_C[1] + y2 * rad, GLOBE_C[2] + z2 * rad, z2];
+}
+
+/* ---------- vector overlay helpers (world coords → screen through the same camera) ---------- */
+const OV = {
+  path(c, V, pts, prog) {
+    if (pts.length < 2 || prog <= 0) return; prog = prog == null ? 1 : Math.min(1, prog);
+    let L = 0; const seg = []; for (let k = 1; k < pts.length; k++) { const a = pts[k - 1], b = pts[k], l = Math.hypot(b[0] - a[0], b[1] - a[1], (b[2] || 0) - (a[2] || 0)); seg.push(l); L += l; }
+    let rem = L * prog; c.beginPath(); const s = V.p(pts[0][0], pts[0][1], pts[0][2] || 0); c.moveTo(s[0], s[1]);
+    for (let k = 1; k < pts.length && rem > 0; k++) { const l = seg[k - 1], f = l > 0 ? Math.min(1, rem / l) : 1, a = pts[k - 1], b = pts[k]; const q = V.p(lerp(a[0], b[0], f), lerp(a[1], b[1], f), lerp(a[2] || 0, b[2] || 0, f)); c.lineTo(q[0], q[1]); rem -= l; }
+    c.stroke();
+  },
+  ring(x, y, r, z, n) { const pts = []; n = n || 72; for (let k = 0; k <= n; k++) { const a = Math.PI / 2 - k / n * TAU; pts.push([x + r * Math.cos(a), y + r * Math.sin(a), z || 0]); } return pts; },
+  ringXZ(x, z, r, y, n) { const pts = []; n = n || 72; for (let k = 0; k <= n; k++) { const a = k / n * TAU; pts.push([x + r * Math.cos(a), y || 0, z + r * Math.sin(a)]); } return pts; },
+  rrect(x, y, w, h, r) { const pts = [], q = [[x + w - r, y + h - r, 0], [x + r, y + h - r, Math.PI / 2], [x + r, y + r, Math.PI], [x + w - r, y + r, Math.PI * 1.5]]; for (const [cx, cy, a0] of q) for (let k = 0; k <= 8; k++) { const a = a0 + k / 8 * Math.PI / 2; pts.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]); } pts.push(pts[0]); return pts; },
+  fillPoly(c, V, pts, style) { c.beginPath(); pts.forEach((p, k) => { const s = V.p(p[0], p[1], p[2] || 0); k ? c.lineTo(s[0], s[1]) : c.moveTo(s[0], s[1]); }); c.closePath(); c.fillStyle = style; c.fill(); },
+  text(c, V, s, x, y, px, color, align, font, z) { const q = V.p(x, y, z || 0); c.font = `${(px * V.u).toFixed(1)}px ${font || FONT_SANS}`; c.fillStyle = color; c.textAlign = align || 'center'; c.textBaseline = 'middle'; c.fillText(s, q[0], q[1]); },
+  dot(c, V, x, y, rpx, color, z) { const q = V.p(x, y, z || 0); c.beginPath(); c.arc(q[0], q[1], rpx * V.u, 0, TAU); c.fillStyle = color; c.fill(); },
+  pulse(c, V, x, y, age, color, z, maxPx) { if (age < 0 || age > 1.4) return; const q = V.p(x, y, z || 0); c.beginPath(); c.arc(q[0], q[1], (4 + age * (maxPx || 26)) * V.u, 0, TAU); c.strokeStyle = color(Math.max(0, .8 * (1 - age / 1.4))); c.lineWidth = 1.2 * V.u; c.stroke(); },
+};
+function curvePts(a, b, lift, n) { const pts = [], mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2 + lift; n = n || 48; for (let k = 0; k <= n; k++) { const u = k / n, w = 1 - u; pts.push([w * w * a[0] + 2 * w * u * mx + u * u * b[0], w * w * a[1] + 2 * w * u * my + u * u * b[1]]); } return pts; }
+function smoothPts(ctrl, n) { const out = []; for (let k = 0; k < ctrl.length - 1; k++) { const p0 = ctrl[Math.max(0, k - 1)], p1 = ctrl[k], p2 = ctrl[k + 1], p3 = ctrl[Math.min(ctrl.length - 1, k + 2)]; for (let j = 0; j < n; j++) { const u = j / n; out.push([catmull(p0[0], p1[0], p2[0], p3[0], u), catmull(p0[1], p1[1], p2[1], p3[1], u)]); } } out.push(ctrl[ctrl.length - 1]); return out; }
+function catmull(a, b, c, d, u) { return .5 * (2 * b + (-a + c) * u + (2 * a - 5 * b + 4 * c - d) * u * u + (-a + 3 * b - 3 * c + d) * u * u * u); }
+function polyLen(pts) { const L = [0]; for (let k = 1; k < pts.length; k++) L.push(L[k - 1] + Math.hypot(pts[k][0] - pts[k - 1][0], pts[k][1] - pts[k - 1][1])); return L; }
+function polyAt(pts, L, d) { d = clamp(d, 0, L[L.length - 1]); let k = 1; while (k < L.length - 1 && L[k] < d) k++; const f = (d - L[k - 1]) / Math.max(1e-6, L[k] - L[k - 1]); return [lerp(pts[k - 1][0], pts[k][0], f), lerp(pts[k - 1][1], pts[k][1], f)]; }
+const cam2 = (cx, cy, D, ap, fov) => ({ p: [cx, cy, D], l: [cx, cy, 0], fov: fov || 40, ap: ap == null ? 1.1 : ap, fo: D, roll: 0 });
+const SC = {};
+/* ---------------- 序章: today's name, then back to twenty people ---------------- */
+SC.prologue = {
+  bg: ['#04040B', '#0B0A1A'], dust: .22, tr: null,
+  build() {
+    this.nW = Math.round(N * .5); this.nM = Math.round(N * .07);
+    this.wm = textPoints('沐瞳', `900 220px ${FONT_SERIF}`, this.nW, 560, 31);
+    this.mt = textPoints('MOONTON', `700 200px ${FONT_DISP}`, this.nM, 300, 32);
+    this.F = []; for (let k = 0; k < 20; k++) this.F.push([((k % 5) - 2) * 30, (Math.floor(k / 5) - 1.5) * 30 - 10]);
+  },
+  fill(o, lt, t) {
+    const heart = env('heart', t, .2), sweep = lerp(-760, 760, clamp((lt - 4.8) / 3.8));
+    for (let i = 0; i < N; i++) {
+      let tx, ty, tz = 0, r = .95, g = .92, b = .86, a = .9, s = .9;
+      if (i < this.nW) { tx = this.wm[i * 2]; ty = this.wm[i * 2 + 1] + 40; }
+      else if (i < this.nW + this.nM) { const q = i - this.nW; tx = this.mt[q * 2]; ty = this.mt[q * 2 + 1] - 108; a = .7; r = .84; g = .85; b = .92; s = .8; }
+      else { haze(o, i, .035 * sstep(1, 4, lt)); continue; }
+      const e = ease3(clamp((lt - 1.5 - R[3][i] * 1.8) / 1.7));
+      const sx = i === 0 ? 0 : G[0][i] * 700, sy = i === 0 ? 0 : G[1][i] * 420, sz = i === 0 ? 0 : -300 + G[2][i] * 300;
+      let x = lerp(sx, tx, e), y = lerp(sy, ty, e), z = lerp(sz, tz, e); a *= e;
+      const d = (x * .55 + y) - sweep, h = Math.exp(-d * d / 5000);
+      r = lerp(r, 1, h); g = lerp(g, .85, h); b = lerp(b, .58, h); a = Math.min(1, a * (1 + h));
+      if (i >= 20) { const dd = clamp((lt - 8.9 - R[4][i] * 1.3) / 1.6); if (dd > 0) { x += G[0][i] * 60 * dd; y -= (40 + R[5][i] * 120) * dd * dd; a *= 1 - dd; } }
+      else {
+        if (lt < 1.5) { if (i === 0) { x = y = z = 0; a = .45 + .55 * heart; s = 2.4 + heart * 1.4; r = 1; g = .88; b = .66; } else a = 0; }
+        const ef = ease3(clamp((lt - 9.1) / 1.8));
+        if (ef > 0) { const f = this.F[i]; x = lerp(x, f[0], ef); y = lerp(y, f[1], ef); z = lerp(z, 0, ef); r = lerp(r, 1, ef); g = lerp(g, .84, ef); b = lerp(b, .55, ef); a = lerp(a, 1, ef); s = lerp(s, 2.6, ef); }
+      }
+      put(o, i, x, y, z, s, r, g, b, a);
+    }
+  },
+  draw(c, V, lt) {
+    const p = ease3(clamp((lt - 5.6) / 1.2)), fo = 1 - clamp((lt - 8.6) / .6);
+    if (p > 0 && fo > 0) { c.strokeStyle = INK(.35 * fo); c.lineWidth = V.u; OV.path(c, V, [[-160, -150], [160, -150]], p); }
+  },
+  cam(lt) { return cam2(0, 0, lerp(1000, 900, clamp(lt / 12)), 1.4); },
+  caps: [
+    [1.2, 4.6, 'line', 'rise', 'c3', '每一个光点，都是一个人'],
+    [5.8, 8.6, 'tag', 'type', { l: '50%', t: '80%', ax: -50, ay: -50 }, '2014 — 2026'],
+    [9.3, 12.2, 'line', 'rise', 'bc', '故事，要从{二十个人}说起'],
+  ],
+};
+
+/* ---------------- 2014: twenty people in Shanghai, then out to sea ---------------- */
+SC.y2014 = {
+  bg: ['#03060F', '#0A1830'], dust: .25, tr: { k: 'flow', pre: 1.0, post: 1.6, st: .3 },
+  build() {
+    this.SH = AXY(...LL.SH);
+    this.map = AMAP.map(([lon, lat]) => AXY(lon, lat)); this.nMap = Math.min(this.map.length, N - 40);
+    this.O = []; for (let k = 0; k < 20; k++) this.O.push([this.SH[0] + ((k % 5) - 2) * 2.6, this.SH[1] + (Math.floor(k / 5) - 1.5) * 2.6]);
+    this.route = smoothPts([[121.47, 31.23], [123.2, 28.5], [122.6, 24.5], [120.2, 20.4], [116.5, 16.5], [113, 12], [110, 7], [108.3, 2], [107.2, -3], [106.85, -6.2]].map(p => AXY(...p)), 10);
+    this.rL = polyLen(this.route);
+    this.br = [
+      { pts: smoothPts([[116.5, 16.5], [119, 15.4], [120.98, 14.6]].map(p => AXY(...p)), 8), from: .38, city: AXY(...LL.MNL), name: '马尼拉' },
+      { pts: smoothPts([[108.3, 2], [104.8, 2.6], [101.69, 3.14]].map(p => AXY(...p)), 8), from: .76, city: AXY(...LL.KUL), name: '吉隆坡' },
+    ];
+    this.jkt = AXY(...LL.JKT);
+    this.fT = evTimesIn('founder', SEC.y2014.t0, SEC.y2014.t1);
+  },
+  hp(lt) { return ease3(clamp((lt - 8) / 5.6)); },
+  fill(o, lt, t) {
+    const zoom = ease3(sstep(2.4, 7.2, lt)), hp = this.hp(lt), mapA = .62 * sstep(2.6, 5.6, lt);
+    for (let k = 0; k < 20; k++) {
+      let x, y; const ft = this.fT[k], pulse = ft != null && t >= ft ? Math.exp(-(t - ft) / .35) : 0;
+      if (hp <= 0) { x = this.O[k][0]; y = this.O[k][1]; }
+      else { const q = polyAt(this.route, this.rL, hp * this.rL[this.rL.length - 1] - k * 7); x = q[0]; y = q[1]; }
+      const sp = ease3(clamp((lt - 14 - k * .02) / 1.6)); if (sp > 0) { const cc = [this.br[0].city, this.br[1].city, this.jkt][k % 3], a = k * 2.4; x = lerp(x, cc[0] + Math.cos(a) * 10, sp); y = lerp(y, cc[1] + Math.sin(a) * 10, sp); }
+      put(o, k, x, y, 0, lerp(.34, 2.3, zoom) * (1 + pulse * .6), 1, .84, .55, 1);
+    }
+    for (let q = 0; q < this.nMap; q++) { const i = 20 + q, m = this.map[q]; put(o, i, m[0], m[1], 0, 1.35, .5, .62, .92, mapA); }
+    for (let i = 20 + this.nMap; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const zoom = sstep(2.4, 7.2, lt), hp = this.hp(lt), SH = this.SH;
+    const ring = ease3(clamp((lt - .6) / 1)) * (1 - sstep(2.6, 3.4, lt));
+    if (ring > 0) { c.strokeStyle = GOLD(.6 * ring); c.lineWidth = 1.2 * V.u; OV.path(c, V, OV.ring(SH[0], SH[1], 9), ring); }
+    const lab = sstep(4.6, 5.6, lt);
+    if (lab > 0) { OV.dot(c, V, SH[0], SH[1], 3, GOLD(.9 * lab)); const q = V.p(SH[0], SH[1]); c.font = `${(13 * V.u).toFixed(1)}px ${FONT_SANS}`; c.fillStyle = INK(.75 * lab); c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText('上海', q[0] + 10 * V.u, q[1]); }
+    if (hp > 0) {
+      c.save(); c.setLineDash([5 * V.u, 5 * V.u]); c.strokeStyle = GOLD(.75); c.lineWidth = 1.4 * V.u; OV.path(c, V, this.route, hp);
+      for (const b of this.br) { const bp = clamp((hp - b.from) / .18); if (bp > 0) OV.path(c, V, b.pts, bp); }
+      c.restore();
+      const cities = [[this.br[0], this.br[0].from + .18], [this.br[1], this.br[1].from + .18], [{ city: this.jkt, name: '雅加达' }, 1]];
+      for (const [b, at] of cities) {
+        if (hp < at) continue; const tA = 8 + 5.6 * at, age = lt - tA;
+        OV.pulse(c, V, b.city[0], b.city[1], age % 1.6, GOLD); OV.dot(c, V, b.city[0], b.city[1], 2.6, GOLD(.9));
+        const q = V.p(b.city[0], b.city[1]); c.font = `${(12 * V.u).toFixed(1)}px ${FONT_SANS}`; c.fillStyle = INK(.7 * sstep(0, .6, age)); c.textAlign = 'left'; c.fillText(b.name, q[0] + 9 * V.u, q[1]);
+      }
+    }
+  },
+  cam(lt) {
+    const e = ease3(sstep(2.4, 7.2, lt)), D = 120 * Math.pow(1000 / 120, e), m = ease3(clamp((lt - 8) / 8));
+    const cx = lerp(lerp(this.SH[0], -10, e), -60, m), cy = lerp(lerp(this.SH[1], -40, e), -110, m);
+    return cam2(cx, cy, lerp(D, 930, m), lerp(.5, 1.2, e));
+  },
+  caps: [
+    [.6, 6.4, 'tag', 'type', 'tl', '2014 · 上海'],
+    [1.2, 6.4, 'titlecn', 'rise', 'tl2c', '{二十}个人'],
+    [8.4, 15.2, 'line', 'rise', 'bc', '一开始，就选择了{出海}'],
+  ],
+};
+
+/* ---------------- 2015: Magic Rush: Heroes, profitable from the start ---------------- */
+SC.rush = {
+  bg: ['#080610', '#150E08'], dust: .25, tr: { k: 'flow', pre: .8, post: 1.4, st: .35 },
+  y(u) { return -60 + 300 * (1 - Math.exp(-3.2 * u)) / (1 - Math.exp(-3.2)); },
+  x(u) { return -420 + 840 * u; },
+  build() {
+    this.u0 = .0666; this.nF = Math.round(N * .34); this.tc = 1.2 + Math.cbrt(this.u0 / 4) * 6.8;
+    this.pts = []; for (let k = 0; k <= 160; k++) { const u = k / 160; this.pts.push([this.x(u), this.y(u)]); }
+  },
+  head(lt) { return ease3(clamp((lt - 1.2) / 6.8)); },
+  fill(o, lt, t) {
+    const hd = this.head(lt), nF = this.nF, hx = this.x(hd), hy = this.y(hd);
+    for (let i = 0; i < nF; i++) {
+      const u = this.u0 + (1 - this.u0) * R[0][i], top = this.y(u), yy = R[1][i] * top, vis = clamp((hd - u) / .03);
+      const sh = .75 + .25 * Math.sin(t * 2 + i), k = .55 + .45 * (yy / 240);
+      put(o, i, this.x(u) + G[0][i] * .8, yy, G[1][i] * 3, .95, 1 * sh * k, .76 * sh * k, .36 * sh * k, .5 * vis);
+    }
+    const nH = 500; for (let i = nF; i < nF + nH; i++) put(o, i, hx + G[0][i] * 5, hy + G[1][i] * 5, 0, 1.1, 1, .92, .65, hd > 0 && hd < 1 ? .9 : .3 * (hd >= 1 ? 1 : 0));
+    for (let i = nF + nH; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const bl = ease3(clamp((lt - .2) / 1)), hd = this.head(lt);
+    c.save(); c.setLineDash([6 * V.u, 6 * V.u]); c.strokeStyle = INK(.32); c.lineWidth = V.u; OV.path(c, V, [[-470, 0], [470, 0]], bl); c.restore();
+    OV.text(c, V, '盈亏线', -470, 14, 11, INK(.5 * bl), 'left');
+    if (hd > 0) {
+      const k0 = Math.round(this.u0 * 160), below = this.pts.slice(0, k0 + 1), above = this.pts.slice(k0);
+      c.strokeStyle = INK(.55); c.lineWidth = 1.6 * V.u; OV.path(c, V, below, hd / this.u0);
+      if (hd > this.u0) { c.strokeStyle = GOLD(.95); c.lineWidth = 2.2 * V.u; OV.path(c, V, above, (hd - this.u0) / (1 - this.u0)); }
+      OV.dot(c, V, this.x(0), this.y(0), 3, INK(.8)); OV.text(c, V, '上线', this.x(0), this.y(0) - 18, 11, INK(.6));
+      const age = lt - this.tc; if (age > 0) { OV.pulse(c, V, this.x(this.u0), 0, age, GOLD, 0, 40); OV.dot(c, V, this.x(this.u0), 0, 3.2, GOLD(.95)); }
+    }
+  },
+  cam(lt) { return cam2(0, 30, lerp(1000, 940, clamp(lt / 14)), 1.1); },
+  caps: [
+    [.5, 6.6, 'tag', 'type', 'tl', '2015 · 第一款游戏'],
+    [.9, 13, 'title', 'type', 'tl2', 'MAGIC RUSH: HEROES'],
+    [3.4, 13, 'titlecn', 'rise', 'tl3', '上线就实现了{盈利}'],
+  ],
+};
+
+/* ---------------- 2016: MLBB — one screen, ten people, three lanes ---------------- */
+SC.mlbb = {
+  bg: ['#02040B', '#081026'], dust: .25, tr: { k: 'flow', pre: .3, post: 1.2, st: .2 },
+  build() {
+    const B = [-92, -107], Rb = [92, 77], TL = [-92, 77], BR = [92, -107];
+    this.lanes = [[B, TL, Rb], [B, Rb], [B, BR, Rb]].map(p => { const L = polyLen(p); return { p, L }; });
+    this.river = smoothPts([[-110, 95], [-40, 40], [0, -15], [40, -60], [110, -125]], 10); this.rvL = polyLen(this.river);
+    this.nG = Math.round(N * .12); this.nLn = Math.round(N * .08); this.nRv = Math.round(N * .035); this.nHero = 1200; this.nMin = Math.round(N * .1); this.nBase = Math.round(N * .02);
+  },
+  lp(L, s) { const ln = this.lanes[L]; return polyAt(ln.p, ln.L, s * ln.L[ln.L.length - 1]); },
+  laneOn(lt, L) { return sstep(5.2 + L * .5, 5.9 + L * .5, lt); },
+  heroPos(h, lt) {
+    const red = h >= 5, role = h % 5, w = .5 + .5 * Math.sin(lt * .5 + h * 1.7);
+    if (role === 4) { const a = lt * .7 + h, cx = red ? 42 : -42, cy = red ? 10 : -30; return [cx + 26 * Math.cos(a), cy + 20 * Math.sin(a)]; }
+    const L = role === 3 ? 2 : role, s = .12 + .26 * w; return this.lp(L, red ? 1 - s : s);
+  },
+  fill(o, lt, t) {
+    let i = 0; const dim = 1 - .65 * sstep(11, 12, lt) * (1 - sstep(15.5, 16.5, lt)), mapA = sstep(1.3, 2.4, lt) * dim;
+    for (let q = 0; q < this.nG; q++, i++) put(o, i, (R[0][i] - .5) * 220, -15 + (R[1][i] - .5) * 220, 0, .9, .2, .45, .52, .28 * mapA);
+    for (let q = 0; q < this.nLn; q++, i++) { const L = q % 3, s = R[0][i], p = this.lp(L, s), on = this.laneOn(lt, L); put(o, i, p[0] + G[0][i] * 2.5, p[1] + G[1][i] * 2.5, 0, .95, .6, .7, 1, .5 * on * dim); }
+    for (let q = 0; q < this.nRv; q++, i++) { const d = ((R[0][i] + lt * .03) % 1) * this.rvL[this.rvL.length - 1], p = polyAt(this.river, this.rvL, d); put(o, i, p[0] + G[0][i] * 4, p[1] + G[1][i] * 4, 0, .95, .3, .8, .9, .42 * mapA); }
+    for (let q = 0; q < this.nBase; q++, i++) { const red = q % 2, c = red ? [92, 77] : [-92, -107], a = R[0][i] * TAU, rr = Math.sqrt(R[1][i]) * 11; put(o, i, c[0] + rr * Math.cos(a), c[1] + rr * Math.sin(a), 0, 1, red ? 1 : .45, red ? .4 : .65, red ? .45 : 1, .75 * mapA); }
+    for (let q = 0; q < this.nHero; q++, i++) {
+      const h = Math.floor(q / (this.nHero / 10)), red = h >= 5, p = this.heroPos(h, lt), on = sstep(3.3 + h * .08, 3.6 + h * .08, lt);
+      put(o, i, p[0] + G[0][i] * 2.2, p[1] + G[1][i] * 2.2, 0, 1.15, red ? 1 : .55, red ? .55 : .8, red ? .6 : 1, .95 * on * dim);
+    }
+    for (let q = 0; q < this.nMin; q++, i++) {
+      const L = q % 3, red = R[1][i] >= .5, phi = Math.floor(R[2][i] * 6) / 6 + R[3][i] * .02, u = (phi + Math.max(0, lt - 7) * .08) % 1, s = red ? 1 - u * .5 : u * .5, p = this.lp(L, s);
+      const on = sstep(7, 8, lt) * dim * sstep(0, .04, u) * (u > .46 ? 1 - (u - .46) / .04 : 1);
+      put(o, i, p[0] + G[0][i] * 2, p[1] + G[1][i] * 2, 0, .85, red ? 1 : .5, red ? .45 : .7, red ? .5 : 1, .8 * on);
+    }
+    for (; i < N; i++) haze(o, i);
+  },
+  timer(lt) {
+    if (lt < 11.2) { const s = Math.max(0, (lt - 1.2) * 70); return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(Math.floor(s % 60)).padStart(2, '0'); }
+    return String(2016 + Math.floor(10 * ease3(clamp((lt - 11.8) / 2.4)) + 1e-6));
+  },
+  draw(c, V, lt) {
+    const fr = ease3(clamp(lt / 1.2)), dimUI = 1 - .7 * sstep(11, 12, lt);
+    c.strokeStyle = INK(.75); c.lineWidth = 1.7 * V.u; OV.path(c, V, OV.rrect(-300, -155, 600, 290, 38), fr);
+    c.strokeStyle = INK(.14); c.lineWidth = V.u; OV.path(c, V, OV.rrect(-282, -137, 564, 254, 22), fr);
+    OV.dot(c, V, -291, -10, 2.4, INK(.5 * fr));
+    const ma = sstep(1.3, 2.4, lt) * dimUI;
+    if (ma > 0) { c.strokeStyle = INK(.16 * ma); c.lineWidth = V.u; OV.path(c, V, [[-110, -125], [110, -125], [110, 95], [-110, 95], [-110, -125]]); }
+    for (let L = 0; L < 3; L++) { const on = this.laneOn(lt, L); if (on > 0) { c.strokeStyle = GOLD(.55 * dimUI); c.lineWidth = 1.3 * V.u; OV.path(c, V, this.lanes[L].p, on); } }
+    const ui = sstep(1.6, 2.6, lt) * dimUI;
+    if (ui > 0) {
+      c.strokeStyle = INK(.28 * ui); c.lineWidth = 1.2 * V.u; OV.path(c, V, OV.ring(-222, -82, 34)); const kx = -222 + 12 * Math.sin(lt * 1.3), ky = -82 + 8 * Math.cos(lt * 1.7); OV.dot(c, V, kx, ky, 9, INK(.22 * ui));
+      const btn = [[228, -92, 24], [178, -110, 14], [190, -58, 14], [238, -40, 14]];
+      btn.forEach((b, k) => { const ph = (lt * 1.1 + k * .37) % 1, fl = lt > 7 && ph < .15 ? 1 - ph / .15 : 0; c.strokeStyle = INK(.28 * ui); OV.path(c, V, OV.ring(b[0], b[1], b[2])); if (fl > 0) OV.dot(c, V, b[0], b[1], b[2] * V.k / V.u * .95, GOLD(.35 * fl * ui)); });
+    }
+    const ta = sstep(1.1, 1.6, lt); if (ta > 0) {
+      const e = ease3(sstep(11.2, 12.2, lt)), y = lerp(106, -8, e), px = lerp(14, 66, e);
+      OV.text(c, V, this.timer(lt), 0, y, px, lt > 11.2 ? GOLD(.95 * ta) : INK(.85 * ta), 'center', FONT_DISP);
+      if (e > .5) OV.text(c, V, '2016 年上线，至今', 0, y - 52, 12, INK(.55 * sstep(12.2, 12.8, lt)));
+    }
+  },
+  cam(lt) { const z = ease3(sstep(15.6, 18, lt)); return cam2(0, -10, lerp(1000, 2400, z), 1.1); },
+  caps: [
+    [.3, 4.8, 'tag', 'type', 'tl', '2016 · MOBILE LEGENDS: BANG BANG'],
+    [1.4, 10.4, 'line', 'seq', 'bc', '一块屏幕，|十个人，|三条路', [1.4, 3.3, 5.2]],
+    [11.6, 16.6, 'line', 'rise', 'bc', '这一局，一打就是{十年}'],
+  ],
+};
+
+/* ---------------- 电竞: MPL leagues → M1 (16 teams, 14 countries) → SEA Games medal ---------------- */
+SC.esports = {
+  bg: ['#04030C', '#120A24'], dust: .25, tr: { k: 'flow', pre: 1.0, post: 1.6, st: .35 },
+  build() {
+    this.cities = [[LL.JKT, '印尼', 0, -46, 30], [LL.MNL, '菲律宾', 0, 46, 30], [LL.KUL, '马来西亚', -40, 30, 22], [LL.SIN, '新加坡', 44, -34, 22]].map(([ll, n, dx, dy, r]) => ({ p: AXY(...ll), n, dx, dy, r }));
+    this.map = AMAP.map(([lon, lat]) => AXY(lon, lat)); this.nMap = Math.min(this.map.length, Math.round(N * .2));
+    const SCL = 2.2, xs = [190, 150, 110, 70, 25].map(v => v * SCL), stub = 20 * SCL, leafY = k => (k - 3.5) * 24 * SCL;
+    this.segs = []; this.nodes = [];
+    for (const sd of [-1, 1]) {
+      let ys = [0, 1, 2, 3, 4, 5, 6, 7].map(leafY); const rounds = [ys.slice()];
+      for (let r = 0; r < 3; r++) { const nx = []; for (let k = 0; k < ys.length; k += 2) { const a = ys[k], b = ys[k + 1], m = (a + b) / 2; this.segs.push([sd * xs[r], a, sd * (xs[r] - stub), a, r, sd], [sd * xs[r], b, sd * (xs[r] - stub), b, r, sd], [sd * (xs[r] - stub), a, sd * (xs[r] - stub), b, r, sd], [sd * (xs[r] - stub), m, sd * xs[r + 1], m, r, sd]); nx.push(m); } ys = nx; rounds.push(ys.slice()); }
+      this.segs.push([sd * xs[3], ys[0], 0, 0, 3, sd]); this.nodes.push(rounds);
+    }
+    this.xs = [xs[0], xs[1], xs[2], xs[3]];
+    this.win = []; for (let sd = 0; sd < 2; sd++) { let alive = [0, 1, 2, 3, 4, 5, 6, 7]; const rs = [alive.slice()]; for (let r = 0; r < 3; r++) { const nx = []; for (let k = 0; k < alive.length; k += 2) nx.push(hash1(alive[k] * 7 + r * 3 + sd * 11) < .5 ? alive[k] : alive[k + 1]); alive = nx; rs.push(alive.slice()); } this.win.push(rs); }
+    let tot = 0; const Ls = this.segs.map(s => { const l = Math.hypot(s[2] - s[0], s[3] - s[1]); tot += l; return l; }); this.segL = Ls; this.segTot = tot;
+    this.nC = Math.round(N * .24); this.nT = 960;
+  },
+  T0: 6.6,
+  teamPos(sd, k, lt) {
+    const sg = sd ? 1 : -1; let x = sg * this.xs[0], y = (k - 3.5) * 24 * 2.2, alive = true;
+    for (let r = 0; r < 3; r++) { const tr = this.T0 + r * 1.4 + .8, nidx = this.win[sd][r + 1].indexOf(k); if (nidx < 0) { alive = lt < tr; break; } const e = ease3(clamp((lt - tr) / .5)); x = lerp(x, sg * this.xs[r + 1], e); y = lerp(y, this.nodes[sd][r + 1][nidx], e); if (e < 1) break; }
+    if (this.win[sd][3].indexOf(k) >= 0) { const tf = this.T0 + 3 * 1.4 + .8, e = ease3(clamp((lt - tf) / .6)); x = lerp(x, 0, e); y = lerp(y, 0, e); if (sd === 1 && e >= 1) alive = false; }
+    return [x, y, alive];
+  },
+  medal(i, out) {
+    const rr = Math.sqrt(R[6][i]) * 96, a = R[5][i] * TAU, rim = rr > 84;
+    out[0] = rr * Math.cos(a); out[1] = -20 + rr * Math.sin(a); out[2] = rim ? 1 : .96; out[3] = rim ? .82 : .66; out[4] = rim ? .45 : .3; out[5] = rim ? .9 : .38;
+  },
+  fill(o, lt, t) {
+    let i = 0; const mapA = .58 * (1 - sstep(4.4, 5.6, lt)), md = [0, 0, 0, 0, 0, 0], mE = 13.4;
+    for (let q = 0; q < this.nMap; q++, i++) { const m = this.map[q]; put(o, i, m[0], m[1], 0, 1.35, .5, .62, .92, mapA); }
+    for (let q = 0; q < this.nC; q++, i++) {
+      const cyo = this.cities[q % 4], city = cyo.p, a0 = R[0][i] * TAU, gather = ease3(clamp((lt - .3 - R[1][i] * 1.4) / 2)), spin = a0 + lt * .6;
+      const r0 = 70 + R[2][i] * 110, r1 = (cyo.r / 30) * (9 + R[3][i] * 14), rr = lerp(r0, r1, gather);
+      let x = city[0] + rr * Math.cos(spin), y = city[1] + rr * Math.sin(spin) * .75, cr = 1, cg = .9, cb = .75, al = .8 * sstep(.2, 1.2, lt);
+      if (R[4][i] < .15) { cr = .5; cg = .65; cb = 1; } else if (R[4][i] < .3) { cr = 1; cg = .45; cb = .5; }
+      const eb = ease3(clamp((lt - 4.8 - R[5][i] * .8) / 1.4));
+      if (eb > 0) { let d = R[6][i] * this.segTot, k = 0; while (k < this.segs.length - 1 && d > this.segL[k]) { d -= this.segL[k]; k++; } const s = this.segs[k], f = d / Math.max(1e-6, this.segL[k]); const bx = lerp(s[0], s[2], f), by = lerp(s[1], s[3], f); x = lerp(x, bx, eb); y = lerp(y, by, eb); cr = lerp(cr, .8, eb); cg = lerp(cg, .8, eb); cb = lerp(cb, .95, eb); al = lerp(al, .5, eb); }
+      const em = ease3(clamp((lt - mE - R[7][i] * .6) / 1.2));
+      if (em > 0) { this.medal(i, md); x = lerp(x, md[0], em); y = lerp(y, md[1], em); cr = lerp(cr, md[2], em); cg = lerp(cg, md[3], em); cb = lerp(cb, md[4], em); al = lerp(al, md[5], em); }
+      put(o, i, x, y, 0, .9, cr, cg, cb, al);
+    }
+    for (let q = 0; q < this.nT; q++, i++) {
+      const team = Math.floor(q / (this.nT / 16)), sd = team >> 3, k = team & 7, col = CHAPTER_COLS[Math.floor(hash1(team * 3.1) * 7)];
+      const src = this.cities[team % 4].p, fly = ease3(clamp((lt - 5.2 - k * .07 - sd * .25) / 1.3)), tp = this.teamPos(sd, k, lt);
+      let x = lerp(src[0], tp[0], fly), y = lerp(src[1], tp[1], fly), a = fly <= 0 ? 0 : (tp[2] ? 1 : .2), s = 1.2;
+      const champ = sd === 0 && this.win[0][3].indexOf(k) >= 0, tc = this.T0 + 3 * 1.4 + 1.4; if (champ && lt > tc) { a = 1; s = 1.3 + 1.2 * Math.exp(-(lt - tc) * 1.5); }
+      const em = ease3(clamp((lt - mE - R[7][i] * .6) / 1.2)); if (em > 0) { const an = R[0][i] * TAU, rr = 110 + R[1][i] * 90; x = lerp(x, rr * Math.cos(an), em); y = lerp(y, -20 + rr * Math.sin(an), em); a = lerp(a, .5 * (.5 + .5 * Math.sin(t * 4 + i)), em); }
+      put(o, i, x + G[0][i] * 3 * (1 - em), y + G[1][i] * 3 * (1 - em), 0, s, col[0], col[1], col[2], a);
+    }
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const A = 1 - sstep(4.4, 5.4, lt);
+    if (A > 0) this.cities.forEach((cy, k) => { const on = sstep(.4 + k * .3, 1.2 + k * .3, lt) * A; if (on <= 0) return; c.strokeStyle = INK(.55 * on); c.lineWidth = 1.1 * V.u; OV.path(c, V, OV.ring(cy.p[0], cy.p[1], cy.r * .75, 0, 48)); OV.path(c, V, OV.ring(cy.p[0], cy.p[1], cy.r, 0, 48)); const q = V.p(cy.p[0] + cy.dx, cy.p[1] + cy.dy); c.font = `${(12 * V.u).toFixed(1)}px ${FONT_SANS}`; c.fillStyle = INK(.75 * on); c.textAlign = 'center'; c.fillText('MPL · ' + cy.n, q[0], q[1]); });
+    const Bk = sstep(5.2, 6.2, lt) * (1 - sstep(13.2, 14, lt));
+    if (Bk > 0) {
+      this.segs.forEach(s => { const r = s[4], sd = s[5] > 0 ? 1 : 0, dr = clamp((lt - 5.6 - r * .3) / .8); c.strokeStyle = INK(.22 * Bk); c.lineWidth = 1.1 * V.u; OV.path(c, V, [[s[0], s[1]], [s[2], s[3]]], dr); });
+      for (let sd = 0; sd < 2; sd++) for (let r = 0; r < 3; r++) { const tr = this.T0 + r * 1.4 + .8, e = clamp((lt - tr) / .5); if (e <= 0) continue; for (const k of this.win[sd][r + 1]) { const sg = sd ? 1 : -1, ys = this.nodes[sd][r], y0 = ys[this.win[sd][r].indexOf(k)], y1 = this.nodes[sd][r + 1][this.win[sd][r + 1].indexOf(k)], xa = sg * this.xs[r], xb = sg * (this.xs[r] - 44), xc = sg * this.xs[r + 1]; c.strokeStyle = GOLD(.7 * Bk); c.lineWidth = 1.4 * V.u; OV.path(c, V, [[xa, y0], [xb, y0], [xb, y1], [xc, y1]], e); } }
+      const tc = this.T0 + 3 * 1.4 + 1.4; if (lt > tc) { OV.pulse(c, V, 0, 0, (lt - tc) % 1.8, GOLD, 0, 60); OV.text(c, V, '冠军', 0, -34, 12, GOLD(.9 * Bk * sstep(tc, tc + .5, lt))); }
+    }
+    const M = sstep(13.8, 14.8, lt);
+    if (M > 0) {
+      c.strokeStyle = GOLD(.85 * M); c.lineWidth = 2 * V.u; OV.path(c, V, OV.ring(0, -20, 100), M); c.strokeStyle = GOLD(.35 * M); c.lineWidth = V.u; OV.path(c, V, OV.ring(0, -20, 80), M);
+      c.strokeStyle = GOLD(.6 * M); c.lineWidth = 1.4 * V.u; OV.path(c, V, [[-30, 78], [-82, 250]], M); OV.path(c, V, [[30, 78], [82, 250]], M); OV.path(c, V, [[-58, 250], [-10, 88]], M); OV.path(c, V, [[58, 250], [10, 88]], M);
+      const star = []; for (let k = 0; k <= 10; k++) { const a = Math.PI / 2 + k / 10 * TAU, rr = k % 2 ? 18 : 42; star.push([rr * Math.cos(a), -20 + rr * Math.sin(a)]); } c.strokeStyle = GOLD(.95 * M); c.lineWidth = 1.6 * V.u; OV.path(c, V, star, M);
+    }
+  },
+  cam(lt) {
+    const e = ease3(sstep(4.6, 6.4, lt)), m = ease3(sstep(13.4, 15, lt));
+    return cam2(lerp(-70, 0, e), lerp(-175, lerp(0, 40, m), e), lerp(700, lerp(1000, 820, m), e), 1.1);
+  },
+  caps: [
+    [.4, 4.8, 'tag', 'type', 'tl', 'MPL · 职业联赛'],
+    [.9, 4.8, 'line', 'rise', 'bc', '从各地职业联赛开始，搭起自己的{电竞}体系'],
+    [5.6, 12.8, 'tag', 'type', 'tl', '2019.11 · 吉隆坡'],
+    [5.9, 12.8, 'titlecn', 'rise', 'tl2c', 'M1 世界锦标赛'],
+    [6.6, 12.8, 'line', 'rise', 'bc', '{16} 支队伍，来自 {14} 个国家'],
+    [13.4, 19.6, 'tag', 'type', 'tl', '2019 · SEA GAMES'],
+    [13.8, 19.6, 'titlecn', 'rise', 'bc', 'MLBB 成为东南亚运动会{奖牌项目}'],
+  ],
+};
+/* ---------------- 2020: Snake.io eats its way into a globe of one billion downloads ---------------- */
+SC.billion = {
+  bg: ['#02030A', '#060C1E'], dust: .22, tr: { k: 'flow', pre: .8, post: 1.2, st: .3 },
+  head(s) { return [400 * Math.sin(.8 * s), 200 * Math.sin(1.3 * s + .7)]; },
+  build() {
+    this.nFood = Math.round(N * .16); this.nSnake = Math.round(N * .03); this.K = 80;
+    const r = mulberry32(44); this.food = []; this.eatT = new Float32Array(this.nFood).fill(1e9);
+    for (let q = 0; q < this.nFood; q++) this.food.push([(r() - .5) * 1200, (r() - .5) * 640]);
+    for (let k = 0; k <= 700; k++) { const lt = k / 100, h = this.head(lt * .9); for (let q = 0; q < this.nFood; q++) { if (this.eatT[q] < 1e8) continue; const f = this.food[q]; if (Math.abs(f[0] - h[0]) < 16 && Math.abs(f[1] - h[1]) < 16) this.eatT[q] = lt; } }
+    this.per = 1e9 / N_GLOBE;
+  },
+  psi(lt) { return (-110 + lt * 4) * Math.PI / 180; },
+  fill(o, lt, t) {
+    let i = 0; const glob = sstep(6.8, 8.2, lt), lit = N_GLOBE * easeOut3(clamp((lt - 9) / 3)), psi = this.psi(lt);
+    for (let q = 0; q < N_GLOBE; q++, i++) {
+      const g = globeXYZ(q, psi, .45, GLOBE_R), front = g[3] > 0 ? 1 : .35, on = q < lit ? 1 : 0;
+      const a = glob * (on ? 1 * front : .1 * front), br = on ? 1.15 : .5;
+      put(o, i, g[0], g[1], g[2], 1.05, .55 * br, .82 * br, 1 * br, a);
+    }
+    const coil = ease3(sstep(6.1, 7.6, lt)), cols = [[1, .5, .72], [1, .88, .4], [.5, .95, .78]];
+    for (let q = 0; q < this.nFood; q++, i++) {
+      const f = this.food[q], eaten = lt >= this.eatT[q], c = cols[q % 3], fade = (1 - coil) * sstep(.2, 1, lt);
+      if (eaten && lt - this.eatT[q] > .25) { haze(o, i, 0); continue; }
+      put(o, i, f[0], f[1], 0, 1.9, c[0], c[1], c[2], .85 * fade * (eaten ? 1 - (lt - this.eatT[q]) / .25 : 1));
+    }
+    const vis = 26 + lt * 9;
+    for (let q = 0; q < this.nSnake; q++, i++) {
+      const k = Math.floor(q / this.nSnake * this.K), h = this.head(lt * .9 - k * .012), band = Math.floor(k / 4) % 3, c = k < 2 ? [1, 1, 1] : cols[band];
+      const an = k / this.K * TAU - Math.PI / 2, cx = GLOBE_C[0] + (GLOBE_R + 6) * Math.cos(an), cy = GLOBE_C[1] + (GLOBE_R + 6) * Math.sin(an);
+      const x = lerp(h[0], cx, coil) + G[0][i] * 5.5, y = lerp(h[1], cy, coil) + G[1][i] * 5.5, on = (k < vis ? 1 : 0) * sstep(.1, .8, lt) * (1 - sstep(8, 9.5, lt));
+      put(o, i, x, y, 0, k < 2 ? 2 : 1.6, c[0], c[1], c[2], .95 * on);
+    }
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const ring = sstep(7, 8.2, lt); if (ring > 0) { c.strokeStyle = INK(.16 * ring); c.lineWidth = V.u; OV.path(c, V, OV.ring(GLOBE_C[0], GLOBE_C[1], GLOBE_R + 6, 0, 120)); }
+  },
+  cam(lt) { return cam2(lerp(0, 60, sstep(6.5, 8.5, lt)), 0, 1000, 1); },
+  caps: [
+    [.4, 6, 'tag', 'type', 'tl', '2020.06 · SWEET CROSSING: SNAKE.IO'],
+    [.9, 6, 'line', 'rise', 'bc', '沐瞳第一款{休闲} io 游戏'],
+    [8.6, 15.4, 'tag', 'type', 'bl3', '2020.11 · MLBB 全球下载量'],
+    [9, 15.4, 'count', 'count', 'bl2', null, { c0: 9, c1: 12, v: 1e9 }],
+    [12.2, 15.4, 'line', 'rise', 'bl', '突破{十亿}次 · 每一个点，是十万次下载'],
+  ],
+};
+
+/* ---------------- 2021: MLA reaches #1 in Japan and Korea ---------------- */
+SC.mla = {
+  bg: ['#050414', '#120C24'], dust: .22, tr: { k: 'flow', pre: .5, post: .9, st: .2 },
+  psi(lt) { const a = SC.billion.psi(16.6), b = -132 * Math.PI / 180; return lerp(a, b, ease3(clamp(lt / 3))); },
+  tilt(lt) { return lerp(.45, .72, ease3(clamp(lt / 3))); },
+  build() { this.cls = new Uint8Array(N_GLOBE); for (let q = 0; q < N_GLOBE; q++) { const p = GLOBE_PTS[Math.floor(q * GLOBE_PTS.length / N_GLOBE)]; this.cls[q] = inJapan(p[3], p[4]) ? 1 : inKorea(p[3], p[4]) ? 2 : 0; } },
+  fill(o, lt, t) {
+    let i = 0; const psi = this.psi(lt), tilt = this.tilt(lt), hl = sstep(2.4, 3.4, lt);
+    for (let q = 0; q < N_GLOBE; q++, i++) {
+      const g = globeXYZ(q, psi, tilt, GLOBE_R), front = g[3] > 0 ? 1 : .3, k = this.cls[q];
+      if (k) { const r = lerp(.55, 1, hl), gg = lerp(.82, .6, hl), b = lerp(1, .82, hl); put(o, i, g[0], g[1], g[2] + 1, lerp(.95, 1.5, hl), r, gg, b, (.85 + .15 * hl) * front); }
+      else put(o, i, g[0], g[1], g[2], .95, .5, .72, .95, .5 * front * (1 - .35 * hl));
+    }
+    for (; i < N; i++) haze(o, i);
+  },
+  card(c, V, x, y, title, climbT, lt, a) {
+    const w = 320, h = 184, rows = 5, rh = 28;
+    OV.fillPoly(c, V, OV.rrect(x, y - h, w, h, 10), INK(.035 * a)); c.strokeStyle = INK(.16 * a); c.lineWidth = V.u; OV.path(c, V, OV.rrect(x, y - h, w, h, 10));
+    OV.text(c, V, title, x + 18, y - 22, 13, INK(.8 * a), 'left');
+    const e = ease3(clamp((lt - climbT) / 2.4)), pos = lerp(5, 1, e);
+    for (let r = 1; r <= rows; r++) {
+      const cy = y - 44 - (r - 1) * rh - 6; OV.text(c, V, String(r), x + 22, cy, 12, INK(.45 * a), 'center', FONT_DISP);
+      let slot = r; if (r >= Math.round(pos)) slot = r; // placeholder rows shift down as MLA climbs
+      const shifted = r < pos ? r : r + 1; if (shifted > rows) continue;
+      const yy = y - 44 - (shifted - 1) * rh - 6, bw = 150 - ((r * 37) % 60);
+      OV.fillPoly(c, V, OV.rrect(x + 46, yy - 6, bw, 12, 6), INK(.1 * a));
+    }
+    const my = y - 44 - (pos - 1) * rh - 6;
+    OV.fillPoly(c, V, OV.rrect(x + 40, my - 12, w - 56, 24, 8), GOLD((.12 + .1 * e) * a));
+    OV.text(c, V, '幻世与冒险', x + 50, my, 13, GOLD(.95 * a), 'left');
+    if (e >= 1) { const q = V.p(x + w - 34, my); c.beginPath(); c.arc(q[0], q[1], 11 * V.u, 0, TAU); c.fillStyle = GOLD(.95 * a); c.fill(); c.font = `${(11 * V.u).toFixed(1)}px ${FONT_DISP}`; c.fillStyle = 'rgba(20,14,8,.95)'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('#1', q[0], q[1] + .5); }
+  },
+  draw(c, V, lt) {
+    const psi = this.psi(lt), tilt = this.tilt(lt), a1 = sstep(3, 4, lt), a2 = sstep(3.6, 4.6, lt);
+    const J = globeProj(137.5, 36.5, psi, tilt, GLOBE_R), K = globeProj(127.8, 36.4, psi, tilt, GLOBE_R);
+    if (a1 > 0) { this.card(c, V, -560, 230, '日本 · 免费榜', 4.6, lt, a1); c.strokeStyle = INK(.25 * a1); c.lineWidth = V.u; OV.path(c, V, [[-240, 140], [J[0], J[1], J[2]]], a1); OV.pulse(c, V, J[0], J[1], (lt - 3) % 1.6, GOLD, J[2]); }
+    if (a2 > 0) { this.card(c, V, -560, -20, '韩国 · 免费榜', 5.4, lt, a2); c.strokeStyle = INK(.25 * a2); c.lineWidth = V.u; OV.path(c, V, [[-240, -110], [K[0], K[1], K[2]]], a2); OV.pulse(c, V, K[0], K[1], (lt - 3.6) % 1.6, GOLD, K[2]); }
+  },
+  cam(lt) { return cam2(60, 0, 1000, 1); },
+  caps: [
+    [.4, 13.2, 'tag', 'type', 'tl', '2021 · 幻世与冒险 MOBILE LEGENDS: ADVENTURE'],
+    [3.4, 13.2, 'line', 'rise', 'bl', '走进日本和韩国，登上两地{免费榜榜首}'],
+  ],
+};
+
+/* ---------------- 2023: Watcher of Realms — a tide that sweeps across ~60 countries ---------------- */
+SC.wor = {
+  bg: ['#030612', '#07132A'], dust: .2, tr: { k: 'flow', pre: 1.0, post: 1.8, st: .35 },
+  build() {
+    this.map = WMAP.map(([lon, lat]) => WXY(lon, lat)); this.nMap = Math.min(this.map.length, Math.round(N * .34));
+    this.cp = WOR_COUNTRIES.map(([lon, lat]) => WXY(lon, lat)); this.nMk = Math.round(N * .04);
+  },
+  front(lt) { return lerp(660, -660, ease3(clamp((lt - 1.4) / 9))); },
+  passT(x) { let lo = 0, hi = 14; for (let k = 0; k < 30; k++) { const m = (lo + hi) / 2; if (this.front(m) > x) lo = m; else hi = m; } return hi; },
+  fill(o, lt, t) {
+    let i = 0; const fx = this.front(lt);
+    for (let q = 0; q < this.nMap; q++, i++) { const m = this.map[q], past = m[0] > fx ? 1 : 0, near = Math.exp(-Math.pow((m[0] - fx) / 30, 2)); put(o, i, m[0], m[1], 0, 1.1, lerp(.42, .45, past) + near * .4, lerp(.52, .78, past) + near * .3, lerp(.8, .9, past) + near * .2, .3 + .1 * past + .5 * near); }
+    const per = Math.max(1, Math.floor(this.nMk / this.cp.length));
+    for (let q = 0; q < this.nMk; q++, i++) { const k = Math.min(this.cp.length - 1, Math.floor(q / per)), p = this.cp[k], on = p[0] > fx ? 1 : 0; put(o, i, p[0] + G[0][i] * 2, p[1] + G[1][i] * 2, 0, 1.1, 1, .88, .6, on * .9); }
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt, t) {
+    const fx = this.front(lt), on = sstep(1.2, 1.8, lt) * (1 - sstep(10.4, 11.4, lt));
+    if (on > 0) {
+      const pts = []; for (let y = -260; y <= 260; y += 8) pts.push([fx + 10 * Math.sin(y * .03 + t * 2.4), y]);
+      c.strokeStyle = TEAL(.8 * on); c.lineWidth = 1.6 * V.u; OV.path(c, V, pts);
+      const a = V.p(fx, 0), b = V.p(fx + 140, 0), gr = c.createLinearGradient(a[0], 0, b[0], 0); gr.addColorStop(0, TEAL(.14 * on)); gr.addColorStop(1, TEAL(0));
+      const top = V.p(fx, 270), bot = V.p(fx, -270); c.fillStyle = gr; c.fillRect(a[0], top[1], b[0] - a[0], bot[1] - top[1]);
+    }
+    let n = 0; this.cp.forEach(p => { const tp = this.passT(p[0]); if (lt >= tp) { n++; OV.pulse(c, V, p[0], p[1], lt - tp, GOLD, 0, 18); } });
+    const na = sstep(1.8, 2.6, lt); if (na > 0) { OV.text(c, V, String(n), 560, -200, 44, GOLD(.95 * na), 'right', FONT_DISP); OV.text(c, V, '个国家 · 免费榜前十', 560, -236, 12, INK(.6 * na), 'right'); }
+  },
+  cam(lt) { return cam2(0, 20, 1000, .9); },
+  caps: [
+    [.4, 13.2, 'tag', 'type', 'tl', '2023 · 潮汐守望者 WATCHER OF REALMS'],
+    [5.2, 13.2, 'line', 'rise', 'bc', '在近 {60} 个国家，进入免费榜前十'],
+  ],
+};
+
+/* ---------------- 2025.01: 《决胜巅峰》 comes home ---------------- */
+SC.home = {
+  bg: ['#060308', '#160A0A'], dust: .2, tr: { k: 'flow', pre: .5, post: .9, st: .2 },
+  build() {
+    this.sh = WXY(...LL.SH); this.nC = Math.min(CHN.length, Math.round(N * .08)); this.chn = CHN.map(([lon, lat]) => WXY(lon, lat)); this.nS = Math.round(N * .06);
+    this.src = WOR_COUNTRIES.concat([LL.JKT, LL.MNL, LL.KUL, LL.SIN]).map(p => WXY(...p));
+  },
+  fill(o, lt, t) {
+    let i = 0; const W0 = SC.wor, dim = 1 - .45 * sstep(.5, 2, lt);
+    for (let q = 0; q < W0.nMap; q++, i++) { const m = W0.map[q]; put(o, i, m[0], m[1], 0, 1.1, .45, .72, .88, .38 * dim); }
+    const per = Math.max(1, Math.floor(W0.nMk / W0.cp.length));
+    for (let q = 0; q < W0.nMk; q++, i++) { const k = Math.min(W0.cp.length - 1, Math.floor(q / per)), p = W0.cp[k]; put(o, i, p[0] + G[0][i] * 2, p[1] + G[1][i] * 2, 0, 1.1, 1, .88, .6, .9 * (1 - sstep(1.5, 3, lt))); }
+    const R0 = 170 * ease3(clamp((lt - 1.6) / 3.4));
+    for (let q = 0; q < this.nC; q++, i++) { const p = this.chn[q % this.chn.length], d = Math.hypot(p[0] - this.sh[0], p[1] - this.sh[1]), on = sstep(d + 10, d - 10, R0); put(o, i, p[0] + G[0][i] * .6, p[1] + G[1][i] * .6, 0, 1.05, 1, lerp(.5, .78, on), lerp(.35, .45, on), .15 + .75 * on); }
+    for (let q = 0; q < this.nS; q++, i++) {
+      const s = this.src[q % this.src.length], u = ease3(clamp((lt - .4 - R[0][i] * 1.6) / 2.2)), w = 1 - u, mx = (s[0] + this.sh[0]) / 2, my = (s[1] + this.sh[1]) / 2 + 60 + R[1][i] * 40;
+      put(o, i, w * w * s[0] + 2 * w * u * mx + u * u * this.sh[0], w * w * s[1] + 2 * w * u * my + u * u * this.sh[1], 0, 1, 1, .8, .45, u > 0 && u < 1 ? .85 : 0);
+    }
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const a = sstep(1, 2, lt); OV.dot(c, V, this.sh[0], this.sh[1], 3, GOLD(.95 * a));
+    const q = V.p(...this.sh); c.font = `${(13 * V.u).toFixed(1)}px ${FONT_SANS}`; c.fillStyle = INK(.8 * a); c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText('上海', q[0] + 10 * V.u, q[1]);
+    if (lt > 2) OV.pulse(c, V, this.sh[0], this.sh[1], (lt - 2) % 1.4, GOLD, 0, 40);
+  },
+  cam(lt) { const e = ease3(sstep(0, 3, lt)); return cam2(lerp(0, 330, e), lerp(20, 60, e), lerp(1000, 560, e), 1); },
+  caps: [
+    [.4, 7.6, 'tag', 'type', 'tl', '2025.01.23 · 《决胜巅峰》国服上线'],
+    [1, 7.6, 'line', 'rise', 'bc', '海外最大的 MOBA，{回家}了'],
+    [3, 7.6, 'tag', 'type', 'bc2', '上线登顶 iOS 免费榜'],
+  ],
+};
+
+/* ---------------- 2025.05: Magic Chess: Go Go — #1 in 8 countries' strategy charts ---------------- */
+SC.chess = {
+  bg: ['#0C0718', '#1B1030'], dust: .15, tr: { k: 'flow', pre: .8, post: 1.2, st: .3 },
+  crowns: [[1, 6], [3, 5], [5, 7], [6, 4], [2, 2], [4, 1], [7, 2], [0, 3]],
+  build() { this.nB = Math.round(N * .34); this.nCr = 1600; this.flip = evTimesIn('flip', SEC.chess.t0, SEC.chess.t1); this.pal = [hex('#FF8FB8'), hex('#B9A6FF')]; },
+  sq(i, j) { return [(i - 3.5) * 52, (j - 3.5) * 52]; },
+  crownT(k) { return 1.6 + k * .45; },
+  fill(o, lt, t) {
+    let i = 0; let rel = -1; for (let k = 0; k < this.flip.length; k++) if (this.flip[k] <= t) rel = k; else break;
+    for (let q = 0; q < this.nB; q++, i++) {
+      const tk = q % 64, ti = tk % 8, tj = tk >> 3, d = ti + tj, c = this.sq(ti, tj); let phi = 0, flips = 0;
+      if (rel >= d % 8) { const m = rel - ((rel - d % 8) % 8); flips = Math.floor((rel - d % 8) / 8) + 1; const e = clamp((t - this.flip[m]) / .5); phi = Math.PI * ease3(e); if (e < .5) flips--; }
+      const u = (R[1][i] - .5) * 46, v = (R[2][i] - .5) * 46, col = this.pal[(ti + tj + flips) % 2];
+      put(o, i, c[0] + u, Math.sin(phi) * v * .3, c[1] + Math.cos(phi) * v, .95, col[0], col[1], col[2], ((ti + tj) % 2 ? .38 : .5));
+    }
+    for (let q = 0; q < this.nCr; q++, i++) { const k = q % 8, cr = this.crowns[k], c = this.sq(cr[0], cr[1]), on = sstep(this.crownT(k), this.crownT(k) + .4, lt); put(o, i, c[0] + G[0][i] * 7, 6 + Math.abs(G[1][i]) * 8, c[1] + G[2][i] * 7, 1.1, 1, .82, .4, .9 * on); }
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const a = sstep(.2, 1.2, lt); c.strokeStyle = INK(.3 * a); c.lineWidth = V.u; OV.path(c, V, [[-208, 0, -208], [208, 0, -208], [208, 0, 208], [-208, 0, 208], [-208, 0, -208]]);
+    this.crowns.forEach((cr, k) => {
+      const on = sstep(this.crownT(k), this.crownT(k) + .35, lt); if (on <= 0) return; const s = this.sq(cr[0], cr[1]), y = 30 + 8 * easeOutBack(on), w = 16;
+      const pts = [[-w, 0], [-w, 12], [-w / 2, 5], [0, 16], [w / 2, 5], [w, 12], [w, 0], [-w, 0]].map(p => [s[0] + p[0], y + p[1], s[1]]);
+      c.strokeStyle = GOLD(.95 * on); c.lineWidth = 1.6 * V.u; OV.path(c, V, pts); OV.text(c, V, '#1', s[0], y - 10, 10, GOLD(.8 * on), 'center', FONT_DISP, s[1]);
+    });
+  },
+  cam(lt) { const a = .35 + lt * .03; return { p: [Math.sin(a) * 760, 620, Math.cos(a) * 760], l: [0, -20, 0], fov: 40, ap: 1.4, fo: 980, roll: 0 }; },
+  caps: [
+    [.4, 7.6, 'tag', 'type', 'tl', '2025.05 · MAGIC CHESS: GO GO'],
+    [1.4, 7.6, 'line', 'rise', 'bc', '登顶 {8} 个国家的策略游戏免费榜'],
+  ],
+};
+
+/* ---------------- 2025.06: 银与绯 — silver and scarlet ---------------- */
+SC.silver = {
+  bg: ['#07050A', '#1A060C'], dust: .18, tr: { k: 'flow', pre: .8, post: 1.2, st: .3 },
+  build() { this.nL = Math.round(N * .36); this.nP = Math.round(N * .05); },
+  fill(o, lt, t) {
+    let i = 0; const rot = lt * .05, cy = 10;
+    for (let q = 0; q < this.nL; q++, i++) {
+      const w = R[0][i]; let x, y, sc = q % 2 === 0; let cr, cg, cb, a = .6;
+      if (w < .62) { const k = Math.floor(R[1][i] * 12), an = k / 12 * TAU + rot, rr = Math.sqrt(R[2][i]) * 56, a2 = R[3][i] * TAU; x = Math.cos(an) * 158 + rr * Math.cos(a2); y = cy + Math.sin(an) * 158 + rr * Math.sin(a2); sc = k % 2 === 1; }
+      else if (w < .8) { const k = Math.floor(R[1][i] * 6), an = k / 6 * TAU - rot * 2, rr = Math.sqrt(R[2][i]) * 24, a2 = R[3][i] * TAU; x = Math.cos(an) * 64 + rr * Math.cos(a2); y = cy + Math.sin(an) * 64 + rr * Math.sin(a2); sc = k % 2 === 0; }
+      else if (w < .95) { const an = R[1][i] * TAU, rr = 236 + R[2][i] * 16; x = Math.cos(an) * rr; y = cy + Math.sin(an) * rr; sc = false; a = .5; }
+      else { const rr = Math.sqrt(R[2][i]) * 16, an = R[1][i] * TAU; x = rr * Math.cos(an); y = cy + rr * Math.sin(an); sc = true; a = .9; }
+      if (sc) { cr = .92; cg = .14; cb = .26; } else { cr = .86; cg = .88; cb = .96; }
+      put(o, i, x, y, 0, .95, cr, cg, cb, a * sstep(.2, 1.4, lt));
+    }
+    for (let q = 0; q < this.nP; q++, i++) { const y = 380 - ((R[1][i] * 760 + lt * 40) % 760), x = (R[0][i] - .5) * 1200 + 20 * Math.sin(lt + i); put(o, i, x, y, -100 + R[2][i] * 200, 1.2, .9, .15, .28, .45); }
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const a = ease3(clamp((lt - .3) / 1.6)); c.strokeStyle = 'rgba(214,220,238,' + (.32 * a) + ')'; c.lineWidth = V.u;
+    OV.path(c, V, OV.ring(0, 10, 256, 0, 120), a); OV.path(c, V, OV.ring(0, 10, 230, 0, 120), a); OV.path(c, V, OV.ring(0, 10, 96, 0, 80), a);
+    for (let k = 0; k < 12; k++) { const an = k / 12 * TAU + lt * .05; OV.path(c, V, OV.ring(Math.cos(an) * 158, 10 + Math.sin(an) * 158, 58, 0, 40), a); const b = an + Math.PI / 12; OV.path(c, V, [[Math.cos(b) * 96, 10 + Math.sin(b) * 96], [Math.cos(b) * 230, 10 + Math.sin(b) * 230]], a); }
+  },
+  cam(lt) { return cam2(0, 10, lerp(1000, 940, clamp(lt / 8)), 1); },
+  caps: [
+    [.4, 7.6, 'tag', 'type', 'tl', '2025.06 · 银与绯 SILVER AND BLOOD'],
+    [1.2, 7.6, 'line', 'rise', 'bc', '沐瞳第一款{二次元}游戏'],
+    [3, 7.6, 'tag', 'type', 'bc2', '登顶韩国 iOS 免费榜'],
+  ],
+};
+/* ---------------- 2025.08: 发条总动员 — the screen turns into an old hand-drawn cartoon ---------------- */
+SC.acecraft = {
+  bg: ['#07050A', '#1A060C'], dust: 0, tr: { k: 'cut', pre: 0, post: 0, st: 0 },
+  build() { },
+  fill(o, lt, t) { if (lt < .7) { SC.silver.fill(o, 8 + lt, t); return; } for (let i = 0; i < N; i++) haze(o, i, 0); },
+  plane(lt) { const u = clamp((lt - 1.3) / 6.2), x = lerp(-470, 470, u); let y = 40 + 26 * Math.sin(lt * 2.2), ang = .12 * Math.cos(lt * 2.2); const L0 = 3.6, L1 = 5.1; if (lt > L0 && lt < L1) { const k = (lt - L0) / (L1 - L0), a = -Math.PI / 2 + k * TAU; const cx = lerp(-470, 470, clamp((L0 - 1.3) / 6.2)); return [cx + 70 * Math.cos(a) + 0 * k, 110 + 70 * Math.sin(a), a + Math.PI / 2]; } if (lt >= L1) { const u2 = clamp((lt - 1.3 - (L1 - L0)) / 6.2); return [lerp(-470, 470, u2), y, ang]; } return [x, y, ang]; },
+  draw(c, V, lt, t) {
+    const W = c.canvas.width, H = c.canvas.height, dpr = V.u, cxs = W / 2, cys = H / 2, diag = Math.hypot(W, H) / 2;
+    if (lt < .7) { SC.silver.draw(c, V, 8 + lt, t); const r = diag * (1 - ease3(clamp(lt / .7))); c.save(); c.fillStyle = '#000'; c.beginPath(); c.rect(0, 0, W, H); c.arc(cxs, cys, Math.max(0, r), 0, TAU, true); c.fill(); c.restore(); return; }
+    const open = ease3(clamp((lt - .7) / .8)), close = ease3(clamp((lt - 7.2) / .7)), r = diag * open * (1 - close);
+    const boil = Math.floor(lt * 12), jit = (k) => (hash1(boil * 31 + k) - .5) * 2.2 * dpr;
+    c.save(); c.beginPath(); c.arc(cxs, cys, Math.max(0, r), 0, TAU); c.clip();
+    c.fillStyle = '#EFE2C4'; c.fillRect(0, 0, W, H);
+    const vg = c.createRadialGradient(cxs, cys, diag * .3, cxs, cys, diag); vg.addColorStop(0, 'rgba(90,60,30,0)'); vg.addColorStop(1, 'rgba(90,60,30,.45)'); c.fillStyle = vg; c.fillRect(0, 0, W, H);
+    const k = V.k, S = (x, y) => V.p(x, y), ink = '#2B2118';
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    const cloud = (x, y, s, seed) => { const q = S(x, y), C = []; for (let n = 0; n < 6; n++) { const an = n / 6 * TAU, rr = (16 + 7 * (n % 2)) * s * k; C.push([q[0] + Math.cos(an) * 26 * s * k + jit(seed + n), q[1] + Math.sin(an) * 11 * s * k + jit(seed + n + 7), rr]); } C.push([q[0], q[1], 22 * s * k]); c.fillStyle = ink; for (const [x0, y0, r0] of C) { c.beginPath(); c.arc(x0, y0, r0 + 2.4 * dpr, 0, TAU); c.fill(); } c.fillStyle = '#FBF6EA'; for (const [x0, y0, r0] of C) { c.beginPath(); c.arc(x0, y0, r0, 0, TAU); c.fill(); } };
+    cloud(-300 - lt * 14, 170, 1.4, 1); cloud(160 - lt * 10, 210, 1.1, 20); cloud(420 - lt * 18, 120, 1.2, 40); cloud(-60 - lt * 8, -170, 1.6, 60);
+    const pl = this.plane(lt), P = S(pl[0], pl[1]), sc = k * 1.25;
+    c.save(); c.translate(P[0], P[1]); c.rotate(-pl[2]);
+    const line = (pts, fill) => { c.beginPath(); pts.forEach((p, n) => { const x = p[0] * sc + jit(n + 3), y = -p[1] * sc + jit(n + 9); n ? c.lineTo(x, y) : c.moveTo(x, y); }); c.closePath(); if (fill) { c.fillStyle = fill; c.fill(); } c.strokeStyle = ink; c.lineWidth = 2.4 * dpr; c.stroke(); };
+    line([[-34, 16], [-44, 30], [-30, 30], [-22, 12]], '#E0A93B');
+    c.beginPath(); c.ellipse(jit(1), jit(2), 40 * sc, 15 * sc, 0, 0, TAU); c.fillStyle = '#C8452F'; c.fill(); c.strokeStyle = ink; c.lineWidth = 2.4 * dpr; c.stroke();
+    line([[-12, 2], [18, 2], [22, -10], [-16, -10]], '#E0A93B'); line([[-12, 22], [18, 22], [22, 30], [-16, 30]], '#E0A93B');
+    c.beginPath(); c.moveTo(-6 * sc, -2 * sc); c.lineTo(-6 * sc, -22 * sc); c.moveTo(12 * sc, -2 * sc); c.lineTo(12 * sc, -22 * sc); c.stroke();
+    c.beginPath(); c.arc(-2 * sc, -18 * sc, 7 * sc, 0, TAU); c.fillStyle = '#FBF6EA'; c.fill(); c.stroke(); c.beginPath(); c.arc(1 * sc, -18 * sc, 2.4 * sc, 0, TAU); c.fillStyle = ink; c.fill();
+    const kr = lt * 6; c.save(); c.translate(-18 * sc, -22 * sc); c.beginPath(); c.moveTo(0, 0); c.lineTo(0, -10 * sc); c.stroke(); const kw = Math.cos(kr) * 9 * sc; c.beginPath(); c.ellipse(-Math.abs(kw) * .9, -14 * sc, Math.abs(kw) * .8 + .5, 5 * sc, 0, 0, TAU); c.ellipse(Math.abs(kw) * .9, -14 * sc, Math.abs(kw) * .8 + .5, 5 * sc, 0, 0, TAU); c.fillStyle = '#E0A93B'; c.fill(); c.stroke(); c.restore();
+    c.beginPath(); c.ellipse(44 * sc, 0, 4 * sc, (16 * Math.abs(Math.sin(lt * 40)) + 4) * sc, 0, 0, TAU); c.fillStyle = 'rgba(43,33,24,.35)'; c.fill(); c.beginPath(); c.arc(41 * sc, 0, 4 * sc, 0, TAU); c.fillStyle = ink; c.fill();
+    c.restore();
+    for (let n = 0; n < 6; n++) { const age = ((lt * 2.6 + n / 6) % 1), dist = 60 + age * 520, a = -pl[2]; const bx = P[0] + Math.cos(a) * dist * k, by = P[1] + Math.sin(a) * dist * k; c.beginPath(); c.arc(bx + jit(n + 50), by + jit(n + 60), 4.5 * dpr * V.u / dpr * 1, 0, TAU); c.fillStyle = ink; c.fill(); }
+    const rs = mulberry32(boil + 7); for (let n = 0; n < 60; n++) { c.fillStyle = `rgba(43,33,24,${.08 + rs() * .12})`; c.fillRect(rs() * W, rs() * H, (1 + rs() * 2) * dpr, (1 + rs() * 2) * dpr); }
+    if (rs() < .5) { c.fillStyle = 'rgba(43,33,24,.12)'; c.fillRect(rs() * W, 0, 1.2 * dpr, H); }
+    c.restore();
+    c.save(); c.fillStyle = '#000'; c.beginPath(); c.rect(0, 0, W, H); c.arc(cxs, cys, Math.max(0, r), 0, TAU, true); c.fill(); c.restore();
+  },
+  cam(lt) { return cam2(0, 10, lt < .7 ? 1000 - (8 + lt) / 8 * 60 : 1000, 1); },
+  caps: [
+    [1.4, 6.9, 'tag', 'type', 'tl', '2025.08 · 发条总动员 ACECRAFT', { ink: 1 }],
+    [1.8, 6.9, 'line', 'rise', 'bc', '旗下 Vizta Games 研发，复古{手绘}风的飞行射击', { ink: 1 }],
+  ],
+};
+
+/* ---------------- 2026.01: M7 — 5,680,000 people watching at once ---------------- */
+SC.m7 = {
+  bg: ['#04030B', '#0C0A1C'], dust: .2, tr: { k: 'cut', pre: 0, post: 0, st: 0 },
+  build() {
+    this.per = N >= 30000 ? 200 : 500; this.nP = Math.round(5680000 / this.per);
+    const seats = [], r = mulberry32(78);
+    while (seats.length < this.nP) { const row = Math.floor(Math.pow(r(), .8) * 34), rx = 170 + row * 15.5, ry = 50 + row * 8.6, a = (.1 + r() * .8) * Math.PI; const x = rx * Math.cos(a), y = -250 + ry * Math.sin(a) * 1.5; if (y > 200) continue; seats.push([x + (r() - .5) * 5, y + (r() - .5) * 4, Math.hypot(x, (y + 250) * 1.4)]); }
+    seats.sort((a, b) => a[2] - b[2]); this.seats = seats;
+  },
+  count(lt) { return 5680000 * easeOutExpo(clamp((lt - .8) / 4.6)); },
+  fill(o, lt, t) {
+    let i = 0; const lit = this.count(lt) / this.per;
+    for (let q = 0; q < this.nP && i < N; q++, i++) {
+      const s = this.seats[q], on = clamp(lit - q), pk = R[3][i], c = pk < .7 ? [1, .9, .72] : pk < .85 ? [.5, .66, 1] : [1, .45, .5], tw = .75 + .25 * Math.sin(t * 3 + i * 1.7);
+      put(o, i, s[0], s[1], 0, .95, c[0] * tw, c[1] * tw, c[2] * tw, .85 * on + .03);
+    }
+    const nS = 900; for (let q = 0; q < nS && i < N; q++, i++) put(o, i, (R[0][i] - .5) * 260, -262 + G[1][i] * 4, 0, 1.2, 1, .85, .6, .5 * sstep(0, 1, lt));
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const a = sstep(0, 1, lt); c.strokeStyle = GOLD(.6 * a); c.lineWidth = 1.4 * V.u; OV.path(c, V, [[-140, -270], [140, -270]], a);
+    OV.text(c, V, '● 每个点 ≈ ' + this.per + ' 人', 600, -300, 11, INK(.55 * sstep(1, 2, lt)), 'right');
+  },
+  cam(lt) { return cam2(0, -20, lerp(1000, 940, clamp(lt / 12)), 1); },
+  caps: [
+    [.4, 11.4, 'tag', 'type', 'tl', '2026.01 · 雅加达 · M7 世界锦标赛'],
+    [.8, 11.4, 'count', 'count', 'tl2', null, { c0: .8, c1: 5.4, v: 5680000 }],
+    [2.4, 11.4, 'line', 'rise', 'tl4', '峰值同时在线观看，移动电竞史上{最多}'],
+  ],
+};
+
+/* ---------------- 2026.03: Savvy Games Group ---------------- */
+SC.savvy = {
+  bg: ['#030409', '#08101E'], dust: .2, tr: { k: 'flow', pre: .8, post: 1.4, st: .35 },
+  build() { this.a = WXY(...LL.SH); this.b = WXY(...LL.RUH); this.arc = curvePts(this.a, this.b, 70, 80); this.nA = 2400; },
+  fill(o, lt, t) {
+    let i = 0; const W0 = SC.wor;
+    for (let q = 0; q < W0.nMap; q++, i++) { const m = W0.map[q]; put(o, i, m[0], m[1], 0, 1.1, .42, .55, .82, .32 * sstep(0, 1, lt)); }
+    const pr = ease3(clamp((lt - 1.2) / 2.2)), L = this.arc.length - 1;
+    for (let q = 0; q < this.nA; q++, i++) { const u = (((R[0][i] + lt * .25) % 1) + 1) % 1, p = this.arc[Math.min(L, Math.floor(u * L))]; put(o, i, p[0] + G[0][i] * 1.2, p[1] + G[1][i] * 1.2, 0, 1, 1, .82, .45, u < pr ? .7 : 0); }
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const pr = ease3(clamp((lt - 1.2) / 2.2)); c.strokeStyle = GOLD(.9); c.lineWidth = 1.6 * V.u; OV.path(c, V, this.arc, pr);
+    const a = sstep(.6, 1.4, lt); OV.dot(c, V, this.a[0], this.a[1], 3, GOLD(.95 * a)); OV.text(c, V, '上海', this.a[0], this.a[1] - 16, 12, INK(.8 * a));
+    const b = sstep(3.2, 3.8, lt); OV.dot(c, V, this.b[0], this.b[1], 3, GOLD(.95 * b)); OV.text(c, V, '利雅得', this.b[0], this.b[1] - 16, 12, INK(.8 * b)); if (b > 0) OV.pulse(c, V, this.b[0], this.b[1], (lt - 3.4) % 1.6, GOLD, 0, 30);
+  },
+  cam(lt) { return cam2(285, 40, lerp(560, 520, clamp(lt / 8)), 1); },
+  caps: [
+    [.5, 7.6, 'tag', 'type', 'tl', '2026.03.21'],
+    [1, 7.6, 'line', 'rise', 'bc', 'Savvy Games Group 宣布以 {60 亿美元}收购沐瞳'],
+  ],
+};
+
+/* ---------------- 2026.09: from the SEA Games medal to the Asian Games ---------------- */
+SC.asian = {
+  bg: ['#070406', '#1A0C08'], dust: .2, tr: { k: 'flow', pre: .8, post: 1.2, st: .3 },
+  build() { this.nD = Math.round(N * .12); this.nR = Math.round(N * .14); this.nS = Math.round(N * .04); },
+  fill(o, lt, t) {
+    let i = 0; const big = ease3(clamp((lt - 1.4) / 1.6)), rot = lt * .06;
+    for (let q = 0; q < this.nS; q++, i++) { const rr = Math.sqrt(R[0][i]) * 54, a = R[1][i] * TAU; put(o, i, -360 + rr * Math.cos(a), -10 + rr * Math.sin(a), 0, .9, .95, .78, .5, .45 * sstep(0, 1, lt)); }
+    for (let q = 0; q < this.nD; q++, i++) { const rr = Math.sqrt(R[0][i]) * 104, a = R[1][i] * TAU, rim = rr > 90; put(o, i, 140 + rr * Math.cos(a), -10 + rr * Math.sin(a), 0, .95, 1, rim ? .85 : .72, rim ? .5 : .36, (rim ? .9 : .5) * big); }
+    for (let q = 0; q < this.nR; q++, i++) { const id = Math.floor(R[0][i] * 24), an = id / 24 * TAU + rot + (id % 2) * .06, u = R[1][i], d = 128 + u * (150 + 90 * hash1(id)); put(o, i, 140 + Math.cos(an) * d + G[0][i] * (1 + u * 5), -10 + Math.sin(an) * d + G[1][i] * (1 + u * 5), -20, 1, 1, lerp(.62, .38, u), lerp(.4, .3, u), (.7 * (1 - u) + .06) * big); }
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const a = sstep(.2, 1, lt), b = sstep(1.6, 2.8, lt);
+    c.strokeStyle = GOLD(.6 * a); c.lineWidth = 1.3 * V.u; OV.path(c, V, OV.ring(-360, -10, 60), a);
+    OV.text(c, V, '2019 · 东南亚运动会', -360, -100, 12, INK(.7 * a));
+    c.save(); c.setLineDash([4 * V.u, 6 * V.u]); c.strokeStyle = INK(.3 * b); c.lineWidth = V.u; OV.path(c, V, [[-280, -10], [20, -10]], b); c.restore();
+    c.strokeStyle = GOLD(.95 * b); c.lineWidth = 2 * V.u; OV.path(c, V, OV.ring(140, -10, 112), b);
+    OV.text(c, V, '2026 · 亚运会', 140, -160, 13, INK(.85 * b));
+  },
+  cam(lt) { return cam2(-40, 0, lerp(1000, 950, clamp(lt / 10)), 1); },
+  caps: [
+    [.5, 9.6, 'tag', 'type', 'tl', '2026.09.29 — 10.01 · 爱知 · 名古屋'],
+    [1.6, 9.6, 'titlecn', 'rise', 'bc', 'MLBB 第一次成为{亚运会}奖牌项目'],
+  ],
+};
+
+/* ---------------- 头号禁区: in testing — the next story ---------------- */
+SC.zone = {
+  bg: ['#030605', '#0A1210'], dust: .15, tr: { k: 'flow', pre: .8, post: 1.2, st: .3 },
+  ex: [250, 110],
+  build() { this.nT = Math.round(N * .3); this.nH = Math.round(N * .08); this.nPl = 600; this.nL = 500; const r = mulberry32(9); this.cl = []; for (let k = 0; k < 30; k++) this.cl.push([(r() - .5) * 1100, (r() - .5) * 600, 20 + r() * 50]); },
+  zr(lt) { return lerp(520, 250, ease3(clamp(lt / 8))); },
+  zc(lt) { return [lerp(0, 90, ease3(clamp(lt / 8))), lerp(0, 40, ease3(clamp(lt / 8)))]; },
+  fill(o, lt, t) {
+    let i = 0; const r = this.zr(lt), zc = this.zc(lt);
+    for (let q = 0; q < this.nT; q++, i++) { const cl = this.cl[q % 30], x = cl[0] + G[0][i] * cl[2], y = cl[1] + G[1][i] * cl[2] * .7, out = Math.hypot(x - zc[0], y - zc[1]) > r; put(o, i, x, y, 0, 1, out ? .8 : .45, out ? .3 : .62, out ? .28 : .5, (out ? .22 : .3) * sstep(0, 1, lt)); }
+    for (let q = 0; q < this.nH; q++, i++) { const a = R[0][i] * TAU, d = r + 10 + R[1][i] * 300; put(o, i, zc[0] + Math.cos(a) * d, zc[1] + Math.sin(a) * d, 0, 1.4, .85, .2, .2, .12 * sstep(0, 1, lt)); }
+    for (let q = 0; q < this.nPl; q++, i++) { const p = q % 5, a = lt * (.35 + p * .07) + p * 1.3, x = zc[0] + Math.cos(a) * (60 + p * 25) + (p === 0 ? (this.ex[0] - zc[0]) * sstep(4, 7.5, lt) * .8 : 0), y = zc[1] + Math.sin(a * 1.3) * (40 + p * 18) + (p === 0 ? (this.ex[1] - zc[1]) * sstep(4, 7.5, lt) * .8 : 0); put(o, i, x + G[0][i] * 1.8, y + G[1][i] * 1.8, 0, 1.1, .6, .9, 1, .95 * sstep(.6, 1.2, lt)); }
+    for (let q = 0; q < this.nL; q++, i++) { const k = q % 25, ph = (lt * .4 + hash1(k)) % 1, x = zc[0] + (hash1(k + 3) - .5) * r * 1.2, y = zc[1] + (hash1(k + 7) - .5) * r * .8; put(o, i, x + G[0][i] * 1.2, y + G[1][i] * 1.2, 0, 1, 1, .85, .4, .8 * Math.sin(ph * Math.PI) * sstep(1, 2, lt)); }
+    for (; i < N; i++) haze(o, i);
+  },
+  draw(c, V, lt) {
+    const a = sstep(0, 1, lt), r = this.zr(lt), zc = this.zc(lt);
+    c.strokeStyle = 'rgba(255,90,80,' + (.7 * a) + ')'; c.lineWidth = 1.6 * V.u; OV.path(c, V, OV.ring(zc[0], zc[1], r, 0, 120));
+    for (let k = 0; k < 4; k++) { const pts = []; for (let n = 0; n <= 90; n++) { const an = n / 90 * TAU, rr = (80 + k * 70) * (1 + .12 * Math.sin(an * 3 + k)); pts.push([-200 + Math.cos(an) * rr, -40 + Math.sin(an) * rr * .6]); } c.strokeStyle = INK(.06 * a); c.lineWidth = V.u; OV.path(c, V, pts); }
+    const e = sstep(1.5, 2.5, lt); if (e > 0) { OV.pulse(c, V, this.ex[0], this.ex[1], lt % 1.2, TEAL, 0, 30); OV.dot(c, V, this.ex[0], this.ex[1], 3.5, TEAL(.95 * e)); OV.text(c, V, '撤离点', this.ex[0], this.ex[1] - 20, 11, TEAL(.8 * e)); }
+  },
+  cam(lt) { return cam2(40, 10, lerp(1000, 900, clamp(lt / 8)), 1); },
+  caps: [
+    [.4, 7.6, 'tag', 'type', 'tl', '2026 · 测试中'],
+    [.8, 7.6, 'titlecn', 'rise', 'tl2c', '头号禁区'],
+    [2.2, 7.6, 'line', 'rise', 'bc', '搜打撤，遇上 MOBA · 下一个故事，{正在写}'],
+  ],
+};
+
+/* ---------------- 尾声: next stop M8, and back to twenty people ---------------- */
+SC.outro = {
+  bg: ['#04040B', '#0B0A1A'], dust: .22, tr: { k: 'flow', pre: .8, post: 1.4, st: .35 },
+  build() {
+    this.a = WXY(...LL.JKT); this.b = WXY(...LL.IST); this.arc = curvePts(this.a, this.b, 110, 80);
+    this.nW = Math.round(N * .5); this.nM = Math.round(N * .07);
+    this.wm = textPoints('沐瞳', `900 220px ${FONT_SERIF}`, this.nW, 520, 91); this.mt = textPoints('MOONTON', `700 200px ${FONT_DISP}`, this.nM, 280, 92);
+    this.F = SC.prologue.F;
+  },
+  fill(o, lt, t) {
+    const W0 = SC.wor, mapA = .32 * (1 - sstep(4, 5.4, lt)); let i = 0;
+    for (let k = 0; k < 20; k++, i++) { const f = this.F[k], on = sstep(4.6 + k * .03, 5.2 + k * .03, lt), g = ease3(clamp((lt - 6.4) / 2)), w = this.wm[k * 2], wy = this.wm[k * 2 + 1] + 40; put(o, i, lerp(f[0], w, g), lerp(f[1], wy, g), 0, lerp(2.6, 1, g), 1, .84, .55, on); }
+    for (; i < N; i++) {
+      let x, y, a, cr = .95, cg = .88, cb = .72, s = .9;
+      if (i < this.nW) { x = this.wm[i * 2]; y = this.wm[i * 2 + 1] + 40; a = .9; }
+      else if (i < this.nW + this.nM) { const q = i - this.nW; x = this.mt[q * 2]; y = this.mt[q * 2 + 1] - 100; a = .7; cr = .84; cg = .85; cb = .92; s = .8; }
+      else { haze(o, i, .035); continue; }
+      const e = ease3(clamp((lt - 6.2 - R[3][i] * 1.8) / 1.8));
+      let sx, sy; if (i - 20 < W0.nMap && i >= 20) { const m = W0.map[i - 20]; sx = m[0]; sy = m[1]; } else { sx = G[0][i] * 600; sy = G[1][i] * 380; }
+      const sa = i - 20 < W0.nMap ? mapA : 0, gw = sstep(9, 11, lt) * (.12 + .08 * Math.sin(t * 1.5 + i));
+      put(o, i, lerp(sx, x, e), lerp(sy, y, e), 0, s, lerp(.42, cr + gw, e), lerp(.55, cg + gw * .6, e), lerp(.82, cb, e), lerp(sa, a, e));
+    }
+  },
+  draw(c, V, lt) {
+    const A = 1 - sstep(4, 5, lt); if (A <= 0) return; const pr = ease3(clamp((lt - .6) / 2.4));
+    c.strokeStyle = GOLD(.9 * A); c.lineWidth = 1.6 * V.u; OV.path(c, V, this.arc, pr);
+    OV.dot(c, V, this.a[0], this.a[1], 3, GOLD(.9 * A)); OV.text(c, V, 'M7 · 雅加达', this.a[0], this.a[1] - 16, 11, INK(.7 * A));
+    const b = sstep(2.8, 3.4, lt) * A; OV.dot(c, V, this.b[0], this.b[1], 3.4, GOLD(.95 * b)); OV.text(c, V, 'M8 · 土耳其', this.b[0], this.b[1] + 18, 12, INK(.85 * b)); if (b > 0) OV.pulse(c, V, this.b[0], this.b[1], (lt - 3) % 1.4, GOLD, 0, 30);
+  },
+  cam(lt) { const e = ease3(sstep(4, 6, lt)); return cam2(lerp(230, 0, e), lerp(30, 0, e), lerp(620, 1000, e), 1.2); },
+  caps: [
+    [.6, 4.2, 'line', 'rise', 'bc', '下一站 · {M8} · 土耳其 · 2027.01'],
+    [4.8, 9.6, 'line', 'rise', 'bc', '从二十个人，到今天的{我们}'],
+    [10.2, 16.6, 'titlecn', 'rise', 'c3', '致每一位沐瞳人'],
+    [11.6, 16.6, 'tag', 'type', { l: '50%', t: '84%', ax: -50, ay: -50 }, 'MOONTON · 2014 — 2026'],
+    [12, 16.6, 'fine', 'fade', { l: '50%', b: '5%', ax: -50 }, '个人作品 · 非官方 · 画面与音乐均由代码实时生成'],
+  ],
+};
+/* ============================================================
+   Part 3: engine — transitions, WebGL renderer, vector overlay, captions, UI
+   ============================================================ */
+const $ = id => document.getElementById(id);
+const dist3 = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+for (const s of SECS) { const S = SC[s.id]; S.bgc = S.bg.map(hex); }
+
+/* which scene(s) are on screen at time t */
+function stateAt(t) {
+  let k = 0; for (let i = 0; i < SECS.length; i++) if (t >= SECS[i].t0) k = i;
+  const cur = SC[SECS[k].id].tr;
+  if (k > 0 && cur && cur.pre + cur.post > 0 && t < SECS[k].t0 + cur.post) return { a: k - 1, b: k, p: (t - (SECS[k].t0 - cur.pre)) / (cur.pre + cur.post), tr: cur };
+  if (k + 1 < SECS.length) { const nx = SC[SECS[k + 1].id].tr; if (nx && nx.pre > 0 && t >= SECS[k + 1].t0 - nx.pre) return { a: k, b: k + 1, p: (t - (SECS[k + 1].t0 - nx.pre)) / (nx.pre + nx.post), tr: nx }; }
+  return { a: k, b: -1, p: 0, tr: null };
+}
+const ltA = (A, t) => Math.min(t - A.t0, A.len * BAR + 3);
+const OUT = new Float32Array(N * 8), TA = new Float32Array(N * 8), TB = new Float32Array(N * 8);
+function fillParticles(t, st) {
+  const A = SECS[st.a];
+  if (st.b < 0) { SC[A.id].fill(OUT, t - A.t0, t); return; }
+  const B = SECS[st.b];
+  SC[A.id].fill(TA, ltA(A, t), t); SC[B.id].fill(TB, t - B.t0, t);
+  const p = clamp(st.p), stg = st.tr.st;
+  for (let i = 0; i < N; i++) {
+    const j = i * 8, e0 = clamp((p - R[5][i] * stg) / (1 - stg));
+    if (e0 <= 0) { for (let c = 0; c < 8; c++) OUT[j + c] = TA[j + c]; continue; }
+    if (e0 >= 1) { for (let c = 0; c < 8; c++) OUT[j + c] = TB[j + c]; continue; }
+    const e = ease3(e0), ax = TA[j], ay = TA[j + 1], az = TA[j + 2], bx = TB[j], by = TB[j + 1], bz = TB[j + 2];
+    const d = Math.hypot(bx - ax, by - ay, bz - az), sw = .12 * d + 12, mx = (ax + bx) / 2 + G[0][i] * sw, my = (ay + by) / 2 + G[1][i] * sw * .7, mz = (az + bz) / 2 + G[2][i] * sw * .5;
+    const u = 1 - e, w0 = u * u, w1 = 2 * u * e, w2 = e * e;
+    OUT[j] = w0 * ax + w1 * mx + w2 * bx; OUT[j + 1] = w0 * ay + w1 * my + w2 * by; OUT[j + 2] = w0 * az + w1 * mz + w2 * bz;
+    OUT[j + 3] = lerp(TA[j + 3], TB[j + 3], e);
+    for (let c = 4; c < 7; c++) OUT[j + c] = lerp(TA[j + c], TB[j + c], e);
+    const aa = TA[j + 7], ab = TB[j + 7]; OUT[j + 7] = lerp(aa, ab, e) + Math.sin(e * Math.PI) * .25 * Math.max(aa, ab);
+  }
+}
+function cameraAt(t, st) {
+  const A = SECS[st.a], ca = SC[A.id].cam(ltA(A, t));
+  if (st.b < 0) return ca;
+  const B = SECS[st.b], cb = SC[B.id].cam(Math.max(0, t - B.t0)), p = clamp(st.p), e = ease3(p);
+  const P3 = [0, 1, 2].map(c => lerp(ca.p[c], cb.p[c], e)), L3 = [0, 1, 2].map(c => lerp(ca.l[c], cb.l[c], e));
+  return { p: P3, l: L3, fov: lerp(ca.fov, cb.fov, e), ap: lerp(ca.ap, cb.ap, e), fo: lerp(ca.fo, cb.fo, e), roll: 0 };
+}
+function lookState(t, st) {
+  const A = SC[SECS[st.a].id]; if (st.b < 0) return { bg: A.bgc, dust: A.dust };
+  const B = SC[SECS[st.b].id], e = ease3(clamp(st.p));
+  return { bg: [0, 1].map(k => A.bgc[k].map((v, c) => lerp(v, B.bgc[k][c], e))), dust: lerp(A.dust, B.dust, e) };
+}
+const FLASHES = [[SEC.mlbb.t0, .3, .45], [SEC.m7.t0, .4, .6]];
+function flashAt(t) { let f = 0; for (const [ft, a, d] of FLASHES) if (t >= ft && t < ft + d * 6) f = Math.max(f, a * Math.exp(-(t - ft) / d)); return f; }
+
+/* ---------- WebGL ---------- */
+const cv = $('gl'), OVC = $('ov'), OX = OVC.getContext('2d', { willReadFrequently: true });
+const gl = cv.getContext('webgl2', { antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: Q.has('shot'), powerPreference: 'high-performance' });
+let OVT = null, HDR = false, PROG = {}, VAO_P, VAO_D, VAO_E, BUF_P, FB = {}, W_ = 0, H_ = 0, MAXPT = 64;
+const VS_PT = `#version 300 es
+layout(location=0) in vec4 aPos; layout(location=1) in vec4 aCol;
+uniform mat4 uVP; uniform vec3 uEye; uniform vec3 uFwd; uniform float uPx, uFocus, uAper, uMax, uMul;
+out vec4 vCol; out float vBok;
+void main(){
+  vec3 d3 = aPos.xyz - uEye; float d = dot(d3, uFwd);
+  gl_Position = uVP * vec4(aPos.xyz, 1.0);
+  if (d < 1.0 || aCol.a <= 0.002) { gl_Position = vec4(2.0, 2.0, 2.0, 1.0); gl_PointSize = 0.0; vCol = vec4(0.0); vBok = 0.0; return; }
+  float px = aPos.w * uPx / d;
+  float coc = uAper * abs(d - uFocus) / d * uPx / uFocus;
+  float s = max(sqrt(px * px + coc * coc), 1.0);
+  float sc = min(s, uMax);
+  float pe = max(px, 0.55);
+  float e = clamp(pe * pe / (sc * sc), 0.0, 1.0);
+  vCol = vec4(aCol.rgb, aCol.a * e * uMul * smoothstep(1.0, 24.0, d));
+  vBok = clamp((coc - px) / (px + 5.0), 0.0, 1.0);
+  gl_PointSize = sc + 1.0;
+}`;
+const FS_PT = `#version 300 es
+precision mediump float; in vec4 vCol; in float vBok; out vec4 o;
+void main(){
+  vec2 c = gl_PointCoord * 2.0 - 1.0; float r2 = dot(c, c); if (r2 > 1.0) discard;
+  float g = exp(-r2 * 4.0);
+  float disk = smoothstep(1.0, 0.72, sqrt(r2)) * (0.55 + 0.45 * r2);
+  float sh = mix(g, disk * 0.75, vBok);
+  o = vec4(vCol.rgb * vCol.a * sh, 1.0);
+}`;
+const VS_FS = `#version 300 es
+out vec2 vUv; void main(){ vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2)); vUv = p; gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0); }`;
+const FS_DOWN = `#version 300 es
+precision mediump float; in vec2 vUv; uniform sampler2D uSrc; uniform vec2 uTx; uniform float uThr; out vec4 o;
+void main(){ vec3 c = texture(uSrc, vUv + uTx * vec2(-1.0,-1.0)).rgb + texture(uSrc, vUv + uTx * vec2(1.0,-1.0)).rgb + texture(uSrc, vUv + uTx * vec2(-1.0,1.0)).rgb + texture(uSrc, vUv + uTx * vec2(1.0,1.0)).rgb; c *= .25; o = vec4(max(c - uThr, 0.0), 1.0); }`;
+const FS_BLUR = `#version 300 es
+precision mediump float; in vec2 vUv; uniform sampler2D uSrc; uniform vec2 uDir; out vec4 o;
+void main(){ vec3 c = texture(uSrc, vUv).rgb * .227027;
+  c += (texture(uSrc, vUv + uDir * 1.3846).rgb + texture(uSrc, vUv - uDir * 1.3846).rgb) * .3162162;
+  c += (texture(uSrc, vUv + uDir * 3.2308).rgb + texture(uSrc, vUv - uDir * 3.2308).rgb) * .0702703; o = vec4(c, 1.0); }`;
+const FS_COMP = `#version 300 es
+precision highp float; in vec2 vUv; uniform sampler2D uScene, uB1, uB2, uOv; uniform vec3 uTop, uBot; uniform float uTime, uFlash, uFade, uCA, uLb, uExpo, uBloom; out vec4 o;
+vec3 aces(vec3 x){ return clamp((x * (2.51 * x + .03)) / (x * (2.43 * x + .59) + .14), 0.0, 1.0); }
+void main(){
+  vec2 uv = vUv, d = uv - .5; float ca = uCA * dot(d, d) * 4.0;
+  vec3 s = vec3(texture(uScene, uv + d * ca).r, texture(uScene, uv).g, texture(uScene, uv - d * ca).b);
+  vec3 b = texture(uB1, uv).rgb * .8 + texture(uB2, uv).rgb * 1.2;
+  vec3 bg = mix(uBot, uTop, smoothstep(0.0, 1.0, uv.y));
+  vec3 c = aces(bg + (s + b * uBloom) * uExpo);
+  c *= mix(1.0, smoothstep(1.3, .2, length(d * vec2(1.0, .85)) * 1.5), .6);
+  vec4 ov = texture(uOv, vec2(uv.x, 1.0 - uv.y)); c = mix(c, ov.rgb, ov.a);
+  c = mix(c, vec3(1.0, .98, .95), clamp(uFlash, 0.0, 1.0));
+  float n = fract(sin(dot(floor(gl_FragCoord.xy) + fract(uTime * 7.13) * 91.7, vec2(12.9898, 78.233))) * 43758.5453);
+  c += (n - .5) * .035;
+  c *= uFade;
+  if (uv.y < uLb || uv.y > 1.0 - uLb) c = vec3(0.0);
+  o = vec4(c, 1.0);
+}`;
+function shader(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
+function program(vs, fs) { const p = gl.createProgram(); gl.attachShader(p, shader(gl.VERTEX_SHADER, vs)); gl.attachShader(p, shader(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(p); if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p)); const u = {}; const n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS); for (let i = 0; i < n; i++) { const a = gl.getActiveUniform(p, i); u[a.name] = gl.getUniformLocation(p, a.name); } return { p, u }; }
+function target(w, h) {
+  const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+  if (HDR) gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, w, h, 0, gl.RGBA, gl.HALF_FLOAT, null); else gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  const fb = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, fb); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+  return { tex, fb, w, h };
+}
+function initGL() {
+  HDR = !!gl.getExtension('EXT_color_buffer_float');
+  PROG.pt = program(VS_PT, FS_PT); PROG.down = program(VS_FS, FS_DOWN); PROG.blur = program(VS_FS, FS_BLUR); PROG.comp = program(VS_FS, FS_COMP);
+  const r = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE); MAXPT = Math.min(r ? r[1] : 64, 110);
+  const mkVao = (buf, data, usage) => { const v = gl.createVertexArray(); gl.bindVertexArray(v); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, data, usage); gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 4, gl.FLOAT, false, 32, 0); gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 4, gl.FLOAT, false, 32, 16); gl.bindVertexArray(null); return v; };
+  BUF_P = gl.createBuffer(); VAO_P = mkVao(BUF_P, OUT.byteLength, gl.DYNAMIC_DRAW);
+  const dust = new Float32Array(NDUST * 8), rd = mulberry32(3);
+  for (let i = 0; i < NDUST; i++) { const tw = .5 + rd() * .5; dust.set([(rd() - .5) * 2600, (rd() - .5) * 1500, -900 + rd() * 1300, .8 + rd() * .8, .7 * tw, .75 * tw, 1 * tw, .45], i * 8); }
+  VAO_D = mkVao(gl.createBuffer(), dust, gl.STATIC_DRAW);
+  VAO_E = gl.createVertexArray();
+  OVT = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, OVT); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+}
+function resize() {
+  const dpr = Math.min(devicePixelRatio || 1, 1.5), cw = cv.clientWidth || innerWidth, ch = cv.clientHeight || innerHeight;
+  let w = Math.round(cw * dpr), h = Math.round(ch * dpr); const px = w * h, cap = MOBILE ? 1.3e6 : 2.6e6; if (px > cap) { const k = Math.sqrt(cap / px); w = Math.round(w * k); h = Math.round(h * k); }
+  if (w === W_ && h === H_) return; W_ = w; H_ = h; cv.width = w; cv.height = h;
+  for (const k in FB) { gl.deleteTexture(FB[k].tex); gl.deleteFramebuffer(FB[k].fb); }
+  OVC.width = w; OVC.height = h;
+  FB.scene = target(w, h); FB.a1 = target(Math.max(1, w >> 2), Math.max(1, h >> 2)); FB.b1 = target(Math.max(1, w >> 2), Math.max(1, h >> 2)); FB.a2 = target(Math.max(1, w >> 3), Math.max(1, h >> 3)); FB.b2 = target(Math.max(1, w >> 3), Math.max(1, h >> 3));
+}
+function mat4Persp(fovy, asp, n, f) { const t = 1 / Math.tan(fovy / 2), nf = 1 / (n - f); return [t / asp, 0, 0, 0, 0, t, 0, 0, 0, 0, (f + n) * nf, -1, 0, 0, 2 * f * n * nf, 0]; }
+function mat4Look(e, c, roll) {
+  let fx = c[0] - e[0], fy = c[1] - e[1], fz = c[2] - e[2]; const fl = Math.hypot(fx, fy, fz) || 1; fx /= fl; fy /= fl; fz /= fl;
+  let ux = Math.sin(roll), uy = Math.cos(roll), uz = 0;
+  let sx = fy * uz - fz * uy, sy = fz * ux - fx * uz, sz = fx * uy - fy * ux; const sl = Math.hypot(sx, sy, sz) || 1; sx /= sl; sy /= sl; sz /= sl;
+  ux = sy * fz - sz * fy; uy = sz * fx - sx * fz; uz = sx * fy - sy * fx;
+  return { m: [sx, ux, -fx, 0, sy, uy, -fy, 0, sz, uz, -fz, 0, -(sx * e[0] + sy * e[1] + sz * e[2]), -(ux * e[0] + uy * e[1] + uz * e[2]), fx * e[0] + fy * e[1] + fz * e[2], 1], f: [fx, fy, fz] };
+}
+function mul4(a, b) { const o = new Array(16); for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) { let s = 0; for (let k = 0; k < 4; k++) s += a[k * 4 + j] * b[i * 4 + k]; o[i * 4 + j] = s; } return o; }
+function fsPass(prog, dst, setup) { gl.bindFramebuffer(gl.FRAMEBUFFER, dst ? dst.fb : null); gl.viewport(0, 0, dst ? dst.w : W_, dst ? dst.h : H_); gl.useProgram(prog.p); setup(prog.u); gl.bindVertexArray(VAO_E); gl.drawArrays(gl.TRIANGLES, 0, 3); }
+function bindTex(unit, tex, loc) { gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, tex); gl.uniform1i(loc, unit); }
+
+function makeView(VP) {
+  const W = W_, H = H_;
+  const p = (x, y, z) => { z = z || 0; const cx = VP[0] * x + VP[4] * y + VP[8] * z + VP[12], cy = VP[1] * x + VP[5] * y + VP[9] * z + VP[13], cw = VP[3] * x + VP[7] * y + VP[11] * z + VP[15], w = Math.max(1e-3, cw); return [(cx / w * .5 + .5) * W, (1 - (cy / w * .5 + .5)) * H]; };
+  return { p, u: H / 720, k: 1, W, H };
+}
+function renderAt(t) {
+  resize();
+  const st = stateAt(t); fillParticles(t, st);
+  const cam = cameraAt(t, st), look = lookState(t, st);
+  const fov = cam.fov * Math.PI / 180, V = mat4Look(cam.p, cam.l, cam.roll || 0), Pm = mat4Persp(fov, W_ / H_, 1, 12000), VP = mul4(Pm, V.m);
+  const pxs = H_ / (2 * Math.tan(fov / 2));
+  gl.bindFramebuffer(gl.FRAMEBUFFER, FB.scene.fb); gl.viewport(0, 0, W_, H_); gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE);
+  const u = PROG.pt.u; gl.useProgram(PROG.pt.p);
+  gl.uniformMatrix4fv(u.uVP, false, VP); gl.uniform3fv(u.uEye, cam.p); gl.uniform3fv(u.uFwd, V.f);
+  gl.uniform1f(u.uPx, pxs); gl.uniform1f(u.uFocus, Math.max(10, cam.fo)); gl.uniform1f(u.uAper, cam.ap); gl.uniform1f(u.uMax, Math.min(MAXPT, 90 * H_ / 1080 + 16));
+  gl.uniform1f(u.uMul, look.dust); gl.bindVertexArray(VAO_D); gl.drawArrays(gl.POINTS, 0, NDUST);
+  gl.uniform1f(u.uMul, 1); gl.bindBuffer(gl.ARRAY_BUFFER, BUF_P); gl.bufferSubData(gl.ARRAY_BUFFER, 0, OUT); gl.bindVertexArray(VAO_P); gl.drawArrays(gl.POINTS, 0, N);
+  gl.disable(gl.BLEND);
+  fsPass(PROG.down, FB.a1, u => { bindTex(0, FB.scene.tex, u.uSrc); gl.uniform2f(u.uTx, 1 / W_, 1 / H_); gl.uniform1f(u.uThr, HDR ? .55 : .45); });
+  fsPass(PROG.blur, FB.b1, u => { bindTex(0, FB.a1.tex, u.uSrc); gl.uniform2f(u.uDir, 1 / FB.a1.w, 0); });
+  fsPass(PROG.blur, FB.a1, u => { bindTex(0, FB.b1.tex, u.uSrc); gl.uniform2f(u.uDir, 0, 1 / FB.a1.h); });
+  fsPass(PROG.down, FB.a2, u => { bindTex(0, FB.a1.tex, u.uSrc); gl.uniform2f(u.uTx, 1 / FB.a1.w, 1 / FB.a1.h); gl.uniform1f(u.uThr, 0); });
+  fsPass(PROG.blur, FB.b2, u => { bindTex(0, FB.a2.tex, u.uSrc); gl.uniform2f(u.uDir, 1 / FB.a2.w, 0); });
+  fsPass(PROG.blur, FB.a2, u => { bindTex(0, FB.b2.tex, u.uSrc); gl.uniform2f(u.uDir, 0, 1 / FB.a2.h); });
+  const flash = flashAt(t), fade = sstep(0, 1.2, t) * (1 - sstep(DUR - 1.4, DUR, t));
+  /* vector overlay, through the same camera */
+  const VV = makeView(VP), l0 = VV.p(cam.l[0], cam.l[1], cam.l[2]), l1 = VV.p(cam.l[0] + 1, cam.l[1], cam.l[2]); VV.k = Math.hypot(l1[0] - l0[0], l1[1] - l0[1]);
+  OX.setTransform(1, 0, 0, 1, 0, 0); OX.clearRect(0, 0, W_, H_); OX.fillStyle = 'rgba(0,0,0,0.004)'; OX.fillRect(0, 0, 1, 1); OX.lineCap = 'round'; OX.lineJoin = 'round';
+  const drawScene = (idx, a) => { if (a <= .003) return; const S = SECS[idx], sc = SC[S.id]; if (!sc.draw) return; OX.save(); OX.globalAlpha = a; sc.draw(OX, VV, idx === st.a ? ltA(S, t) : t - S.t0, t); OX.restore(); };
+  if (st.b < 0) drawScene(st.a, 1); else { const e = ease3(clamp(st.p)); drawScene(st.a, 1 - e); drawScene(st.b, e); }
+  gl.bindTexture(gl.TEXTURE_2D, OVT); gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, OVC);
+  fsPass(PROG.comp, null, u => {
+    bindTex(0, FB.scene.tex, u.uScene); bindTex(1, FB.a1.tex, u.uB1); bindTex(2, FB.a2.tex, u.uB2); bindTex(3, OVT, u.uOv);
+    gl.uniform3fv(u.uTop, look.bg[0]); gl.uniform3fv(u.uBot, look.bg[1]); gl.uniform1f(u.uTime, t); gl.uniform1f(u.uFlash, flash);
+    gl.uniform1f(u.uFade, fade); gl.uniform1f(u.uCA, .0008 + .012 * flash); gl.uniform1f(u.uLb, 0); gl.uniform1f(u.uExpo, 1.3); gl.uniform1f(u.uBloom, 1);
+  });
+  capsUpdate(t);
+}
+
+/* ---------- captions ---------- */
+const POS = {
+  c: { l: '50%', t: '50%', ax: -50, ay: -50 }, c3: { l: '50%', t: '74%', ax: -50, ay: -50 },
+  bc: { l: '50%', b: '10%', ax: -50 }, bc2: { l: '50%', b: '17%', ax: -50 },
+  bl: { l: '6%', b: '11%' }, bl2: { l: '6%', b: '17%' }, bl3: { l: '6%', b: '31%' },
+  tl: { l: '6%', t: '8%' }, tl2: { l: '6%', t: '13%' }, tl2c: { l: '6%', t: '12.5%' }, tl3: { l: '6%', t: '22%' }, tl4: { l: '6%', t: '30%' },
+};
+const CAPS = [];
+for (const s of SECS) for (const c of (SC[s.id].caps || [])) {
+  const [t0, t1, k, a, p, x, ex] = c, o = { t0: s.t0 + t0, t1: s.t0 + t1, k, a, p, x };
+  if (a === 'seq') o.seq = ex.map(v => s.t0 + v); else if (ex) { if (ex.c0 != null) { o.c0 = s.t0 + ex.c0; o.c1 = s.t0 + ex.c1; o.v = ex.v; } if (ex.ink) o.ink = 1; }
+  CAPS.push(o);
+}
+function buildCaps() {
+  const host = $('caps');
+  for (const c of CAPS) {
+    const el = document.createElement('div'); el.className = 'cap k-' + c.k + (c.ink ? ' ink' : ''); const p = typeof c.p === 'string' ? POS[c.p] : c.p;
+    if (p.l) el.style.left = p.l; if (p.r) el.style.right = p.r; if (p.t) el.style.top = p.t; if (p.b) el.style.bottom = p.b; if (p.ta) el.style.textAlign = p.ta;
+    c.base = `translate(${p.ax || 0}%, ${p.ay || 0}%)`; el.style.transform = c.base; c.out = .6;
+    if (c.a !== 'count') {
+      c.ch = []; c.seg = []; let hl = false, seg = 0;
+      for (const s of c.x) {
+        if (s === '{') { hl = true; continue; } if (s === '}') { hl = false; continue; } if (s === '|') { seg++; continue; }
+        if (s === '\n') { el.appendChild(document.createElement('br')); continue; }
+        const sp = document.createElement('span'); sp.className = 'c' + (hl ? ' hl' : ''); sp.textContent = s; el.appendChild(sp); c.ch.push(sp); c.seg.push(seg);
+      }
+    }
+    host.appendChild(el); c.el = el; c.on = false;
+  }
+}
+const fmtNum = v => Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+function capsUpdate(t) {
+  for (const c of CAPS) {
+    const vis = t >= c.t0 - .02 && t <= c.t1 + c.out;
+    if (!vis) { if (c.on) { c.el.style.display = 'none'; c.on = false; } continue; }
+    if (!c.on) { c.el.style.display = 'block'; c.on = true; }
+    const a = t - c.t0, fo = clamp((t - c.t1) / c.out), el = c.el;
+    switch (c.a) {
+      case 'rise': case 'fade': case 'seq': {
+        const stg = c.a === 'fade' ? 0 : .06; let idx = 0;
+        c.ch.forEach((s, i) => { const st0 = c.a === 'seq' ? c.seq[c.seg[i]] - c.t0 : 0; if (i > 0 && c.seg[i] !== c.seg[i - 1]) idx = 0; const p = clamp((a - st0 - idx * stg) / .7), e = easeOut3(p); idx++; s.style.opacity = (e * (1 - fo)).toFixed(3); s.style.transform = `translateY(${((1 - e) * .45).toFixed(3)}em)`; s.style.filter = `blur(${((1 - p) * 7 + fo * 6).toFixed(1)}px)`; });
+        break;
+      }
+      case 'type': c.ch.forEach((s, i) => { s.style.opacity = a >= i * .045 ? (1 - fo).toFixed(3) : 0; }); break;
+      case 'count': { const p = easeOutExpo(clamp((t - c.c0) / (c.c1 - c.c0))), land = t >= c.c1 ? Math.exp(-(t - c.c1) * 6) : 0; el.textContent = fmtNum(c.v * p); el.style.opacity = (sstep(0, .3, a) * (1 - fo)).toFixed(3); el.style.transform = c.base + ` scale(${(1 + .05 * land).toFixed(4)})`; break; }
+    }
+  }
+}
+
+/* ---------- UI & main loop ---------- */
+const ui = { bar: $('bar'), start: $('start'), btn: $('playBtn'), pp: $('pp'), ppIcon: $('ppIcon'), tl: $('tl'), fill: $('tlFill'), time: $('time'), fs: $('fs') };
+let hideTimer = 0, SHOT = Q.has('shot'), IDLE_T = 7.4;
+function showBar() { if (SHOT || !P.started) return; ui.bar.classList.add('show'); clearTimeout(hideTimer); hideTimer = setTimeout(() => { if (P.playing) ui.bar.classList.remove('show'); }, 2600); }
+function setPP() { ui.ppIcon.setAttribute('d', P.playing ? 'M3 2h3.5v12H3zM9.5 2H13v12H9.5z' : 'M4 2l10 6-10 6z'); ui.pp.setAttribute('aria-label', P.playing ? '暂停' : '播放'); }
+function begin(pos) { P.started = true; ui.start.classList.add('hide'); transportStart(pos || 0); setPP(); showBar(); }
+function toggle() { if (!P.started) return begin(0); if (P.playing) transportStop(); else transportStart(P.pos0 >= DUR - .5 ? 0 : P.pos0); setPP(); showBar(); }
+function seek(pos) { pos = clamp(pos, 0, DUR - .1); if (!P.started) return begin(pos); if (P.playing) transportStart(pos); else P.pos0 = pos; showBar(); }
+function buildTimeline() {
+  SECS.forEach(s => { if (!s.name) return; const d = document.createElement('div'); d.className = 'tick' + (['序章', '2016', '2026'].includes(s.name) ? ' major' : ''); d.textContent = s.name; d.style.left = (s.t0 / DUR * 100) + '%'; d.style.pointerEvents = 'none'; ui.tl.appendChild(d); });
+  const go = e => { const r = ui.tl.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * DUR); };
+  ui.tl.addEventListener('pointerdown', go);
+  ui.tl.addEventListener('keydown', e => { if (e.key === 'ArrowRight') seek(curTime() + 5); if (e.key === 'ArrowLeft') seek(curTime() - 5); });
+}
+function fullscreen() { const d = document, el = $('stage'); try { if (d.fullscreenElement || d.webkitFullscreenElement) (d.exitFullscreen || d.webkitExitFullscreen).call(d); else { const r = (el.requestFullscreen || el.webkitRequestFullscreen).call(el); if (r && r.catch) r.catch(() => { }); } } catch (e) { } }
+function frame() {
+  requestAnimationFrame(frame);
+  if (SHOT) return;
+  let t;
+  if (!P.started) t = IDLE_T; else { t = curTime(); if (P.playing) schedule(); }
+  if (P.playing && t >= DUR) { transportStop(); P.pos0 = DUR; P.ended = true; setPP(); ui.btn.textContent = '重新播放'; ui.start.classList.remove('hide'); P.started = false; IDLE_T = 7.4; }
+  renderAt(Math.min(t, DUR));
+  ui.fill.style.width = (clamp(t / DUR) * 100).toFixed(2) + '%'; ui.time.textContent = fmtTime(t) + ' / ' + fmtTime(DUR);
+}
+function boot() {
+  if (!gl) { const m = $('msg'); m.style.display = 'block'; m.textContent = '这个浏览器不支持 WebGL2，无法播放。请用最新版 Chrome、Edge 或 Safari 打开。'; ui.start.classList.add('hide'); return; }
+  try { initGL(); } catch (e) { const m = $('msg'); m.style.display = 'block'; m.textContent = '图形初始化失败：' + e.message; return; }
+  for (const s of SECS) SC[s.id].build();
+  buildCaps(); buildTimeline();
+  ui.btn.disabled = false; ui.btn.textContent = '播放';
+  ui.btn.addEventListener('click', () => begin(0));
+  ui.pp.addEventListener('click', toggle); ui.fs.addEventListener('click', fullscreen);
+  ['pointermove', 'pointerdown'].forEach(ev => $('stage').addEventListener(ev, showBar));
+  addEventListener('keydown', e => { if (e.target === ui.tl) return; if (e.code === 'Space') { e.preventDefault(); toggle(); } else if (e.key === 'f' || e.key === 'F') fullscreen(); else if (e.key === 'ArrowRight') seek(curTime() + 5); else if (e.key === 'ArrowLeft') seek(curTime() - 5); });
+  window.MV = { renderAt: t => { renderAt(t); return true; }, DUR, SECS, N };
+  if (SHOT) { $('start').style.display = 'none'; renderAt(+(Q.get('t') || 0)); }
+  const jt = Q.get('t'); if (jt && !SHOT) IDLE_T = +jt;
+  requestAnimationFrame(frame);
+}
+(document.fonts && document.fonts.ready ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 1500))]) : Promise.resolve()).then(boot);
+
+</script>
+</body>
+</html>
