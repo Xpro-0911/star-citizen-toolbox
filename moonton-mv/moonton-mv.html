@@ -190,6 +190,10 @@ function chordAt(bar) {
     default: return CPROG.main[lb % 4];
   }
 }
+const M_MLBB2 = mapOf([[0,74,6],[6,72,2],[8,69,8],[16,70,6],[22,69,2],[24,65,8],[32,72,6],[38,69,2],[40,65,4],[44,67,4],[48,64,8],[56,67,4],[60,69,4]]);
+const M_ESP2 = mapOf([[0,69,8],[8,74,8],[16,74,4],[20,72,4],[24,70,8],[32,72,8],[40,77,8],[48,76,12],[60,74,4]]);
+const M_M72 = mapOf([[0,77,4],[4,76,4],[8,74,8],[16,74,4],[20,72,4],[24,70,8],[32,72,4],[36,74,4],[40,77,8],[48,79,8],[56,81,8]]);
+const M_ASIA2 = mapOf([[0,81,4],[4,79,4],[8,77,8],[16,77,4],[20,79,4],[24,74,8],[32,72,4],[36,77,4],[40,81,8],[48,79,8],[56,76,8]]);
 const HOME_M = [[0,72,4],[4,77,4],[8,81,6],[14,79,2],[16,76,6],[22,77,2],[24,79,8],[32,77,4],[36,81,4],[40,84,6],[46,82,2],[48,81,8],[56,79,4],[60,77,4]];
 const M_HOME = mapOf(HOME_M);
 
@@ -208,6 +212,18 @@ function gen(st) {
     if (s === 0) { A('sub', { n: ch.r, d: 14, v: .42 }); A('pad', { n: ch.v, d: 16, v: .28 }); }
     if (arpV) A('arp', { n: tones[s & 7] + 12, v: arpV, cut: .45 });
     if (lead) { const th = M_THEME.get(ph); if (th) { A('lead', { n: th[1] + leadUp, d: th[2], v: .45 }); if (lead === 2) A('lead', { n: dia(th[1] + leadUp, -2), d: th[2], v: .22, harm: 1 }); } }
+  };
+  /* a calm bed: soft pulse, sustained bass, broken chords, one melody with a quiet bell double */
+  const calm = (mel, inst, o) => {
+    o = o || {};
+    if (s === 0) { A('pad', { n: ch.v, d: 16, v: o.pad == null ? .22 : o.pad }); A('sub', { n: ch.r, d: 16, v: .28 }); }
+    if (o.pulse && (s === 0 || s === 8)) A('kick', { v: o.pulse });
+    if (o.shaker && (s & 1) === 0) A('shaker', { v: o.shaker * ((s & 3) === 2 ? 1 : .6) });
+    if (o.arp && (s & 1) === 0) A(o.arpI || 'piano', { n: tones[(s >> 1) & 7] + 12, v: o.arp });
+    if (o.choir && s === 0) A('choir', { n: ch.v, d: 16, v: o.choir });
+    if (o.strings && s === 0) A('brassL', { n: ch.v.slice(0, 3), d: 16, v: o.strings });
+    if (o.taiko && s === 0) A('taiko', { v: o.taiko });
+    const m = mel && mel.get(ph); if (m) { A(inst, { n: m[1] + (o.up || 0), d: m[2], v: o.mv || .45 }); if (o.bell) A('bell', { n: m[1] + 12 + (o.up || 0), v: o.bell }); }
   };
   const fill = (from, v0) => { if (s >= from) A('snare', { v: v0 + .04 * (s - from) }); };
   switch (S.id) {
@@ -231,47 +247,36 @@ function gen(st) {
     }
     case 'rush':
       if (lb < 6) {
-        A('arp', { n: tones[s & 7] + 12, v: .22, cut: .2 + lb * .06 });
-        if (lb >= 2 && (s === 0 || s === 8)) A('kick', { v: .6 });
-        if (lb >= 3 && (s & 3) === 2) A('hat', { v: .08 });
-        if (lb >= 4 && (s === 4 || s === 12)) A('snare', { v: .35 });
-        if (lb >= 2 && (s & 1) === 0) A('bass', { n: ch.r + 12 + ((s & 7) === 6 ? 12 : 0), d: 2, v: .38 });
-        if (s === 0) A('pad', { n: ch.v, d: 16, v: .24 });
-      } else {
-        if (s === 0) { A('pad', { n: ch.v, d: 14, v: .28 }); A('swell', { d: 14, v: .26 }); }
-        if (s < 14) { if ((s & 1) === 0 || s >= 8) A('snare', { v: .18 + s * .025 }); if ((s & 3) === 0) A('kick', { v: .6 }); }
-      }
+        A('arp', { n: tones[s & 7] + 12, v: .2, cut: .2 + lb * .05 });
+        if (lb >= 2 && (s === 0 || s === 8)) A('kick', { v: .5 });
+        if (lb >= 3 && (s & 3) === 2) A('shaker', { v: .05 });
+        if (lb >= 2 && (s & 1) === 0) A('bass', { n: ch.r + 12 + ((s & 7) === 6 ? 12 : 0), d: 2, v: .32 });
+        if (s === 0) A('pad', { n: ch.v, d: 16, v: .22 });
+      } else if (s === 0) { A('pad', { n: ch.v, d: 16, v: .26 }); A('swell', { d: 16, v: .22 }); }
       break;
     case 'mlbb':
-      if (lb === 0 && s === 0) { A('impact', { v: .75 }); A('crash', { v: .6 }); }
-      if (lb < 8) { groove(lb >= 4 ? 2 : 1, lb >= 4 ? 12 : 0, .12); if (lb === 4 && s === 0) A('crash', { v: .4 }); }
-      else { if (s === 0) { A('pad', { n: ch.v, d: 16, v: .3 }); A('kick', { v: .6 }); } fill(8, .2); }
+      if (lb === 0 && s === 0) A('bell', { n: 86, v: .22 });
+      if (lb < 8) calm(M_MLBB2, 'piano', { arp: .1, arpI: 'mallet', pulse: lb >= 1 ? .42 : 0, shaker: lb >= 4 ? .04 : 0, strings: lb >= 4 ? .24 : 0, mv: .5, bell: .06 });
+      else if (s === 0) { A('pad', { n: ch.v, d: 16, v: .24 }); A('piano', { n: ch.v[2] + 12, v: .3 }); }
       break;
     case 'esports':
       if (lb < 5) {
-        if (s === 0 || s === 2 || s === 8 || s === 10) { A('kick', { v: .68, tag: 'stomp' }); A('bass', { n: ch.r + 12, d: 2, v: .42 }); }
-        if (s === 4 || s === 12) A('clap', { v: .6, big: 1 });
-        if (s === 0) { A('brass', { n: ch.v, d: 3, v: .38 }); A('pad', { n: ch.v, d: 16, v: .22 }); }
-        if (lb === 0 && s === 0) { A('crowd', { d: 16 * 10, v: .16 }); A('crash', { v: .35 }); }
-      } else {
-        groove(1, 12, .1);
-        if (lb === 5 && s === 0) A('crash', { v: .4 });
-        if (lb === 9) fill(10, .2);
-      }
+        if (s === 0 || s === 2 || s === 8 || s === 10) { A('kick', { v: .5, tag: 'stomp' }); A('bass', { n: ch.r + 12, d: 2, v: .34 }); }
+        if (s === 4 || s === 12) A('clap', { v: .36, big: 1 });
+        if (s === 0) { A('brass', { n: ch.v, d: 3, v: .26 }); A('pad', { n: ch.v, d: 16, v: .2 }); }
+        if (lb === 0 && s === 0) A('crowd', { d: 16 * 10, v: .12 });
+      } else calm(M_ESP2, 'flute', { strings: .26, choir: lb >= 7 ? .2 : 0, taiko: .28, arp: .1, bell: .1, mv: .5 });
       break;
     case 'billion':
-      if (lb === 0 && s === 0) A('crash', { v: .4 });
       if (lb < 6) {
-        if ((s & 3) === 0) A('kick', { v: .66 });
-        if (s === 4 || s === 12) A('clap', { v: .3 });
-        if ((s & 3) === 2) A('hat', { v: .08 });
-        A('bass', { n: ch.r + 12 + [0, 0, 12, 0][s & 3], d: 1, v: .3 });
-        A('arp', { n: tones[(s * 3) & 7] + 12, v: .15, cut: .55 });
-        if (s === 0) A('pad', { n: ch.v, d: 16, v: .24 });
-        if (lb >= 2) { const m = M_MOT.get(((lb - 2) % 2) * 16 + s); if (m) A('lead', { n: m[1], d: m[2], v: .38 }); }
-        if (lb === 5) fill(10, .2);
+        if (s === 0 || s === 8) A('kick', { v: .5 });
+        A('bass', { n: ch.r + 12 + [0, 0, 12, 0][s & 3], d: 1, v: .22 });
+        A('arp', { n: tones[(s * 3) & 7] + 12, v: .1, cut: .45 });
+        if ((s & 1) === 0) A('shaker', { v: .04 });
+        if (s === 0) A('pad', { n: ch.v, d: 16, v: .22 });
+        if (lb >= 2) { const m = M_MOT.get(((lb - 2) % 2) * 16 + s); if (m) A('flute', { n: m[1], d: m[2], v: .46 }); }
       } else if (lb === 6) {
-        if (s === 0) { A('impact', { v: .6 }); A('bell', { n: 86, v: .4 }); A('pad', { n: ch.v, d: 32, v: .3 }); A('sub', { n: ch.r, d: 16, v: .36 }); }
+        if (s === 0) { A('boom', { v: .35 }); A('bell', { n: 86, v: .36 }); A('pad', { n: ch.v, d: 32, v: .28 }); A('sub', { n: ch.r, d: 16, v: .32 }); }
       } else if (s >= 8 && (s & 1) === 0) A('koto', { n: [62, 65, 67, 69][(s - 8) >> 1], v: .4 });
       break;
     case 'mla': {
@@ -325,9 +330,9 @@ function gen(st) {
       if (s === 0 || s === 10) A('kick', { v: .42 });
       break;
     case 'm7':
-      if (lb === 0 && s === 0) { A('impact', { v: .8 }); A('crash', { v: .6 }); }
-      if (lb < 5 || s < 8) { groove(1, 12, .12); if (s === 0) A('choir', { n: ch.v, d: 16, v: .24 }); if (s === 0 || s === 8) A('taiko', { v: .3 }); }
-      else { A('snare', { v: .18 + (s - 8) * .03 }); }
+      if (lb === 0 && s === 0) { A('boom', { v: .35 }); A('bell', { n: 86, v: .3 }); }
+      if (lb < 5 || s < 8) calm(M_M72, 'flute', { strings: .28, choir: lb >= 1 ? .24 : 0, pulse: .42, arp: .12, bell: .1, mv: .52 });
+      else if (s === 8) A('swell', { d: 8, v: .18 });
       break;
     case 'savvy':
       if (s === 0) { A('pad', { n: ch.v, d: 16, v: .3 }); A('sub', { n: ch.r, d: 16, v: .3 }); }
@@ -336,9 +341,9 @@ function gen(st) {
       if (lb === 3 && s === 8) A('swell', { d: 8, v: .26 });
       break;
     case 'asian':
-      if (lb === 0 && s === 0) { A('impact', { v: .55 }); A('crash', { v: .45 }); }
-      if (lb < 4) { groove(2, 12, .1); if (s === 0) A('choir', { n: ch.v, d: 16, v: .28 }); if (s === 0 || s === 8) A('taiko', { v: .32 }); const th = M_THEME.get(ph); if (th) A('bell', { n: th[1] + 12, v: .1 }); }
-      else { if (s === 0) { A('choir', { n: ch.v, d: 16, v: .3 }); A('pad', { n: ch.v, d: 16, v: .3 }); } }
+      if (lb === 0 && s === 0) A('bell', { n: 86, v: .3 });
+      if (lb < 4) calm(M_ASIA2, 'mallet', { choir: .26, strings: .24, taiko: .3, arp: .1, bell: .14, mv: .34 });
+      else if (s === 0) { A('choir', { n: ch.v, d: 16, v: .26 }); A('pad', { n: ch.v, d: 16, v: .24 }); }
       break;
     case 'zone':
       if (lb === 0 && s === 0) A('drone', { n: 26, d: 16 * 4, v: .26 });
@@ -1475,7 +1480,7 @@ function lookState(t, st) {
   const B = SC[SECS[st.b].id], e = ease3(clamp(st.p));
   return { bg: [0, 1].map(k => A.bgc[k].map((v, c) => lerp(v, B.bgc[k][c], e))), dust: lerp(A.dust, B.dust, e) };
 }
-const FLASHES = [[SEC.mlbb.t0, .3, .45], [SEC.m7.t0, .4, .6]];
+const FLASHES = [[SEC.mlbb.t0, .12, .5], [SEC.m7.t0, .14, .6]];
 function flashAt(t) { let f = 0; for (const [ft, a, d] of FLASHES) if (t >= ft && t < ft + d * 6) f = Math.max(f, a * Math.exp(-(t - ft) / d)); return f; }
 
 /* ---------- WebGL ---------- */
