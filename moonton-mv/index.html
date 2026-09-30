@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>沐瞳十二年</title>
+<style>
+  @font-face { font-family: 'Noto Serif SC'; font-weight: 300; src: url(fonts/noto-serif-sc-chinese-simplified-300-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Noto Serif SC'; font-weight: 500; src: url(fonts/noto-serif-sc-chinese-simplified-500-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Noto Serif SC'; font-weight: 700; src: url(fonts/noto-serif-sc-chinese-simplified-700-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Noto Serif SC'; font-weight: 300; src: url(fonts/noto-serif-sc-latin-300-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: 'Noto Serif SC'; font-weight: 500; src: url(fonts/noto-serif-sc-latin-500-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: 'Noto Serif SC'; font-weight: 700; src: url(fonts/noto-serif-sc-latin-700-normal.woff2) format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+  @font-face { font-family: 'Cormorant Garamond'; font-weight: 300; src: url(fonts/cormorant-garamond-latin-300-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Cormorant Garamond'; font-weight: 500; src: url(fonts/cormorant-garamond-latin-500-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Cinzel'; font-weight: 400; src: url(fonts/cinzel-latin-400-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Cinzel'; font-weight: 500; src: url(fonts/cinzel-latin-500-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Cormorant Garamond'; font-weight: 400; font-style: italic; src: url(fonts/cormorant-garamond-latin-400-italic.woff2) format('woff2'); }
+  html, body { margin: 0; height: 100%; background: #000; color: #eee; font-family: 'Noto Serif SC', serif; }
+  #wrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+  canvas { width: 100vw; height: 56.25vw; max-height: 100vh; max-width: 177.78vh; display: block; }
+  #play { position: fixed; inset: 0; margin: auto; width: 180px; height: 56px; border: 1px solid #c9a86a; background: rgba(0,0,0,.6);
+          color: #f1e3c6; font: 500 18px 'Noto Serif SC', serif; letter-spacing: 6px; cursor: pointer; }
+  #play[hidden] { display: none; }
+</style>
+</head>
+<body>
+<div id="wrap"><canvas id="c"></canvas></div>
+<button id="play" hidden>播 放</button>
+<script src="src/timeline.js"></script>
+<script src="src/shader.js"></script>
+<script src="src/visuals.js"></script>
+<script>
+(async () => {
+  const params = new URLSearchParams(location.search);
+  await MV.init(document.getElementById('c'));
+  window.__ready = true;
+  if (params.has('render')) return; // 由导出脚本逐帧驱动
+  const t0 = parseFloat(params.get('t') || '0');
+  MV.render(t0);
+  const btn = document.getElementById('play');
+  btn.hidden = false;
+  btn.onclick = () => {
+    btn.hidden = true;
+    const audio = new Audio('output/music.m4a');
+    audio.currentTime = t0;
+    audio.play().catch(() => {});
+    const start = performance.now() - t0 * 1000;
+    const tick = () => {
+      const t = audio.readyState >= 2 && !audio.paused ? audio.currentTime : (performance.now() - start) / 1000;
+      MV.render(Math.min(t, MV.DURATION));
+      if (t < MV.DURATION) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+})();
+</script>
+</body>
+</html>

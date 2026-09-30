@@ -1,0 +1,6 @@
+output/segments/
+output/*.wav
+output/video_silent.mp4
+output/preview_*.mp4
+output/*.log
+node_modules/
